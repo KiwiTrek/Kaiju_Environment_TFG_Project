@@ -26,6 +26,7 @@ public class CharacterMov : MonoBehaviour {
 	[Header("Components")]
 	public Camera cam;
 	public CharacterController controller;
+	public Animator animator;
 	public Transform groundChecker;
 	public LayerMask groundMask;
 
@@ -39,37 +40,59 @@ public class CharacterMov : MonoBehaviour {
 
     private Vector3 verticalMov;
 	int currentJumpCount;
-	bool jump;
+	bool jumpPressed;
+	int jumpHash;
+	Vector3 lastP;
+
+	int isMovingHash;
+	bool sprintPressed;
+	int isSprintingHash;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 		cam = Camera.main;
 		controller = this.GetComponent<CharacterController> ();
+
+		isMovingHash = Animator.StringToHash("isMoving");
+		isSprintingHash = Animator.StringToHash("isSprinting");
+		jumpHash = Animator.StringToHash("jump");
 
 		Cursor.lockState = CursorLockMode.Locked;
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		InputMagnitude ();
+	void Update ()
+	{
+		lastP = transform.position;
+
+		InputMagnitude();
+
+		//Physically move player
+		PlayerMoveAndRotation();
+
+		bool jump = animator.GetBool(jumpHash);
 
 		isGrounded = Physics.CheckSphere(groundChecker.position, groundDistance, groundMask);
+		animator.SetBool("grounded", isGrounded);
         if (isGrounded & verticalMov.y < 0)
         {
 			verticalMov.y = -1.0f;
 			currentJumpCount = maxJumpCount;
         }
-		
-		if (jump)
+
+		animator.SetBool("jump", jumpPressed);
+		if (jumpPressed)
         {
-			jump = false;
-			verticalMov.y = Mathf.Sqrt(jumpHeight * -2.0f * gravity);
+			jumpPressed = false;
+			verticalMov.y += Mathf.Sqrt(jumpHeight * -2.0f * gravity);
         }
 
 		verticalMov.y += gravity * Time.deltaTime;
-        
 		controller.Move(verticalMov * Time.deltaTime);
-    }
+		float verticalVelocity = (lastP.y - transform.position.y) / Time.deltaTime;
+		animator.SetFloat("jumpVelocity", verticalVelocity);
+	}
 
 	void InputMagnitude()
 	{
@@ -79,17 +102,20 @@ public class CharacterMov : MonoBehaviour {
 
 		if (Input.GetButton("Sprint"))
 		{
+			sprintPressed = true;
 			InputX *= sprintMult;
 			InputZ *= sprintMult;
 		}
-
-		//Physically move player
-		PlayerMoveAndRotation();
+		else
+        {
+			sprintPressed = false;
+		}
 
 		if (Input.GetButtonDown("Jump") && currentJumpCount != 0)
 		{
+			Debug.Log("Jump!");
 			currentJumpCount--;
-			jump = true;
+			jumpPressed = true;
 		}
 	}
 	public void RotateToCamera(Transform t)
@@ -100,6 +126,9 @@ public class CharacterMov : MonoBehaviour {
 	}
 	void PlayerMoveAndRotation()
 	{
+		bool isMoving = animator.GetBool(isMovingHash);
+		bool isSprinting = animator.GetBool(isSprintingHash);
+
 		var forward = cam.transform.forward;
 		var right = cam.transform.right;
 
@@ -111,11 +140,24 @@ public class CharacterMov : MonoBehaviour {
 
 		if (InputX != 0.0f || InputZ != 0.0f)
         {
+			if (!isMoving) animator.SetBool("isMoving", true);
+
+			if (sprintPressed)
+			{
+				if (!isSprinting) animator.SetBool("isSprinting", true);
+			}
+			else
+            {
+				if (isSprinting) animator.SetBool("isSprinting", false);
+            }
 			desiredMoveDirection = forward * InputZ + right * InputX;
 			controller.Move(desiredMoveDirection * Time.deltaTime * velocity);
 		}
 		else
         {
+			if (isMoving) animator.SetBool("isMoving", false);
+			if (isSprinting) animator.SetBool("isSprinting", false);
+
 			desiredMoveDirection = forward;
         }
 		
