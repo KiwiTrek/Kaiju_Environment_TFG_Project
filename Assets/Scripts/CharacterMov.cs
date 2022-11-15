@@ -8,46 +8,41 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class CharacterMov : MonoBehaviour {
 
-    public float velocity;
-	public float sprintMult;
-	public int maxJumpCount;
-	public float jumpHeight;
-	public float gravity;
-	int currentJumpCount;
-	bool jump;
-	
-    [Space]
+	[Header("Values")]
+	[Range(0.0f, 30.0f)]
+    public float velocity = 10.0f;
+	[Range(1, 5)]
+	public int sprintMult = 2;
+	[Range(1, 10)]
+	public int maxJumpCount = 2;
+	[Range(0.0f, 30.0f)]
+	public float jumpHeight = 15.0f;
+	[Range(-30.0f, 30.0f)]
+	public float gravity = 15.0f;
+	[Range(0.0f, 0.5f)]
+	public float groundDistance = 0.5f;
 
+	[Space]
+	[Header("Components")]
+	public Camera cam;
+	public CharacterController controller;
+	public Transform groundChecker;
+	public LayerMask groundMask;
+
+	[Space]
+	[Header("Debug values")]
 	public float InputX;
 	public float InputZ;
 	public Vector3 desiredMoveDirection;
-	public bool blockRotationPlayer;
 	public float desiredRotationSpeed = 0.1f;
-	public Animator anim;
-	public float speed;
-	public float allowPlayerRotation = 0.1f;
-	public Camera cam;
-	public CharacterController controller;
 	public bool isGrounded;
-	public Transform groundChecker;
-	public LayerMask groundMask;
-	public float groundDistance;
-
-    [Header("Animation Smoothing")]
-    [Range(0, 1f)]
-    public float HorizontalAnimSmoothTime = 0.2f;
-    [Range(0, 1f)]
-    public float VerticalAnimTime = 0.2f;
-    [Range(0,1f)]
-    public float StartAnimTime = 0.3f;
-    [Range(0, 1f)]
-    public float StopAnimTime = 0.15f;
 
     private Vector3 verticalMov;
+	int currentJumpCount;
+	bool jump;
 
 	// Use this for initialization
 	void Start () {
-		anim = this.GetComponent<Animator> ();
 		cam = Camera.main;
 		controller = this.GetComponent<CharacterController> ();
 
@@ -76,9 +71,11 @@ public class CharacterMov : MonoBehaviour {
 		controller.Move(verticalMov * Time.deltaTime);
     }
 
-    void PlayerMoveAndRotation() {
-		InputX = Input.GetAxis ("Horizontal");
-		InputZ = Input.GetAxis ("Vertical");
+	void InputMagnitude()
+	{
+		//Calculate Input Vectors
+		InputX = Input.GetAxis("Horizontal");
+		InputZ = Input.GetAxis("Vertical");
 
 		if (Input.GetButton("Sprint"))
 		{
@@ -86,6 +83,23 @@ public class CharacterMov : MonoBehaviour {
 			InputZ *= sprintMult;
 		}
 
+		//Physically move player
+		PlayerMoveAndRotation();
+
+		if (Input.GetButtonDown("Jump") && currentJumpCount != 0)
+		{
+			currentJumpCount--;
+			jump = true;
+		}
+	}
+	public void RotateToCamera(Transform t)
+	{
+		var forward = cam.transform.forward;
+		desiredMoveDirection = forward;
+		t.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), desiredRotationSpeed);
+	}
+	void PlayerMoveAndRotation()
+	{
 		var forward = cam.transform.forward;
 		var right = cam.transform.right;
 
@@ -95,55 +109,16 @@ public class CharacterMov : MonoBehaviour {
 		forward.Normalize ();
 		right.Normalize ();
 
-		desiredMoveDirection = forward * InputZ + right * InputX;
-
-		if (blockRotationPlayer == false) {
-			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation (desiredMoveDirection), desiredRotationSpeed);
-            controller.Move(desiredMoveDirection * Time.deltaTime * velocity);
-		}
-	}
-
-    public void LookAt(Vector3 pos)
-    {
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(pos), desiredRotationSpeed);
-    }
-
-    public void RotateToCamera(Transform t)
-    {
-
-        var camera = Camera.main;
-        var forward = cam.transform.forward;
-        var right = cam.transform.right;
-
-        desiredMoveDirection = forward;
-
-        t.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), desiredRotationSpeed);
-    }
-
-	void InputMagnitude() {
-		//Calculate Input Vectors
-		InputX = Input.GetAxis ("Horizontal");
-		InputZ = Input.GetAxis ("Vertical");
-
-		//anim.SetFloat ("InputZ", InputZ, VerticalAnimTime, Time.deltaTime * 2f);
-		//anim.SetFloat ("InputX", InputX, HorizontalAnimSmoothTime, Time.deltaTime * 2f);
-
-		//Calculate the Input Magnitude
-
-		speed = new Vector2(InputX, InputZ).sqrMagnitude;
-
-		//Physically move player
-		if (speed > allowPlayerRotation) {
-			anim.SetFloat ("Blend", speed, StartAnimTime, Time.deltaTime);
-			PlayerMoveAndRotation ();
-		} else if (speed < allowPlayerRotation) {
-			anim.SetFloat ("Blend", speed, StopAnimTime, Time.deltaTime);
-		}
-
-		if (Input.GetButtonDown("Jump") && currentJumpCount != 0)
+		if (InputX != 0.0f || InputZ != 0.0f)
         {
-			currentJumpCount--;
-			jump = true;
+			desiredMoveDirection = forward * InputZ + right * InputX;
+			controller.Move(desiredMoveDirection * Time.deltaTime * velocity);
+		}
+		else
+        {
+			desiredMoveDirection = forward;
         }
+		
+		transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation (desiredMoveDirection), desiredRotationSpeed);
 	}
 }
