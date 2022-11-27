@@ -2343,6 +2343,8 @@ MonoBehaviour:
   desiredMoveDirection: {x: 0, y: 0, z: 0}
   desiredRotationSpeed: 0.1
   isGrounded: 0
+  canAttack: 1
+  numberClicks: 0
 --- !u!114 &8840117093135699265
 MonoBehaviour:
   m_ObjectHideFlags: 0

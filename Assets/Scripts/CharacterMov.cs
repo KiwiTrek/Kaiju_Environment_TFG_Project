@@ -37,6 +37,8 @@ public class CharacterMov : MonoBehaviour {
 	public Vector3 desiredMoveDirection;
 	public float desiredRotationSpeed = 0.1f;
 	public bool isGrounded;
+	public bool canAttack = true;
+	public int numberClicks = 0;
 
     private Vector3 verticalMov;
 	int currentJumpCount;
@@ -47,6 +49,7 @@ public class CharacterMov : MonoBehaviour {
 	int isMovingHash;
 	bool sprintPressed;
 	int isSprintingHash;
+	int attackStartHash;
 
 	// Use this for initialization
 	void Start ()
@@ -57,6 +60,7 @@ public class CharacterMov : MonoBehaviour {
 		isMovingHash = Animator.StringToHash("isMoving");
 		isSprintingHash = Animator.StringToHash("isSprinting");
 		jumpHash = Animator.StringToHash("jump");
+		attackStartHash = Animator.StringToHash("attackStart");
 
 		Cursor.lockState = CursorLockMode.Locked;
 	}
@@ -65,6 +69,10 @@ public class CharacterMov : MonoBehaviour {
 	void Update ()
 	{
 		lastP = transform.position;
+		if (numberClicks == 0)
+        {
+			canAttack = true;
+        }
 
 		InputMagnitude();
 
@@ -117,7 +125,53 @@ public class CharacterMov : MonoBehaviour {
 			currentJumpCount--;
 			jumpPressed = true;
 		}
+
+		if (Input.GetButtonDown("Fire1"))
+		{
+			if (canAttack && numberClicks < 3)
+			{
+				numberClicks++;
+				if (numberClicks == 1)
+                {
+					animator.SetBool("attackStart", true);
+					animator.SetInteger("hitCount", numberClicks);
+                }
+				canAttack = false;
+			}
+        }
 	}
+
+	//For animation
+	public void VerifyCombo()
+    {
+		if (canAttack)
+		{
+			numberClicks = 0;
+			canAttack = false;
+			animator.SetInteger("hitCount", numberClicks);
+		}
+		else
+		{
+			if (numberClicks > 1) animator.SetInteger("hitCount", numberClicks);
+		}
+	}
+	public void CanAttackToTrue()
+    {
+		canAttack = true;
+    }
+	public void AttackStarted()
+    {
+		bool attackStart = animator.GetBool(attackStartHash);
+		if (attackStart)
+		{
+			animator.SetBool("attackStart", false);
+		}
+	}
+	public void CanAttackToFalse()
+    {
+		canAttack = false;
+    }
+
 	public void RotateToCamera(Transform t)
 	{
 		var forward = cam.transform.forward;
