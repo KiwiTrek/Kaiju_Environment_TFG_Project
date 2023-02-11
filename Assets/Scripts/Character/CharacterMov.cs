@@ -26,6 +26,7 @@ public class CharacterMov : MonoBehaviour {
 	[Header("Components")]
 	public Camera cam;
 	public CharacterController controller;
+	public CharacterLives health;
 	public Animator animator;
 	public Transform groundChecker;
 	public LayerMask groundMask;
@@ -74,10 +75,13 @@ public class CharacterMov : MonoBehaviour {
 			canAttack = true;
         }
 
-		InputMagnitude();
+		if (!health.dead)
+		{
+			InputMagnitude();
 
-		//Physically move player
-		PlayerMoveAndRotation();
+            //Physically move player
+            PlayerMoveAndRotation();
+        }
 
 		bool jump = animator.GetBool(jumpHash);
 
