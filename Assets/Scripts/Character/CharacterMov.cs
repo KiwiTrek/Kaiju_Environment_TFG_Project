@@ -26,6 +26,7 @@ public class CharacterMov : MonoBehaviour {
 	[Header("Components")]
 	public Camera cam;
 	public CharacterController controller;
+	public Collider swordCollider;
 	public CharacterLives health;
 	public Animator animator;
 	public Transform groundChecker;
@@ -163,7 +164,19 @@ public class CharacterMov : MonoBehaviour {
     {
 		canAttack = true;
     }
-	public void AttackStarted()
+	public void CanAttackToFalse()
+    {
+		canAttack = false;
+    }
+	public void ActivateCollider()
+	{
+		swordCollider.enabled = true;
+	}
+    public void DeactivateCollider()
+    {
+        swordCollider.enabled = false;
+    }
+    public void AttackStarted()
     {
 		bool attackStart = animator.GetBool(attackStartHash);
 		if (attackStart)
@@ -171,10 +184,6 @@ public class CharacterMov : MonoBehaviour {
 			animator.SetBool("attackStart", false);
 		}
 	}
-	public void CanAttackToFalse()
-    {
-		canAttack = false;
-    }
 
 	public void RotateToCamera(Transform t)
 	{

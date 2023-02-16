@@ -5,7 +5,8 @@ using UnityEngine;
 public class MinionBehaviour : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float velocity;
+    public bool stop;
+    public float maxVelocity;
     public float multiplier;
     public float turnSpeed;
     public Quaternion rotation = Quaternion.identity;
@@ -13,6 +14,7 @@ public class MinionBehaviour : MonoBehaviour
 
     public GameObject target = null;
     bool foundTarget = false;
+    float velocity;
 
     private void Start()
     {
@@ -33,32 +35,38 @@ public class MinionBehaviour : MonoBehaviour
             Debug.Log("Target not found. Player set instead");
             target = player;
         }
+
+        velocity = maxVelocity;
     }
     // Update is called once per frame
     void Update()
     {
-        if (target == null)
+        if (!stop)
         {
-            Debug.Log("No target assigned.");
-            return;
-        }
+            if (target == null)
+            {
+                Debug.Log("No target assigned.");
+                return;
+            }
 
-        if (Vector3.Angle(transform.forward, direction) <= 2.0f)
-        {
-            direction = target.transform.position - transform.position;
-        }
+            if (Vector3.Angle(transform.forward, direction) <= 2.0f)
+            {
+                direction = target.transform.position - transform.position;
+            }
 
-        if (foundTarget)
-        {
-            Quaternion toRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, turnSpeed * Time.deltaTime);
-            transform.position += transform.forward * velocity * multiplier * Time.deltaTime;
+            if (foundTarget)
+            {
+                Quaternion toRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, turnSpeed * Time.deltaTime);
+                transform.position += transform.forward * velocity * multiplier * Time.deltaTime;
+                velocity = (maxVelocity * (Vector3.Distance(this.transform.position, target.transform.position)/12)) + 3.0f;
+            }
+            else
+            {
+                velocity = maxVelocity + 3.0f;
+                transform.position += transform.forward * velocity * Time.deltaTime;
+            }
         }
-        else
-        {
-            transform.position += transform.forward * velocity * Time.deltaTime;
-        }
-
     }
     private void OnTriggerEnter(Collider other)
     {

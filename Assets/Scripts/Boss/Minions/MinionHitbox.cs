@@ -14,7 +14,10 @@ public class MinionHitbox : MonoBehaviour
         else
         {
             Debug.Log("Enemy has done some damage. Oops!");
-            other.GetComponent<CharacterLives>().Hit();
+            if (other.GetComponent<CharacterLives>() != null)
+            {
+                other.GetComponent<CharacterLives>().Hit();
+            }
         }
 
         //Instantiate(explosionPrefab, this.position, this.rotation);
