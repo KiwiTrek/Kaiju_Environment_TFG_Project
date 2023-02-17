@@ -23,7 +23,6 @@ public class CameraBehaviour : MonoBehaviour
             }
             else
             {
-                //Needs revision
                 objective.transform.LookAt(player.transform);
             }
         }
