@@ -422,7 +422,7 @@ BoxCollider:
   m_GameObject: {fileID: 6514935895374965084}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1.7963079, z: 1.5252264}
   m_Center: {x: 0, y: 0.8942959, z: 1.0383872}
@@ -6517,7 +6517,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 50
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 8878295394376675186}
   m_Follow: {fileID: 8878295394376675186}

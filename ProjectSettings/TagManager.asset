@@ -7,6 +7,8 @@ TagManager:
   - PlayerEyes
   - Sword
   - Target
+  - BossZoneCam
+  - 2DZoneCam
   layers:
   - Default
   - TransparentFX
