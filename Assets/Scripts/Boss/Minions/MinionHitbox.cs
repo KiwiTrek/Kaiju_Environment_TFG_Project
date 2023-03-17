@@ -5,22 +5,37 @@ using UnityEngine;
 public class MinionHitbox : MonoBehaviour
 {
     // Start is called before the first frame update
+    public bool isMinion = true;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Sword")
+        CharacterLives lives = other.GetComponent<CharacterLives>();
+        if (lives != null)
         {
-            Debug.Log("Enemy death! No damage.");
-        }
-        else
-        {
-            Debug.Log("Enemy has done some damage. Oops!");
-            if (other.GetComponent<CharacterLives>() != null)
-            {
-                other.GetComponent<CharacterLives>().Hit();
-            }
+            lives.Hit();
         }
 
-        //Instantiate(explosionPrefab, this.position, this.rotation);
-        Destroy(transform.parent.gameObject);
+        if (isMinion)
+        {
+            if (other.gameObject.tag == "Sword")
+            {
+                Debug.Log("Enemy death! No damage.");
+            }
+            
+            //Instantiate(explosionPrefab, this.position, this.rotation);
+            Destroy(transform.parent.gameObject);
+        }
+        
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        CharacterLives lives = other.GetComponent<CharacterLives>();
+        if (lives != null)
+        {
+            if (lives.invulnerableTimer <= 0 && lives.lives > 0)
+            {
+                lives.Hit();
+            }
+        }
     }
 }

@@ -20,8 +20,21 @@ public class CharacterLives : MonoBehaviour
     public int maxLives;
     public bool dead = false;
     public float respawnTime = 6.0f;
+    public float invulnerabilityFrameTimer = 1.5f;
 
-    int lives;
+    [Space]
+    [Header("Mesh")]
+    public GameObject hair;
+    public GameObject head;
+    public GameObject torso;
+    public GameObject legs;
+    public GameObject sword;
+
+    [HideInInspector]
+    [SerializeField]
+    bool activeMesh;
+    public int lives;
+    public float invulnerableTimer = 0.0f;
     float deathCounter = -1.0f;
 
     int isHurtHash;
@@ -38,6 +51,38 @@ public class CharacterLives : MonoBehaviour
     void Update()
     {
         livesUI.text = "Lives: " + lives;
+
+        if (invulnerableTimer > 0.0f)
+        {
+            invulnerableTimer -= Time.deltaTime;
+            activeMesh = !activeMesh;
+            if(activeMesh)
+            {
+                hair.SetActive(true);
+                head.SetActive(true);
+                torso.SetActive(true);
+                legs.SetActive(true);
+                sword.SetActive(true);
+            }
+            else
+            {
+                hair.SetActive(false);
+                head.SetActive(false);
+                torso.SetActive(false);
+                legs.SetActive(false);
+                sword.SetActive(false);
+            }
+        }
+        else if (invulnerableTimer < 0.0f)
+        {
+            invulnerableTimer = 0.0f;
+            hair.SetActive(true);
+            head.SetActive(true);
+            torso.SetActive(true);
+            legs.SetActive(true);
+            sword.SetActive(true);
+        }
+
         if (dead)
         {
             Debug.Log("Dead!");
@@ -73,7 +118,10 @@ public class CharacterLives : MonoBehaviour
     }
     public void Hit()
     {
-        lives--;
+        if (invulnerableTimer <= 0)
+        {
+            lives--;
+        }
 
         movementScript.canAttack = false;
         movementScript.numberClicks = 0;
@@ -88,6 +136,7 @@ public class CharacterLives : MonoBehaviour
         }
         else
         {
+            invulnerableTimer = invulnerabilityFrameTimer;
             if (!isHurt)
             {
                 animator.SetBool("isHurt", true);
