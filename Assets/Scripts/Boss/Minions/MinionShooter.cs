@@ -35,6 +35,9 @@ public class MinionShooter : MonoBehaviour
     void SpawnMinion()
     {
         GameObject minionInstance = Instantiate(minionPrefab, barrel.position + new Vector3(-3.0f, 0, 0), Quaternion.LookRotation(barrel.up));
+        MinionHitbox minionHitbox = minionInstance.GetComponentInChildren<MinionHitbox>();
+        minionHitbox.isMinion = true;
+
         MinionBehaviour minionBehaviour = minionInstance.GetComponent<MinionBehaviour>();
         minionBehaviour.direction = minionInstance.transform.position - barrel.position;
         minionBehaviour.direction.Normalize();

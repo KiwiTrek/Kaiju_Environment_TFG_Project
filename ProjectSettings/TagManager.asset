@@ -9,6 +9,7 @@ TagManager:
   - Target
   - BossZoneCam
   - 2DZoneCam
+  - Environment
   layers:
   - Default
   - TransparentFX

@@ -13,7 +13,8 @@ public class MinionBehaviour : MonoBehaviour
     public Vector3 direction = Vector3.zero;
 
     public GameObject target = null;
-    bool foundTarget = false;
+    [HideInInspector]
+    public bool foundTarget = false;
     float velocity;
 
     private void Start()
