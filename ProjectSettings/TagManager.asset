@@ -10,6 +10,7 @@ TagManager:
   - BossZoneCam
   - 2DZoneCam
   - Environment
+  - LegZoneCam
   layers:
   - Default
   - TransparentFX

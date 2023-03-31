@@ -14,10 +14,15 @@ public class CameraTrigger : MonoBehaviour
                 Debug.Log("Entered 2D zone");
                 switcher.id = 1;
             }
+            else if (tag == "LegZoneCam")
+            {
+                Debug.Log("Entered Leg zone");
+                switcher.id = 2;
+            }
             else if (tag == "BossZoneCam")
             {
                 Debug.Log("Entered boss zone");
-                switcher.id = 2;
+                switcher.id = 3;
             }
             else
             {

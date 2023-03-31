@@ -2838,6 +2838,7 @@ MonoBehaviour:
   gravity: -15
   groundDistance: 0.1
   cam: {fileID: 0}
+  playerCam: {fileID: 8878295393832341211}
   controller: {fileID: 8840117093135699264}
   swordCollider: {fileID: 3401152978200757638}
   health: {fileID: 7618824097106375683}
@@ -2874,6 +2875,15 @@ MonoBehaviour:
   maxLives: 5
   dead: 0
   respawnTime: 6
+  invulnerabilityFrameTimer: 1.5
+  hair: {fileID: 0}
+  head: {fileID: 0}
+  torso: {fileID: 0}
+  legs: {fileID: 0}
+  sword: {fileID: 0}
+  activeMesh: 0
+  lives: 0
+  invulnerableTimer: 0
 --- !u!114 &8840117093135699265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6523,9 +6533,9 @@ MonoBehaviour:
   m_Follow: {fileID: 8878295394376675186}
   m_CommonLens: 1
   m_Lens:
-    FieldOfView: 40
+    FieldOfView: 60
     OrthographicSize: 10
-    NearClipPlane: 0.1
+    NearClipPlane: 0.001
     FarClipPlane: 5000
     Dutch: 0
     ModeOverride: 0

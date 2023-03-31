@@ -1,4 +1,5 @@
 
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class CharacterMov : MonoBehaviour {
 	[Range(0.0f, 30.0f)]
     public float velocity = 10.0f;
 	[Range(1, 5)]
-	public int sprintMult = 2;
+	public float sprintMult = 2;
 	[Range(1, 10)]
 	public int maxJumpCount = 2;
 	[Range(0.0f, 30.0f)]
@@ -25,6 +26,7 @@ public class CharacterMov : MonoBehaviour {
 	[Space]
 	[Header("Components")]
 	public Camera cam;
+	public CinemachineFreeLook playerCam;
 	public CharacterController controller;
 	public Collider swordCollider;
 	public CharacterLives health;
@@ -116,8 +118,6 @@ public class CharacterMov : MonoBehaviour {
 		if (Input.GetButton("Sprint"))
 		{
 			sprintPressed = true;
-			InputX *= sprintMult;
-			InputZ *= sprintMult;
 		}
 		else
         {
@@ -212,7 +212,9 @@ public class CharacterMov : MonoBehaviour {
 			if (sprintPressed)
 			{
 				if (!isSprinting) animator.SetBool("isSprinting", true);
-			}
+                InputX *= sprintMult;
+                InputZ *= sprintMult;
+            }
 			else
             {
 				if (isSprinting) animator.SetBool("isSprinting", false);
@@ -225,7 +227,7 @@ public class CharacterMov : MonoBehaviour {
 			if (isMoving) animator.SetBool("isMoving", false);
 			if (isSprinting) animator.SetBool("isSprinting", false);
 
-			desiredMoveDirection = forward;
+			if (playerCam.enabled) desiredMoveDirection = forward;
         }
 		
 		transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation (desiredMoveDirection), desiredRotationSpeed);
