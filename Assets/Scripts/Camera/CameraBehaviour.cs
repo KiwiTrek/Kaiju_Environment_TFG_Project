@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraBehaviour : MonoBehaviour
 {
     // Start is called before the first frame update
-    public bool bossOrLevel = false; //Boss = false; Level = true
+    public bool is2D = true; //True: 2D
     public GameObject objective;
     public GameObject player;
 
@@ -14,7 +14,7 @@ public class CameraBehaviour : MonoBehaviour
     {
         if (objective != null)
         {
-            if (bossOrLevel)
+            if (is2D)
             {
                 Vector3 currentPosition = objective.transform.position;
                 currentPosition.y = player.transform.position.y;

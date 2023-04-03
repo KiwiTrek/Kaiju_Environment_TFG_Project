@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DoorConnection : MonoBehaviour
 {
-    public GameObject door;
+    public List<GameObject> doors;
 
     // Start is called before the first frame update
     void Start()
@@ -26,20 +26,26 @@ public class DoorConnection : MonoBehaviour
 
             //Effects
 
-            ActivateDoor(door);
+            ActivateDoors(doors);
         }
     }
 
-    private void ActivateDoor(GameObject door)
+    private void ActivateDoors(List<GameObject> doors)
     {
+        foreach(GameObject door in doors)
+        {
+            door.SetActive(false);
+        }
         //Effects (Door)
 
-        door.SetActive(false);
     }
 
     public void Restart()
     {
+        foreach(GameObject door in doors)
+        {
+            door.SetActive(true);
+        }
         gameObject.SetActive(true);
-        door.SetActive(true);
     }
 }

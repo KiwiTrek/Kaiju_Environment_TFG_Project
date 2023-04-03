@@ -48,8 +48,7 @@ public class MinionHitbox : MonoBehaviour
         if (isMinion)
         {
             if (other.gameObject.tag == "Player"
-                || other.gameObject.tag == "Sword"
-                || other.gameObject.tag == "Environment")
+                || other.gameObject.tag == "Sword")
             {
                 Debug.Log("Enemy death! No damage.");
                 Die();
