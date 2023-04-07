@@ -49,6 +49,7 @@ public class CharacterMov : MonoBehaviour {
 	bool jumpPressed;
 	int jumpHash;
 	Vector3 lastP;
+	float timeWithoutAttacking;
 
 	int isMovingHash;
 	bool sprintPressed;
@@ -131,9 +132,20 @@ public class CharacterMov : MonoBehaviour {
 			jumpPressed = true;
 		}
 
+		timeWithoutAttacking += Time.deltaTime;
+		if (timeWithoutAttacking > 7.5f)
+		{
+			timeWithoutAttacking = 0;
+			numberClicks = 0;
+            animator.SetBool("attackStart", false);
+            animator.SetInteger("hitCount", numberClicks);
+			canAttack = true;
+        }
+
 		if (Input.GetButtonDown("Fire1"))
 		{
-			if (canAttack && numberClicks < 3)
+            timeWithoutAttacking = 0;
+            if (canAttack && numberClicks < 3)
 			{
 				numberClicks++;
 				if (numberClicks == 1)
@@ -144,6 +156,7 @@ public class CharacterMov : MonoBehaviour {
 				canAttack = false;
 			}
         }
+
 	}
 
 	//For animation

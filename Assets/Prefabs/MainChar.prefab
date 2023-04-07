@@ -2831,12 +2831,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 197e7e75da4ac7b45b4d61d366163a20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 7.5
-  sprintMult: 2
-  maxJumpCount: 2
-  jumpHeight: 8
-  gravity: -15
-  groundDistance: 0.1
+  velocity: 5
+  sprintMult: 1.5
+  maxJumpCount: 1
+  jumpHeight: 7
+  gravity: -18
+  groundDistance: 0.07
   cam: {fileID: 0}
   playerCam: {fileID: 8878295393832341211}
   controller: {fileID: 8840117093135699264}
@@ -2876,11 +2876,11 @@ MonoBehaviour:
   dead: 0
   respawnTime: 6
   invulnerabilityFrameTimer: 1.5
-  hair: {fileID: 0}
-  head: {fileID: 0}
-  torso: {fileID: 0}
-  legs: {fileID: 0}
-  sword: {fileID: 0}
+  hair: {fileID: 8877262843280030449}
+  head: {fileID: 8876816324243234973}
+  torso: {fileID: 8877173839191638803}
+  legs: {fileID: 8878217331740085951}
+  sword: {fileID: 8877487951143722397}
   activeMesh: 0
   lives: 0
   invulnerableTimer: 0

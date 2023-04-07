@@ -13,12 +13,13 @@ public class MinionBehaviour : MonoBehaviour
     public Vector3 direction = Vector3.zero;
 
     public GameObject target = null;
-    [HideInInspector]
     public bool foundTarget = false;
     float velocity;
 
     private void Start()
     {
+        foundTarget = false;
+
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         for (int i = 0; i < player.transform.childCount; i++)
         {
@@ -50,10 +51,7 @@ public class MinionBehaviour : MonoBehaviour
                 return;
             }
 
-            if (Vector3.Angle(transform.forward, direction) <= 2.0f)
-            {
-                direction = target.transform.position - transform.position;
-            }
+            direction = target.transform.position - transform.position;
 
             if (foundTarget)
             {
@@ -76,10 +74,6 @@ public class MinionBehaviour : MonoBehaviour
         {
             Debug.Log("Target nearby");
             foundTarget = true;
-        }
-        else
-        {
-            foundTarget = false;
         }
     }
 

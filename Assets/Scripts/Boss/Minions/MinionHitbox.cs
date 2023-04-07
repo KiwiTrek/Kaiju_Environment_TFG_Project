@@ -28,13 +28,10 @@ public class MinionHitbox : MonoBehaviour
             return;
         }
 
-        if (!behaviour.foundTarget)
+        lifeTimeRemaining += Time.deltaTime;
+        if (lifeTimeRemaining >= lifeTimeTotal)
         {
-            lifeTimeRemaining += Time.deltaTime;
-            if (lifeTimeRemaining >= lifeTimeTotal)
-            {
-                Die();
-            }
+            Die();
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -48,7 +45,8 @@ public class MinionHitbox : MonoBehaviour
         if (isMinion)
         {
             if (other.gameObject.tag == "Player"
-                || other.gameObject.tag == "Sword")
+                || other.gameObject.tag == "Sword"
+                || other.gameObject.tag == "Environment")
             {
                 Debug.Log("Enemy death! No damage.");
                 Die();

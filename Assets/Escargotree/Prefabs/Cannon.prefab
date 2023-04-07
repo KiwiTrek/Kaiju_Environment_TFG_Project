@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 5766766999388290074}
   - component: {fileID: 5766766999388290075}
   - component: {fileID: 3855958835163524596}
-  - component: {fileID: 7552490578857419534}
+  - component: {fileID: 6590887586776942138}
   m_Layer: 0
   m_Name: Cannon
   m_TagString: Untagged
@@ -200,9 +200,10 @@ MonoBehaviour:
   barrel: {fileID: 5766766999388290076}
   minionPrefab: {fileID: 155583516784818287, guid: 294cf7e30056d51499e1faf2495a677f, type: 3}
   playerControlled: 0
-  maxFrequencyOfUpdate: 1.5
---- !u!136 &7552490578857419534
-CapsuleCollider:
+  maxFrequencyOfUpdate: 2
+  isReverse: 0
+--- !u!135 &6590887586776942138
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -211,7 +212,6 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 4.3
-  m_Height: 24.5
-  m_Direction: 1
-  m_Center: {x: 0.000003874302, y: 0.0000076293945, z: -0.0000077188015}
+  serializedVersion: 2
+  m_Radius: 10
+  m_Center: {x: 0.00000005960466, y: 0, z: -0.00000008940697}

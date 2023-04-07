@@ -9,6 +9,7 @@ public class MinionShooter : MonoBehaviour
     public GameObject minionPrefab;
     public bool playerControlled = false;
     public float maxFrequencyOfUpdate = 1.5f;
+    public bool isReverse = false;
 
     float frequency;
     GameObject target;
@@ -44,13 +45,32 @@ public class MinionShooter : MonoBehaviour
     }
     void SpawnMinion()
     {
-        GameObject minionInstance = Instantiate(minionPrefab, barrel.position + new Vector3(-3.0f, 0, 0), Quaternion.LookRotation(barrel.up));
+        Vector3 minionFinalPos = Vector3.zero;
+        if (isReverse)
+        {
+            minionFinalPos = barrel.position + new Vector3(4.0f, 0, 0);
+        }
+        else
+        {
+            minionFinalPos = barrel.position + new Vector3(-4.0f, 0, 0);
+        }
+        GameObject minionInstance = Instantiate(minionPrefab, minionFinalPos, Quaternion.LookRotation(barrel.up));
         MinionHitbox minionHitbox = minionInstance.GetComponentInChildren<MinionHitbox>();
-        minionHitbox.isMinion = true;
+        if (minionHitbox != null) minionHitbox.isMinion = true;
 
         MinionBehaviour minionBehaviour = minionInstance.GetComponent<MinionBehaviour>();
-        minionBehaviour.direction = minionInstance.transform.position - barrel.position;
-        minionBehaviour.direction.Normalize();
+        if (minionBehaviour != null)
+        {
+            if (isReverse)
+            {
+                minionBehaviour.direction = barrel.position - minionInstance.transform.position;
+            }
+            else
+            {
+                minionBehaviour.direction = minionInstance.transform.position - barrel.position;
+            }
+            minionBehaviour.direction.Normalize();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
