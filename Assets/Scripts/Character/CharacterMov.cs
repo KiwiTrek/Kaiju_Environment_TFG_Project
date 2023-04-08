@@ -51,6 +51,7 @@ public class CharacterMov : MonoBehaviour {
 	Vector3 lastP;
 	float timeWithoutAttacking;
 
+	int isHurtHardHash;
 	int isMovingHash;
 	bool sprintPressed;
 	int isSprintingHash;
@@ -62,6 +63,7 @@ public class CharacterMov : MonoBehaviour {
 		cam = Camera.main;
 		controller = this.GetComponent<CharacterController> ();
 
+		isHurtHardHash = Animator.StringToHash("isHitHard");
 		isMovingHash = Animator.StringToHash("isMoving");
 		isSprintingHash = Animator.StringToHash("isSprinting");
 		jumpHash = Animator.StringToHash("jump");
@@ -79,7 +81,8 @@ public class CharacterMov : MonoBehaviour {
 			canAttack = true;
         }
 
-		if (!health.dead)
+		bool isHurtHard = animator.GetBool(isHurtHardHash);
+		if (!health.dead || !isHurtHard)
 		{
 			InputMagnitude();
 

@@ -1011,12 +1011,21 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2295112722679721627}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b4ebd892051ad624baaa4bb13ff33798, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attacking: 0
+  LegToDestroy: 3
+  legFrontLeft: {fileID: 0}
+  legFrontRight: {fileID: 0}
+  legBackLeft: {fileID: 0}
+  legBackRight: {fileID: 0}
+  collisionAreaFrontLeft: {fileID: 0}
+  collisionAreaBackLeft: {fileID: 0}
+  collisionAreaFrontRight: {fileID: 0}
+  collisionAreaBackRight: {fileID: 0}
   animator: {fileID: 4787920846242999899}
 --- !u!1 &2366531773314681274
 GameObject:
@@ -1204,7 +1213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d40a98ca6fd231e49b1fa9099d1a9d8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossOrLevel: 0
+  is2D: 1
   objective: {fileID: 6426176196355539649}
   player: {fileID: 0}
 --- !u!114 &3008549303515636228
@@ -2931,7 +2940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d40a98ca6fd231e49b1fa9099d1a9d8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossOrLevel: 1
+  is2D: 1
   objective: {fileID: 2225449088537213638}
   player: {fileID: 0}
 --- !u!114 &2851148677708482923

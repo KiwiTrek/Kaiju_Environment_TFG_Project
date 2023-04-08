@@ -144,6 +144,34 @@ public class CharacterLives : MonoBehaviour
         }
     }
 
+    public void HitHard()
+    {
+        if (invulnerableTimer <= 0)
+        {
+            lives--;
+        }
+
+        movementScript.canAttack = false;
+        movementScript.numberClicks = 0;
+        movementScript.VerifyCombo();
+
+        bool isHurt = animator.GetBool(isHurtHardHash);
+
+        if (lives <= 0)
+        {
+            dead = true;
+            deathCounter = 0.12f;
+        }
+        else
+        {
+            invulnerableTimer = invulnerabilityFrameTimer;
+            if (!isHurt)
+            {
+                animator.SetBool("isHurtHard", true);
+            }
+        }
+    }
+
     //For animation
     public void HasBeenHurt()
     {
