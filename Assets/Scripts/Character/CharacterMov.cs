@@ -63,7 +63,7 @@ public class CharacterMov : MonoBehaviour {
 		cam = Camera.main;
 		controller = this.GetComponent<CharacterController> ();
 
-		isHurtHardHash = Animator.StringToHash("isHitHard");
+		isHurtHardHash = Animator.StringToHash("isHurtHard");
 		isMovingHash = Animator.StringToHash("isMoving");
 		isSprintingHash = Animator.StringToHash("isSprinting");
 		jumpHash = Animator.StringToHash("jump");

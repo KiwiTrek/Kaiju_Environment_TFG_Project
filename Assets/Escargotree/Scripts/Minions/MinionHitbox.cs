@@ -67,6 +67,7 @@ public class MinionHitbox : MonoBehaviour
     private void Die()
     {
         //Instantiate(explosionPrefab, this.position, this.rotation);
+        //PlaySound
         Destroy(transform.parent.gameObject);
     }
 }

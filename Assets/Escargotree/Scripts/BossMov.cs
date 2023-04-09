@@ -34,11 +34,9 @@ public class BossMov : MonoBehaviour
 
     int legsDestroyed = 0;
     int isAttackingHash;
-    int legsDestroyedHash;
     void Start()
     {
         isAttackingHash = Animator.StringToHash("isAttacking");
-        legsDestroyedHash = Animator.StringToHash("LegsDestroyed");
 
         legBackLeftInitialRot = legBackLeft.transform.localRotation;
         legFrontLeftInitialRot = legFrontLeft.transform.localRotation;
@@ -55,9 +53,9 @@ public class BossMov : MonoBehaviour
             animator.SetBool(isAttackingHash, attacking);
         }
 
-        if (attacking)
+        if (legsDestroyed < 3 && attacking)
         {
-            Debug.Log(Quaternion.Angle(legFrontRightInitialRot, legFrontRight.transform.localRotation));
+            legsDestroyed = animator.GetInteger("legsDestroyed");
             Vector3 scale = new Vector3(
                 Quaternion.Angle(legFrontRightInitialRot, legFrontRight.transform.localRotation) / divider,
                 collisionAreaFrontRight.transform.localScale.y,
@@ -88,6 +86,8 @@ public class BossMov : MonoBehaviour
         }
         else
         {
+            attacking = false;
+            animator.SetBool(isAttackingHash, false);
             collisionAreaBackLeft.SetActive(false);
             collisionAreaBackRight.SetActive(false);
             collisionAreaFrontLeft.SetActive(false);
