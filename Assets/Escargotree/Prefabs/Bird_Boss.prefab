@@ -678,6 +678,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3897468550110064948}
   - component: {fileID: 4833224315643697068}
+  - component: {fileID: 7635586964537769185}
+  - component: {fileID: 9172848725351235405}
   m_Layer: 0
   m_Name: Bird_Boss
   m_TagString: Untagged
@@ -694,7 +696,7 @@ Transform:
   m_GameObject: {fileID: 4421767734633786254}
   m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 2.796, z: 0.081}
-  m_LocalScale: {x: 0.06, y: 0.06, z: 0.06}
+  m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5226625213777325757}
@@ -726,7 +728,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de39cb6003573d469443c0f959eed2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 30
+  timeBeforeStrike: 8
+  timeStunned: 5
+  status: 0
+  shockwavePrefab: {fileID: 6596379300243454722, guid: 99cb0a36f252ccb41bec72d0ecee3e79, type: 3}
+  subHitbox: {fileID: 7635586964537769185}
+  bossCamera: {fileID: 0}
   playerTarget: {fileID: 0}
+  preemptiveShadow: {fileID: 0}
+--- !u!114 &7635586964537769185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4421767734633786254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06033219ca7b0a4b904e97eba8d1bbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxLives: 36
+  body:
+  - {fileID: 1678377706195405107}
+  - {fileID: 7272062939543108167}
+  - {fileID: 7670875451954413144}
+  - {fileID: 1939957608362714707}
+  - {fileID: 6014839416445374718}
+  - {fileID: 2800121706635709344}
+  - {fileID: 4923654308946619436}
+  - {fileID: 4097168252217695235}
+  - {fileID: 878784518498785525}
+  - {fileID: 188874438934105967}
+  - {fileID: 2853067305476783167}
+  - {fileID: 1641612234976686213}
+  - {fileID: 7641470089579970849}
+  - {fileID: 4447937345210217353}
+  player: {fileID: 0}
+  behaviour: {fileID: 4833224315643697068}
+  currentHits: 0
+--- !u!136 &9172848725351235405
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4421767734633786254}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.6
+  m_Height: 4.8
+  m_Direction: 2
+  m_Center: {x: 0, y: 0.25, z: -0.31}
 --- !u!1 &4447937345210217353
 GameObject:
   m_ObjectHideFlags: 0

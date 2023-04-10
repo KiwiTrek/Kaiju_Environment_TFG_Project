@@ -35,7 +35,7 @@ public class ShockwaveBehaviour : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        CharacterLives lives = other.GetComponent<CharacterLives>();
+        CharacterLives lives = other.gameObject.GetComponent<CharacterLives>();
         if (lives != null)
         {
             lives.HitHard();

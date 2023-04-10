@@ -7,12 +7,13 @@ public class BossHitbox : MonoBehaviour
     // Start is called before the first frame update
     public int maxLives = 12;
     public Material legMaterial = null;
+    public CharacterMov player = null;
     public Animator animatorBoss = null;
     public GameObject spikeShield = null;
     public Collider hitbox = null;
 
     Color colorInit = Color.gray;
-    int currentHits = 0;
+    public int currentHits = 0;
     float timerHit = 0.0f;
     float maxHitTime = 0.15f;
     void Start()
@@ -28,10 +29,7 @@ public class BossHitbox : MonoBehaviour
         {
             this.hitbox.enabled = false;
             spikeShield.SetActive(true);
-            currentHits = 0;
-            int legsDestroyed = animatorBoss.GetInteger("legsDestroyed");
-            legsDestroyed++;
-            animatorBoss.SetInteger("legsDestroyed", legsDestroyed);
+            currentHits = maxLives;
         }
         else
         {
@@ -60,6 +58,6 @@ public class BossHitbox : MonoBehaviour
         timerHit = 0.0f;
         //Play sound
         //Play fx
-        currentHits++;
+        currentHits += player.numberClicks;
     }
 }

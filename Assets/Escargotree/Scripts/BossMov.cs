@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossMov : MonoBehaviour
 {
@@ -18,6 +19,11 @@ public class BossMov : MonoBehaviour
     public GameObject legBackRight;
 
     [Space(10)]
+    public BossHitbox frontRightHitbox;
+    public BossHitbox backLeftHitbox;
+    public BossHitbox backRightHitbox;
+
+    [Space(10)]
     public GameObject collisionAreaFrontLeft;
     public GameObject collisionAreaBackLeft;
     public GameObject collisionAreaFrontRight;
@@ -26,6 +32,8 @@ public class BossMov : MonoBehaviour
     [Space(10)]
     public GameObject shockwavePrefab;
     public Animator animator;
+    public GameObject canvas;
+    public Slider healthBar;
     
     Quaternion legFrontLeftInitialRot= Quaternion.identity;
     Quaternion legFrontRightInitialRot = Quaternion.identity;
@@ -34,6 +42,7 @@ public class BossMov : MonoBehaviour
 
     int legsDestroyed = 0;
     int isAttackingHash;
+    int maxLives;
     void Start()
     {
         isAttackingHash = Animator.StringToHash("isAttacking");
@@ -42,6 +51,8 @@ public class BossMov : MonoBehaviour
         legFrontLeftInitialRot = legFrontLeft.transform.localRotation;
         legFrontRightInitialRot = legFrontRight.transform.localRotation;
         legBackRightInitialRot = legBackRight.transform.localRotation;
+
+        maxLives = frontRightHitbox.maxLives + backLeftHitbox.maxLives + backRightHitbox.maxLives;
     }
 
     // Update is called once per frame
@@ -55,7 +66,25 @@ public class BossMov : MonoBehaviour
 
         if (legsDestroyed < 3 && attacking)
         {
+            canvas.SetActive(true);
+            healthBar.value = maxLives - frontRightHitbox.currentHits - backLeftHitbox.currentHits - backRightHitbox.currentHits;
+
             legsDestroyed = animator.GetInteger("legsDestroyed");
+            int newValue = 0;
+            if (frontRightHitbox.currentHits >= frontRightHitbox.maxLives)
+            {
+                newValue++;
+            }
+            if (backLeftHitbox.currentHits >= frontRightHitbox.maxLives)
+            {
+                newValue++;
+            }
+            if (backRightHitbox.currentHits >= frontRightHitbox.maxLives)
+            {
+                newValue++;
+            }
+            legsDestroyed = newValue;
+            animator.SetInteger("legsDestroyed", legsDestroyed);
             Vector3 scale = new Vector3(
                 Quaternion.Angle(legFrontRightInitialRot, legFrontRight.transform.localRotation) / divider,
                 collisionAreaFrontRight.transform.localScale.y,
@@ -86,6 +115,7 @@ public class BossMov : MonoBehaviour
         }
         else
         {
+            canvas.SetActive(false);
             attacking = false;
             animator.SetBool(isAttackingHash, false);
             collisionAreaBackLeft.SetActive(false);

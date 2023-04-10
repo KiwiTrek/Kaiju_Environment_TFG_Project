@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Final/destroyed_city.unity
+    guid: 4b04375b845f3d642bd1734c7ef561ae
+  - enabled: 1
+    path: Assets/Scenes/VictoryScreen.unity
+    guid: 0a81697cb3534fb43ae6e14749885fd8
   m_configObjects: {}

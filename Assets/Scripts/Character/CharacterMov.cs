@@ -136,7 +136,7 @@ public class CharacterMov : MonoBehaviour {
 		}
 
 		timeWithoutAttacking += Time.deltaTime;
-		if (timeWithoutAttacking > 7.5f)
+		if (timeWithoutAttacking > 3.0f)
 		{
 			timeWithoutAttacking = 0;
 			numberClicks = 0;
