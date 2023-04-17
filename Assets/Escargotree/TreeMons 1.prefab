@@ -5791,7 +5791,7 @@ GameObject:
   - component: {fileID: 7655704745657498784}
   m_Layer: 3
   m_Name: Objective2D_1
-  m_TagString: Untagged
+  m_TagString: 2DZoneCam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10594,7 +10594,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2303010502925699304}
-  m_LocalRotation: {x: -0.000014439222, y: 1, z: 0.00000084936596, w: -0.0000007748602}
+  m_LocalRotation: {x: 0.0000021382502, y: 1, z: -0.0000026803418, w: -0.0000045776624}
   m_LocalPosition: {x: 0.00038334963, y: -0.0028759253, z: 100.00038}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14588,7 +14588,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2983642247757762202}
   - component: {fileID: 6945605038779668024}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24097,8 +24097,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5279163531249867864}
-  m_LocalRotation: {x: 0.0000024437902, y: 0.99273455, z: -0.12032515, w: -0.0000002980232}
-  m_LocalPosition: {x: 0.00031016782, y: 44.36685, z: 180.33339}
+  m_LocalRotation: {x: 0.000002473592, y: 0.99273455, z: -0.12032516, w: -0.000000029802315}
+  m_LocalPosition: {x: 0.00031016802, y: 44.36685, z: 180.33344}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -24590,10 +24590,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3

@@ -66,8 +66,15 @@ public class BossMov : MonoBehaviour
 
         if (legsDestroyed < 3 && attacking)
         {
-            canvas.SetActive(true);
-            healthBar.value = maxLives - frontRightHitbox.currentHits - backLeftHitbox.currentHits - backRightHitbox.currentHits;
+            if (canvas != null)
+            {
+                canvas.SetActive(true);
+            }
+
+            if (healthBar != null)
+            {
+                healthBar.value = maxLives - frontRightHitbox.currentHits - backLeftHitbox.currentHits - backRightHitbox.currentHits;
+            }
 
             legsDestroyed = animator.GetInteger("legsDestroyed");
             int newValue = 0;
@@ -115,7 +122,10 @@ public class BossMov : MonoBehaviour
         }
         else
         {
-            canvas.SetActive(false);
+            if (canvas != null)
+            {
+                canvas.SetActive(false);
+            }
             attacking = false;
             animator.SetBool(isAttackingHash, false);
             collisionAreaBackLeft.SetActive(false);

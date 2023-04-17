@@ -16,6 +16,9 @@ public class CharacterLives : MonoBehaviour
     public CharacterMov movementScript;
 
     [Space]
+    public DataCompilator compilator;
+
+    [Space]
     [Header("Values")]
     public int maxLives;
     public bool dead = false;
@@ -118,6 +121,11 @@ public class CharacterLives : MonoBehaviour
     }
     public void Hit()
     {
+        if (compilator != null)
+        {
+            compilator.RegisterRecieveDamage();
+        }
+
         if (invulnerableTimer <= 0)
         {
             lives--;
@@ -146,6 +154,11 @@ public class CharacterLives : MonoBehaviour
 
     public void HitHard()
     {
+        if (compilator != null)
+        {
+            compilator.RegisterRecieveDamage();
+        }
+
         if (invulnerableTimer <= 0)
         {
             lives--;
@@ -160,6 +173,10 @@ public class CharacterLives : MonoBehaviour
         if (lives <= 0)
         {
             dead = true;
+            if (compilator != null)
+            {
+                compilator.RegisterDeath();
+            }
             deathCounter = 0.12f;
         }
         else

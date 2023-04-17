@@ -33,6 +33,9 @@ public class CharacterMov : MonoBehaviour {
 	public Animator animator;
 	public Transform groundChecker;
 	public LayerMask groundMask;
+	
+	[Space]
+    public DataCompilator compilator;
 
 	[Space]
 	[Header("Debug values")]
@@ -45,7 +48,7 @@ public class CharacterMov : MonoBehaviour {
 	public int numberClicks = 0;
 
     private Vector3 verticalMov;
-	int currentJumpCount;
+	public int currentJumpCount;
 	bool jumpPressed;
 	int jumpHash;
 	Vector3 lastP;
@@ -130,6 +133,10 @@ public class CharacterMov : MonoBehaviour {
 
 		if (Input.GetButtonDown("Jump") && currentJumpCount != 0)
 		{
+			if (compilator != null)
+			{
+				compilator.RegisterCharacterJump();
+			}
 			Debug.Log("Jump!");
 			currentJumpCount--;
 			jumpPressed = true;
@@ -147,6 +154,10 @@ public class CharacterMov : MonoBehaviour {
 
 		if (Input.GetButtonDown("Fire1"))
 		{
+            if (compilator != null)
+            {
+                compilator.RegisterAttack();
+            }
             timeWithoutAttacking = 0;
             if (canAttack && numberClicks < 3)
 			{

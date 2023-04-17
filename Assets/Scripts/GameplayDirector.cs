@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class GameplayDirector : MonoBehaviour
 {
     // Start is called before the first frame update
     public BossSubHitbox victoryChecker = null;
+    public DataCompilator compilator= null;
     void Start()
     {
 
@@ -19,6 +21,11 @@ public class GameplayDirector : MonoBehaviour
 
         if (victoryChecker.currentHits == victoryChecker.maxLives)
         {
+            if (compilator != null)
+            {
+                compilator.EndSession(DateTime.Now);
+            }
+
             SceneManager.LoadScene(1);
         }
     }

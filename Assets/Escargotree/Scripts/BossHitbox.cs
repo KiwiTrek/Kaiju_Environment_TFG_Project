@@ -5,13 +5,16 @@ using UnityEngine;
 public class BossHitbox : MonoBehaviour
 {
     // Start is called before the first frame update
-    public int maxLives = 12;
+    [Header("Components")]
+    public DataCompilator compilator = null;
     public Material legMaterial = null;
     public CharacterMov player = null;
     public Animator animatorBoss = null;
     public GameObject spikeShield = null;
     public Collider hitbox = null;
 
+    [Space]
+    public int maxLives = 12;
     Color colorInit = Color.gray;
     public int currentHits = 0;
     float timerHit = 0.0f;
@@ -55,6 +58,10 @@ public class BossHitbox : MonoBehaviour
 
     void Hit()
     {
+        if (compilator != null)
+        {
+            compilator.RegisterHitEnemy();
+        }
         timerHit = 0.0f;
         //Play sound
         //Play fx

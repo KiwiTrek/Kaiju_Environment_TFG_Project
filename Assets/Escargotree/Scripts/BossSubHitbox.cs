@@ -8,13 +8,16 @@ using UnityEngine.UI;
 public class BossSubHitbox : MonoBehaviour
 {
     // Start is called before the first frame update
-    public int maxLives = 18;
+    [Header("Components")]
+    public DataCompilator compilator;
     public Slider healthBar;
     public List<GameObject> body = new List<GameObject>();
     public CharacterMov player = null;
     public BossSubBehaviour behaviour = null;
 
+    [Space]
     bool activeMesh = true;
+    public int maxLives = 18;
     public int currentHits = 0;
     float timerHit = 0.0f;
     float maxHitTime = 0.15f;
@@ -82,6 +85,10 @@ public class BossSubHitbox : MonoBehaviour
 
     void Hit()
     {
+        if (compilator != null)
+        {
+            compilator.RegisterHitEnemy();
+        }
         timerHit = 0.0f;
         //Play sound
         //Play fx
