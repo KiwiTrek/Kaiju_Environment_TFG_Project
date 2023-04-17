@@ -57,7 +57,7 @@ public class HeatmapGenerator : MonoBehaviour
     // To change the color palette of the cubes
     public Gradient cubeColors;
     public Filter filter;
-    [Range(0,9)]
+    [Range(0,255)]
     public int playerId;
     public int sessionId;
 
