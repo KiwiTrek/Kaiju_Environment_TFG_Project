@@ -33,8 +33,9 @@ public class CharacterMov : MonoBehaviour {
 	public Animator animator;
 	public Transform groundChecker;
 	public LayerMask groundMask;
-	
+
 	[Space]
+	public Collider trunk = null;
     public DataCompilator compilator;
 
 	[Space]
@@ -93,8 +94,6 @@ public class CharacterMov : MonoBehaviour {
             PlayerMoveAndRotation();
         }
 
-		bool jump = animator.GetBool(jumpHash);
-
 		isGrounded = Physics.CheckSphere(groundChecker.position, groundDistance, groundMask);
 		animator.SetBool("grounded", isGrounded);
         if (isGrounded & verticalMov.y < 0)
@@ -103,6 +102,7 @@ public class CharacterMov : MonoBehaviour {
 			currentJumpCount = maxJumpCount;
         }
 
+		bool jump = animator.GetBool(jumpHash);
 		animator.SetBool("jump", jumpPressed);
 		if (jumpPressed)
         {
@@ -143,7 +143,7 @@ public class CharacterMov : MonoBehaviour {
 		}
 
 		timeWithoutAttacking += Time.deltaTime;
-		if (timeWithoutAttacking > 3.0f)
+		if (timeWithoutAttacking > 2.0f)
 		{
 			timeWithoutAttacking = 0;
 			numberClicks = 0;
@@ -258,5 +258,19 @@ public class CharacterMov : MonoBehaviour {
         }
 		
 		transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation (desiredMoveDirection), desiredRotationSpeed);
+
+		//Position correction for 2D area (Extremely hardcoded)
+		Debug.Log(Vector3.Distance(transform.position, trunk.ClosestPoint(transform.position)));
+		if (Vector3.Distance(transform.position, trunk.ClosestPoint(transform.position)) <= 0.5f)
+		{
+			Vector3 direction = transform.position - trunk.ClosestPoint(transform.position);
+			controller.Move(direction);
+		}
 	}
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+		Gizmos.DrawSphere(groundChecker.position, groundDistance);
+    }
 }

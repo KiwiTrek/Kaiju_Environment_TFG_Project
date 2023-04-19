@@ -7,9 +7,9 @@ public class MinionShooter : MonoBehaviour
     // Start is called before the first frame update
     public Transform barrel;
     public GameObject minionPrefab;
+    public GameObject spawnPosition;
     public bool playerControlled = false;
     public float maxFrequencyOfUpdate = 1.5f;
-    public bool isReverse = false;
 
     float frequency;
     GameObject target;
@@ -45,32 +45,9 @@ public class MinionShooter : MonoBehaviour
     }
     void SpawnMinion()
     {
-        Vector3 minionFinalPos = Vector3.zero;
-        if (isReverse)
-        {
-            minionFinalPos = barrel.position + new Vector3(4.0f, 0, 0);
-        }
-        else
-        {
-            minionFinalPos = barrel.position + new Vector3(-4.0f, 0, 0);
-        }
-        GameObject minionInstance = Instantiate(minionPrefab, minionFinalPos, Quaternion.LookRotation(barrel.up));
+        GameObject minionInstance = Instantiate(minionPrefab, spawnPosition.transform.position, Quaternion.LookRotation(spawnPosition.transform.forward));
         MinionHitbox minionHitbox = minionInstance.GetComponentInChildren<MinionHitbox>();
         if (minionHitbox != null) minionHitbox.isMinion = true;
-
-        MinionBehaviour minionBehaviour = minionInstance.GetComponent<MinionBehaviour>();
-        if (minionBehaviour != null)
-        {
-            if (isReverse)
-            {
-                minionBehaviour.direction = barrel.position - minionInstance.transform.position;
-            }
-            else
-            {
-                minionBehaviour.direction = minionInstance.transform.position - barrel.position;
-            }
-            minionBehaviour.direction.Normalize();
-        }
     }
 
     private void OnTriggerEnter(Collider other)

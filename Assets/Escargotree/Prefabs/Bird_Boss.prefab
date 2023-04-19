@@ -737,6 +737,7 @@ MonoBehaviour:
   bossCamera: {fileID: 0}
   playerTarget: {fileID: 0}
   preemptiveShadow: {fileID: 0}
+  healthBarUI: {fileID: 0}
 --- !u!114 &7635586964537769185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -749,7 +750,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a06033219ca7b0a4b904e97eba8d1bbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLives: 36
+  compilator: {fileID: 0}
+  healthBar: {fileID: 0}
   body:
   - {fileID: 1678377706195405107}
   - {fileID: 7272062939543108167}
@@ -767,6 +769,7 @@ MonoBehaviour:
   - {fileID: 4447937345210217353}
   player: {fileID: 0}
   behaviour: {fileID: 4833224315643697068}
+  maxLives: 36
   currentHits: 0
 --- !u!136 &9172848725351235405
 CapsuleCollider:
@@ -1260,7 +1263,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 824015559753126921, guid: f6127b7867f29964694ce41adbe0360b, type: 3}
+  - {fileID: 2100000, guid: 614d74b97f5b51344b7b67a87d5d7005, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -8,6 +8,7 @@ public class GameplayDirector : MonoBehaviour
 {
     // Start is called before the first frame update
     public BossSubHitbox victoryChecker = null;
+    public CharacterLives lives = null;
     public DataCompilator compilator= null;
     void Start()
     {
@@ -18,6 +19,12 @@ public class GameplayDirector : MonoBehaviour
     void Update()
     {
         if (victoryChecker == null) return;
+        if (lives == null) return;
+
+        if (lives.dead && lives.deathCounter >= 3.0f)
+        {
+            this.GetComponent<CameraSwitcher>().id = 0;
+        }
 
         if (victoryChecker.currentHits == victoryChecker.maxLives)
         {

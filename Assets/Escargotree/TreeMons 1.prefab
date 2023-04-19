@@ -74,12 +74,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c350aa956b67120448476ea573605a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLives: 24
+  compilator: {fileID: 0}
   legMaterial: {fileID: 2100000, guid: 8e6a15e37f4214a41877792e2cb30f03, type: 2}
   player: {fileID: 0}
   animatorBoss: {fileID: 8405073137398056197}
   spikeShield: {fileID: 5143640507266937833}
   hitbox: {fileID: 8556863167532732962}
+  maxLives: 24
   currentHits: 0
 --- !u!1 &10075299874079659
 GameObject:
@@ -5789,7 +5790,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7655704745657498784}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Objective2D_1
   m_TagString: 2DZoneCam
   m_Icon: {fileID: 0}
@@ -7157,12 +7158,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c350aa956b67120448476ea573605a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLives: 24
+  compilator: {fileID: 0}
   legMaterial: {fileID: 2100000, guid: d7fe74ace2575b04eb7b27e779557fe7, type: 2}
   player: {fileID: 0}
   animatorBoss: {fileID: 8405073137398056197}
   spikeShield: {fileID: 4332224053645614350}
   hitbox: {fileID: 2452183557818712863}
+  maxLives: 24
   currentHits: 0
 --- !u!1 &1580042618344359259
 GameObject:
@@ -10361,7 +10363,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -19631,7 +19633,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4363574775387074514}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e7de855ee358cdd43a752e1abae4eaa0, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
@@ -23057,7 +23059,7 @@ GameObject:
   - component: {fileID: 1341682800328763229}
   - component: {fileID: 9067124279462175570}
   - component: {fileID: 8483200562805178898}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: CameraZone2D_1
   m_TagString: 2DZoneCam
   m_Icon: {fileID: 0}
@@ -23563,12 +23565,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c350aa956b67120448476ea573605a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLives: 24
+  compilator: {fileID: 0}
   legMaterial: {fileID: 2100000, guid: d7fe74ace2575b04eb7b27e779557fe7, type: 2}
   player: {fileID: 0}
   animatorBoss: {fileID: 8405073137398056197}
   spikeShield: {fileID: 3684195165379247558}
   hitbox: {fileID: 6493486964295228656}
+  maxLives: 24
   currentHits: 0
 --- !u!1 &5216558377125663160
 GameObject:
@@ -23918,7 +23921,7 @@ GameObject:
   - component: {fileID: 41680193191343709}
   - component: {fileID: 4076892336871695736}
   - component: {fileID: 6296625576402324191}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FrontLeg2_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24097,8 +24100,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5279163531249867864}
-  m_LocalRotation: {x: 0.000002473592, y: 0.99273455, z: -0.12032516, w: -0.000000029802315}
-  m_LocalPosition: {x: 0.00031016802, y: 44.36685, z: 180.33344}
+  m_LocalRotation: {x: 0.0000024437902, y: 0.99273455, z: -0.12032515, w: -0.0000002980232}
+  m_LocalPosition: {x: 0.00031016782, y: 44.36685, z: 180.33339}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -38766,7 +38769,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 72
+  m_MaxValue: 36
   m_WholeNumbers: 1
   m_Value: 36
   m_OnValueChanged:
@@ -43906,16 +43909,8 @@ PrefabInstance:
       value: 0.11999996
       objectReference: {fileID: 0}
     - target: {fileID: 2338930685556335687, guid: 9bd0b462df6e02446a85edcf588cc391, type: 3}
-      propertyPath: m_Size.z
-      value: 0.013618896
-      objectReference: {fileID: 0}
-    - target: {fileID: 2338930685556335687, guid: 9bd0b462df6e02446a85edcf588cc391, type: 3}
       propertyPath: m_Center.y
       value: 0.05000001
-      objectReference: {fileID: 0}
-    - target: {fileID: 2338930685556335687, guid: 9bd0b462df6e02446a85edcf588cc391, type: 3}
-      propertyPath: m_Center.z
-      value: -0.00319055
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bd0b462df6e02446a85edcf588cc391, type: 3}
@@ -44437,7 +44432,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5254711754378435279}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e7de855ee358cdd43a752e1abae4eaa0, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4

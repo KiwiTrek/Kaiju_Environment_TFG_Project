@@ -38,7 +38,7 @@ public class CharacterLives : MonoBehaviour
     bool activeMesh;
     public int lives;
     public float invulnerableTimer = 0.0f;
-    float deathCounter = -1.0f;
+    public float deathCounter = -1.0f;
 
     int isHurtHash;
     int isHurtHardHash;
@@ -121,29 +121,34 @@ public class CharacterLives : MonoBehaviour
     }
     public void Hit()
     {
-        if (compilator != null)
-        {
-            compilator.RegisterRecieveDamage();
-        }
-
-        if (invulnerableTimer <= 0)
+        if (invulnerableTimer <= 0 && lives > 0)
         {
             lives--;
+            if (compilator != null)
+            {
+                compilator.RegisterRecieveDamage();
+            }
         }
 
         movementScript.canAttack = false;
         movementScript.numberClicks = 0;
         movementScript.VerifyCombo();
 
-        bool isHurt = animator.GetBool(isHurtHash);
-
         if (lives <= 0)
         {
-            dead = true;
-            deathCounter = 0.12f;
+            if (!dead)
+            {
+                dead = true;
+                if (compilator != null)
+                {
+                    compilator.RegisterDeath();
+                }
+                deathCounter = 0.12f;
+            }
         }
         else
         {
+            bool isHurt = animator.GetBool(isHurtHash);
             invulnerableTimer = invulnerabilityFrameTimer;
             if (!isHurt)
             {
@@ -154,33 +159,34 @@ public class CharacterLives : MonoBehaviour
 
     public void HitHard()
     {
-        if (compilator != null)
-        {
-            compilator.RegisterRecieveDamage();
-        }
-
         if (invulnerableTimer <= 0)
         {
             lives--;
+            if (compilator != null)
+            {
+                compilator.RegisterRecieveDamage();
+            }
         }
 
         movementScript.canAttack = false;
         movementScript.numberClicks = 0;
         movementScript.VerifyCombo();
 
-        bool isHurt = animator.GetBool(isHurtHardHash);
-
         if (lives <= 0)
         {
-            dead = true;
-            if (compilator != null)
+            if (!dead)
             {
-                compilator.RegisterDeath();
+                dead = true;
+                deathCounter = 0.12f;
+                if (compilator != null)
+                {
+                    compilator.RegisterDeath();
+                }
             }
-            deathCounter = 0.12f;
         }
         else
         {
+            bool isHurt = animator.GetBool(isHurtHardHash);
             invulnerableTimer = invulnerabilityFrameTimer;
             if (!isHurt)
             {
