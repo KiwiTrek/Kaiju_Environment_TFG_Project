@@ -33,6 +33,7 @@ public class CharacterMov : MonoBehaviour {
 	public Animator animator;
 	public Transform groundChecker;
 	public LayerMask groundMask;
+	public LayerMask groundMask2;
 
 	[Space]
 	public Collider trunk = null;
@@ -94,8 +95,8 @@ public class CharacterMov : MonoBehaviour {
             PlayerMoveAndRotation();
         }
 
-		isGrounded = Physics.CheckSphere(groundChecker.position, groundDistance, groundMask);
-		animator.SetBool("grounded", isGrounded);
+		isGrounded = (Physics.CheckSphere(groundChecker.position, groundDistance, groundMask) || Physics.CheckSphere(groundChecker.position, groundDistance, groundMask2));
+        animator.SetBool("grounded", isGrounded);
         if (isGrounded & verticalMov.y < 0)
         {
 			verticalMov.y = -1.0f;
@@ -260,11 +261,13 @@ public class CharacterMov : MonoBehaviour {
 		transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation (desiredMoveDirection), desiredRotationSpeed);
 
 		//Position correction for 2D area (Extremely hardcoded)
-		Debug.Log(Vector3.Distance(transform.position, trunk.ClosestPoint(transform.position)));
-		if (Vector3.Distance(transform.position, trunk.ClosestPoint(transform.position)) <= 0.5f)
+		if (trunk != null)
 		{
-			Vector3 direction = transform.position - trunk.ClosestPoint(transform.position);
-			controller.Move(direction);
+			if (Vector3.Distance(transform.position, trunk.ClosestPoint(transform.position)) <= 0.44f)
+			{
+				Vector3 direction = transform.position - trunk.ClosestPoint(transform.position);
+				controller.Move(direction);
+			}
 		}
 	}
 

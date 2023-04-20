@@ -2878,6 +2878,10 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
+  groundMask2:
+    serializedVersion: 2
+    m_Bits: 256
+  trunk: {fileID: 0}
   compilator: {fileID: 0}
   InputX: 0
   InputZ: 0

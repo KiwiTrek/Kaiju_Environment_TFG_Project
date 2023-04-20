@@ -25,12 +25,13 @@ Material:
   m_ValidKeywords:
   - _GLOSSINESS_FROM_BASE_ALPHA
   - _NORMALMAP
+  - _RECEIVE_SHADOWS_OFF
   - _SPECULAR_COLOR
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2000
   stringTagMap:
     RenderType: Opaque
   disabledShaderPasses: []
@@ -39,7 +40,7 @@ Material:
     m_TexEnvs:
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: 420557f81bba4194b971eecdd63efeb8, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 4, y: 4}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 2800000, guid: e61358ec39887214d87467faa5d817d0, type: 3}
@@ -51,7 +52,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 420557f81bba4194b971eecdd63efeb8, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 4, y: 4}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
@@ -79,7 +80,7 @@ Material:
     - _DstBlend: 0
     - _GlossinessSource: 0
     - _QueueOffset: 0
-    - _ReceiveShadows: 1
+    - _ReceiveShadows: 0
     - _Shininess: 0.139
     - _Smoothness: 0.139
     - _SmoothnessSource: 1

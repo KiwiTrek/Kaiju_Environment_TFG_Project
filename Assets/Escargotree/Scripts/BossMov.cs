@@ -92,40 +92,12 @@ public class BossMov : MonoBehaviour
             }
             legsDestroyed = newValue;
             animator.SetInteger("legsDestroyed", legsDestroyed);
-
-            if (Time.timeScale > 0)
-            {
-                Vector3 scale = new Vector3(
-                    Quaternion.Angle(legFrontRightInitialRot, legFrontRight.transform.localRotation) / divider,
-                    collisionAreaFrontRight.transform.localScale.y,
-                    Quaternion.Angle(legFrontRightInitialRot, legFrontRight.transform.localRotation) / divider
-                    );
-                collisionAreaFrontRight.transform.localScale = scale;
-
-                scale = new Vector3(
-                    Quaternion.Angle(legFrontLeftInitialRot, legFrontLeft.transform.localRotation) / divider,
-                    collisionAreaFrontLeft.transform.localScale.y,
-                    Quaternion.Angle(legFrontLeftInitialRot, legFrontLeft.transform.localRotation) / divider
-                    );
-                collisionAreaFrontLeft.transform.localScale = scale;
-
-                scale = new Vector3(
-                    Quaternion.Angle(legBackRightInitialRot, legBackRight.transform.localRotation) / divider,
-                    collisionAreaBackRight.transform.localScale.y,
-                    Quaternion.Angle(legBackRightInitialRot, legBackRight.transform.localRotation) / divider
-                    );
-                collisionAreaBackRight.transform.localScale = scale;
-
-                scale = new Vector3(
-                    Quaternion.Angle(legBackLeftInitialRot, legBackLeft.transform.localRotation) / divider,
-                    collisionAreaBackLeft.transform.localScale.y,
-                    Quaternion.Angle(legBackLeftInitialRot, legBackLeft.transform.localRotation) / divider
-                    );
-                collisionAreaBackLeft.transform.localScale = scale;
-            }
+            float legSpeed = 0.48f + legsDestroyed * 0.18f;
+            animator.SetFloat("legSpeed", legSpeed);
         }
         else
         {
+
             if (canvas != null)
             {
                 canvas.SetActive(false);

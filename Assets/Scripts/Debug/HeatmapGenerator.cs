@@ -406,6 +406,7 @@ public class HeatmapGenerator : MonoBehaviour
             {
                 for (int j = 0; j < totalSizeZ; j++)
                 {
+                    Debug.Log("Creating cube: " + i + " , " + k + " , " + j);
                     CubeClass temp = new CubeClass();
                     temp.classCubePrefab = cubePrefab;
                     temp.originPosition.Set(topLeftX + (size * i), bottomLevel + (size * k), topLeftZ - (size * j));

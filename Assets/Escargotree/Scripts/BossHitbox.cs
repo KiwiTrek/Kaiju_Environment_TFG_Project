@@ -7,21 +7,22 @@ public class BossHitbox : MonoBehaviour
     // Start is called before the first frame update
     [Header("Components")]
     public DataCompilator compilator = null;
+    public Renderer legRenderer = null;
     public Material legMaterial = null;
+    public Material legDamagedMaterial = null;
     public CharacterMov player = null;
     public Animator animatorBoss = null;
     public GameObject spikeShield = null;
+    public BossHitbox otherLeg = null;
     public Collider hitbox = null;
 
     [Space]
     public int maxLives = 12;
-    Color colorInit = Color.gray;
     public int currentHits = 0;
     float timerHit = 0.0f;
     float maxHitTime = 0.15f;
     void Start()
     {
-        colorInit = legMaterial.color;
         timerHit = maxHitTime;
     }
 
@@ -39,11 +40,11 @@ public class BossHitbox : MonoBehaviour
             if (timerHit < maxHitTime)
             {
                 timerHit += Time.deltaTime;
-                legMaterial.SetColor("_Color", Color.red);
+                legRenderer.material = legDamagedMaterial;
             }
             else
             {
-                legMaterial.color = colorInit;
+                legRenderer.material = legMaterial;
             }
         }
     }
@@ -63,6 +64,10 @@ public class BossHitbox : MonoBehaviour
             compilator.RegisterHitEnemy();
         }
         timerHit = 0.0f;
+        if (otherLeg != null)
+        {
+            otherLeg.timerHit = 0.0f;
+        }
         //Play sound
         //Play fx
         currentHits += player.numberClicks;

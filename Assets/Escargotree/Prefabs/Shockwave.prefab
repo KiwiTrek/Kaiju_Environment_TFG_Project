@@ -175,4 +175,6 @@ MonoBehaviour:
   safeZone: {fileID: 7001861760928860038}
   safeTrigger: {fileID: 6122674156024528110}
   lifeTimeTotal: 1.5
-  expansionRate: 3
+  expand: 1
+  lockedSize: 1
+  expansionRate: 3.25

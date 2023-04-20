@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.29946822, g: 0.42111158, b: 0.49573562, a: 1}
+  m_IndirectSpecularColor: {r: 0.29924813, g: 0.42112598, b: 0.49531627, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &4
 LightmapSettings:
@@ -10803,6 +10803,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1644633557}
   - component: {fileID: 1644633558}
+  - component: {fileID: 1644633559}
   m_Layer: 0
   m_Name: Directional light
   m_TagString: Untagged
@@ -10887,6 +10888,26 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1644633559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644633556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1001 &1717380782
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12172,8 +12193,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxIds: 0
-  getAllEvents: 1
-  totalIdsToStore: 0
+  getAllEvents: 0
+  totalIdsToStore: 8000
   textInfo: {fileID: 267087374}
   textSelected: {fileID: 266197941}
   numbersChosen: 
@@ -13476,7 +13497,7 @@ Terrain:
   m_DrawTreesAndFoliage: 1
   m_StaticShadowCaster: 0
   m_ReflectionProbeUsage: 2
-  m_MaterialTemplate: {fileID: 10650, guid: 0000000000000000f000000000000000, type: 0}
+  m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
   m_BakeLightProbesForTrees: 0
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 0
@@ -20647,9 +20668,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barrel: {fileID: 8481397178990421151}
   minionPrefab: {fileID: 155583516784818287, guid: 294cf7e30056d51499e1faf2495a677f, type: 3}
+  spawnPosition: {fileID: 0}
   playerControlled: 0
   maxFrequencyOfUpdate: 2
-  isReverse: 0
 --- !u!4 &1180771784127873233
 Transform:
   m_ObjectHideFlags: 0
@@ -23759,9 +23780,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barrel: {fileID: 8258917346013094269}
   minionPrefab: {fileID: 155583516784818287, guid: 294cf7e30056d51499e1faf2495a677f, type: 3}
+  spawnPosition: {fileID: 0}
   playerControlled: 0
   maxFrequencyOfUpdate: 2
-  isReverse: 0
 --- !u!4 &1666695999389542022
 Transform:
   m_ObjectHideFlags: 0
@@ -31097,9 +31118,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barrel: {fileID: 5497680607974960072}
   minionPrefab: {fileID: 155583516784818287, guid: 294cf7e30056d51499e1faf2495a677f, type: 3}
+  spawnPosition: {fileID: 0}
   playerControlled: 0
   maxFrequencyOfUpdate: 2
-  isReverse: 0
 --- !u!1 &3014255663614440973
 GameObject:
   m_ObjectHideFlags: 0
@@ -36805,9 +36826,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barrel: {fileID: 5962774961478309089}
   minionPrefab: {fileID: 155583516784818287, guid: 294cf7e30056d51499e1faf2495a677f, type: 3}
+  spawnPosition: {fileID: 0}
   playerControlled: 0
   maxFrequencyOfUpdate: 2
-  isReverse: 0
 --- !u!4 &3987082593253942404
 Transform:
   m_ObjectHideFlags: 0
@@ -37660,9 +37681,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barrel: {fileID: 6694357505588692817}
   minionPrefab: {fileID: 155583516784818287, guid: 294cf7e30056d51499e1faf2495a677f, type: 3}
+  spawnPosition: {fileID: 0}
   playerControlled: 0
   maxFrequencyOfUpdate: 2
-  isReverse: 0
 --- !u!4 &4135916737129043001
 Transform:
   m_ObjectHideFlags: 0
@@ -38462,6 +38483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   victoryChecker: {fileID: 0}
+  lives: {fileID: 0}
   compilator: {fileID: 0}
 --- !u!4 &4250417804120254915
 Transform:
@@ -42034,9 +42056,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barrel: {fileID: 2761972443019884977}
   minionPrefab: {fileID: 155583516784818287, guid: 294cf7e30056d51499e1faf2495a677f, type: 3}
+  spawnPosition: {fileID: 0}
   playerControlled: 0
   maxFrequencyOfUpdate: 2
-  isReverse: 0
 --- !u!4 &4891089326326182311
 Transform:
   m_ObjectHideFlags: 0
@@ -46341,9 +46363,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barrel: {fileID: 3026548733537374818}
   minionPrefab: {fileID: 155583516784818287, guid: 294cf7e30056d51499e1faf2495a677f, type: 3}
+  spawnPosition: {fileID: 0}
   playerControlled: 0
   maxFrequencyOfUpdate: 2
-  isReverse: 1
 --- !u!4 &5730442175749623700
 Transform:
   m_ObjectHideFlags: 0
@@ -46782,9 +46804,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barrel: {fileID: 3794590914539168488}
   minionPrefab: {fileID: 155583516784818287, guid: 294cf7e30056d51499e1faf2495a677f, type: 3}
+  spawnPosition: {fileID: 0}
   playerControlled: 0
   maxFrequencyOfUpdate: 2
-  isReverse: 1
 --- !u!1 &5855834994840013036
 GameObject:
   m_ObjectHideFlags: 0
@@ -47806,9 +47828,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barrel: {fileID: 3593693391248201849}
   minionPrefab: {fileID: 155583516784818287, guid: 294cf7e30056d51499e1faf2495a677f, type: 3}
+  spawnPosition: {fileID: 0}
   playerControlled: 0
   maxFrequencyOfUpdate: 2
-  isReverse: 0
 --- !u!4 &6084383110838917930
 Transform:
   m_ObjectHideFlags: 0
@@ -51295,9 +51317,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barrel: {fileID: 4148036384277770786}
   minionPrefab: {fileID: 155583516784818287, guid: 294cf7e30056d51499e1faf2495a677f, type: 3}
+  spawnPosition: {fileID: 0}
   playerControlled: 0
   maxFrequencyOfUpdate: 2
-  isReverse: 0
 --- !u!4 &6639205396896582136
 Transform:
   m_ObjectHideFlags: 0
@@ -56103,9 +56125,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barrel: {fileID: 995709440735884264}
   minionPrefab: {fileID: 155583516784818287, guid: 294cf7e30056d51499e1faf2495a677f, type: 3}
+  spawnPosition: {fileID: 0}
   playerControlled: 0
   maxFrequencyOfUpdate: 2
-  isReverse: 0
 --- !u!1 &7531751190755461132
 GameObject:
   m_ObjectHideFlags: 0
@@ -60424,9 +60446,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barrel: {fileID: 1645396874625368821}
   minionPrefab: {fileID: 155583516784818287, guid: 294cf7e30056d51499e1faf2495a677f, type: 3}
+  spawnPosition: {fileID: 0}
   playerControlled: 0
   maxFrequencyOfUpdate: 2
-  isReverse: 0
 --- !u!1 &8331269353522973244
 GameObject:
   m_ObjectHideFlags: 0
@@ -60828,7 +60850,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &8405073138081211957
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -60845,7 +60867,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &8406304966778379443
 Transform:
   m_ObjectHideFlags: 0

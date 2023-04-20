@@ -12,6 +12,7 @@ public class ShockwaveBehaviour : MonoBehaviour
     float lifeTimeRemaining = 0.0f;
 
     public bool expand = true;
+    public bool canHurt = true;
     public float lockedSize = 1.0f;
     public float expansionRate = 1.0f;
     float currentSize = 0.0f;
@@ -24,17 +25,20 @@ public class ShockwaveBehaviour : MonoBehaviour
     {
         if (expand)
         {
-            currentSize += expansionRate * Time.deltaTime;
-            Vector3 scale = new Vector3(
-                currentSize,
-                currentSize,
-                transform.localScale.z
-                );
-            transform.localScale = scale;
-            safeZone.height += currentSize * 100;
-
             lifeTimeRemaining += Time.deltaTime;
-            if (lifeTimeRemaining >= lifeTimeTotal)
+
+            if (lifeTimeRemaining < lifeTimeTotal)
+            {
+                currentSize += expansionRate * Time.deltaTime;
+                Vector3 scale = new Vector3(
+                    currentSize,
+                    currentSize,
+                    transform.localScale.z
+                    );
+                transform.localScale = scale;
+                safeZone.height += currentSize * 100;
+            }
+            else
             {
                 Die();
             }
@@ -55,10 +59,13 @@ public class ShockwaveBehaviour : MonoBehaviour
     {
         if (!safeTrigger.isSafe)
         {
-            CharacterLives lives = other.gameObject.GetComponent<CharacterLives>();
-            if (lives != null)
+            if (canHurt)
             {
-                lives.HitHard();
+                CharacterLives lives = other.gameObject.GetComponent<CharacterLives>();
+                if (lives != null)
+                {
+                    lives.HitHard();
+                }
             }
 
             if (other.gameObject.tag == "Player")

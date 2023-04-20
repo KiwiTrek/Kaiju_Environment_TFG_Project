@@ -75,10 +75,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   compilator: {fileID: 0}
+  legRenderer: {fileID: 8596065083345579693}
   legMaterial: {fileID: 2100000, guid: 8e6a15e37f4214a41877792e2cb30f03, type: 2}
+  legDamagedMaterial: {fileID: 2100000, guid: be1a9d93029053a45b07aeb9086e8ccb, type: 2}
   player: {fileID: 0}
   animatorBoss: {fileID: 8405073137398056197}
   spikeShield: {fileID: 5143640507266937833}
+  otherLeg: {fileID: 0}
   hitbox: {fileID: 8556863167532732962}
   maxLives: 24
   currentHits: 0
@@ -3665,7 +3668,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d7fe74ace2575b04eb7b27e779557fe7, type: 2}
+  - {fileID: 2100000, guid: 8e6a15e37f4214a41877792e2cb30f03, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7159,10 +7162,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   compilator: {fileID: 0}
-  legMaterial: {fileID: 2100000, guid: d7fe74ace2575b04eb7b27e779557fe7, type: 2}
+  legRenderer: {fileID: 6858789488927693582}
+  legMaterial: {fileID: 2100000, guid: 8e6a15e37f4214a41877792e2cb30f03, type: 2}
+  legDamagedMaterial: {fileID: 2100000, guid: be1a9d93029053a45b07aeb9086e8ccb, type: 2}
   player: {fileID: 0}
   animatorBoss: {fileID: 8405073137398056197}
   spikeShield: {fileID: 4332224053645614350}
+  otherLeg: {fileID: 1054010308923373130}
   hitbox: {fileID: 2452183557818712863}
   maxLives: 24
   currentHits: 0
@@ -23566,10 +23572,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   compilator: {fileID: 0}
-  legMaterial: {fileID: 2100000, guid: d7fe74ace2575b04eb7b27e779557fe7, type: 2}
+  legRenderer: {fileID: 6858789488927693582}
+  legMaterial: {fileID: 2100000, guid: 8e6a15e37f4214a41877792e2cb30f03, type: 2}
+  legDamagedMaterial: {fileID: 2100000, guid: be1a9d93029053a45b07aeb9086e8ccb, type: 2}
   player: {fileID: 0}
   animatorBoss: {fileID: 8405073137398056197}
   spikeShield: {fileID: 3684195165379247558}
+  otherLeg: {fileID: 3056524522148658669}
   hitbox: {fileID: 6493486964295228656}
   maxLives: 24
   currentHits: 0
@@ -24100,7 +24109,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5279163531249867864}
-  m_LocalRotation: {x: 0.0000024437902, y: 0.99273455, z: -0.12032515, w: -0.0000002980232}
+  m_LocalRotation: {x: 0.0000024437904, y: 0.99273455, z: -0.12032519, w: -0.00000035762787}
   m_LocalPosition: {x: 0.00031016782, y: 44.36685, z: 180.33339}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
