@@ -5,6 +5,7 @@ using UnityEngine;
 public class MinionShooter : MonoBehaviour
 {
     // Start is called before the first frame update
+    public Renderer render;
     public Transform barrel;
     public GameObject minionPrefab;
     public GameObject spawnPosition;
@@ -35,12 +36,17 @@ public class MinionShooter : MonoBehaviour
             frequency += Time.deltaTime;
             if (frequency >= maxFrequencyOfUpdate)
             {
+                frequency = maxFrequencyOfUpdate;
                 if (foundTarget)
                 {
                     frequency = 0.0f;
+                    render.material.color = Color.yellow;
                     SpawnMinion();
                 }
             }
+            float t = frequency / maxFrequencyOfUpdate;
+            render.material.color = Color.Lerp(Color.yellow, Color.red, t);
+
         }
     }
     void SpawnMinion()

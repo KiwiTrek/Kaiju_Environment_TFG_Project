@@ -11,12 +11,12 @@ public class BossHitbox : MonoBehaviour
     public Material legMaterial = null;
     public Material legDamagedMaterial = null;
     public CharacterMov player = null;
-    public Animator animatorBoss = null;
+    public Collider hitbox = null;
     public GameObject spikeShield = null;
     public BossHitbox otherLeg = null;
-    public Collider hitbox = null;
 
     [Space]
+    public bool isDummy = false;
     public int maxLives = 12;
     public int currentHits = 0;
     float timerHit = 0.0f;
@@ -31,8 +31,19 @@ public class BossHitbox : MonoBehaviour
     {
         if (currentHits >= maxLives)
         {
-            this.hitbox.enabled = false;
-            spikeShield.SetActive(true);
+            if (isDummy)
+            {
+                this.gameObject.SetActive(false);
+            }
+            else
+            {
+                this.hitbox.enabled = false;
+            }
+
+            if (spikeShield!= null)
+            {
+                spikeShield.SetActive(true);
+            }
             currentHits = maxLives;
         }
         else
@@ -70,6 +81,13 @@ public class BossHitbox : MonoBehaviour
         }
         //Play sound
         //Play fx
-        currentHits += player.numberClicks;
+        if (isDummy)
+        {
+            currentHits = player.numberClicks;
+        }
+        else
+        {
+            currentHits += player.numberClicks;
+        }
     }
 }

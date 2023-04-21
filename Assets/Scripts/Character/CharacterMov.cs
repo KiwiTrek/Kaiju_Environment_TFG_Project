@@ -41,6 +41,7 @@ public class CharacterMov : MonoBehaviour {
 
 	[Space]
 	[Header("Debug values")]
+	public int currentCameraId;
 	public float InputX;
 	public float InputZ;
 	public Vector3 desiredMoveDirection;
@@ -261,7 +262,7 @@ public class CharacterMov : MonoBehaviour {
 		transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation (desiredMoveDirection), desiredRotationSpeed);
 
 		//Position correction for 2D area (Extremely hardcoded)
-		if (trunk != null)
+		if (trunk != null && currentCameraId == 1)
 		{
 			if (Vector3.Distance(transform.position, trunk.ClosestPoint(transform.position)) <= 0.44f)
 			{

@@ -733,6 +733,7 @@ MonoBehaviour:
   timeStunned: 5
   status: 0
   shockwavePrefab: {fileID: 6596379300243454722, guid: 99cb0a36f252ccb41bec72d0ecee3e79, type: 3}
+  minionPrefab: {fileID: 155583516784818287, guid: 294cf7e30056d51499e1faf2495a677f, type: 3}
   subHitbox: {fileID: 7635586964537769185}
   bossCamera: {fileID: 0}
   playerTarget: {fileID: 0}

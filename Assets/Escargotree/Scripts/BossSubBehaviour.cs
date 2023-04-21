@@ -10,10 +10,14 @@ public enum BossStatus
     Stuck,
     Invulnerable
 }
-
+public enum InvulnerablePhase
+{
+    Returning,
+    Charging,
+    Thrusting
+}
 public class BossSubBehaviour : MonoBehaviour
 {
-
     // Start is called before the first frame update
     [Header("Parameters")]
     [Range(1.0f, 50.0f)]
@@ -24,21 +28,23 @@ public class BossSubBehaviour : MonoBehaviour
 
     [Header("Components")]
     public GameObject shockwavePrefab = null;
+    public GameObject minionPrefab = null;
     public BossSubHitbox subHitbox;
     public CinemachineVirtualCamera bossCamera;
     public GameObject playerTarget;
     public GameObject preemptiveShadow;
     public GameObject healthBarUI;
 
+    bool minionAttackType = true;
     Vector3 initialPosition = Vector3.zero;
     Vector3 thrustObjective = Vector3.zero;
-    Vector3 currentRotation = Vector3.zero;
     float currentAngle = 0.0f;
     float currentTimeStrike = 0.0f;
     float currentTimeStuck = 0.0f;
     float currentTimeInvulnerable = 0.0f;
+    float timeBetweenBirds = 0.5f;
     int numberThrust = 0;
-    bool returning = false;
+    InvulnerablePhase invulnerablePhase = InvulnerablePhase.Thrusting;
     void Start()
     {
         initialPosition = transform.position;
@@ -66,10 +72,10 @@ public class BossSubBehaviour : MonoBehaviour
             currentTimeStrike = 0.0f;
             currentTimeStuck = 0.0f;
             currentTimeInvulnerable = 0.0f;
-            currentRotation = Vector3.zero;
             numberThrust = 0;
-            returning = false;
+            invulnerablePhase = InvulnerablePhase.Charging;
             healthBarUI.SetActive(false);
+            minionAttackType = false;
             return;
         }
 
@@ -93,7 +99,14 @@ public class BossSubBehaviour : MonoBehaviour
                 break;
             case BossStatus.Invulnerable:
                 {
-                    InvulnerableState();
+                    if (minionAttackType)
+                    {
+                        MinionState();
+                    }
+                    else
+                    {
+                        InvulnerableState();
+                    }
                 }
                 break;
             default:
@@ -115,6 +128,7 @@ public class BossSubBehaviour : MonoBehaviour
             currentAngle += Time.deltaTime * 10.0f;
             if (Time.timeScale > 0.0f)
             {
+                gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, initialPosition - (this.transform.forward * 2.0f), Time.deltaTime * 2.5f);
                 Vector3 scale = new Vector3
                     ((Mathf.Sin(currentAngle) / 200) + preemptiveShadow.transform.localScale.x,
                     preemptiveShadow.transform.localScale.y,
@@ -176,7 +190,9 @@ public class BossSubBehaviour : MonoBehaviour
             status = BossStatus.Idle;
             currentTimeInvulnerable = 0.0f;
             numberThrust = 0;
-            returning = false;
+            invulnerablePhase = InvulnerablePhase.Charging;
+            preemptiveShadow.SetActive(false);
+            minionAttackType = !minionAttackType;
             return;
         }
 
@@ -187,32 +203,55 @@ public class BossSubBehaviour : MonoBehaviour
         }
         else
         {
-            if (returning)
+            switch (invulnerablePhase)
             {
-                if (Vector3.Distance(transform.position, initialPosition) >= 0.01f)
-                {
-                    transform.LookAt(initialPosition);
-                    transform.position = Vector3.MoveTowards(transform.position, initialPosition, Time.deltaTime * speed);
-                }
-                else
-                {
-                    returning = false;
-                    thrustObjective = playerTarget.transform.position;
-                    numberThrust++;
-                }
-            }
-            else
-            {
-                if (Vector3.Distance(thrustObjective, gameObject.transform.position) >= 2.25f)
-                {
-                    transform.LookAt(thrustObjective);
-                    gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, thrustObjective, Time.deltaTime * speed);
-                }
-                else
-                {
-                    returning = true;
-                    SpawnShockwave();
-                }
+                case InvulnerablePhase.Returning:
+                    {
+                        if (Vector3.Distance(transform.position, initialPosition) >= 0.01f)
+                        {
+                            transform.LookAt(initialPosition);
+                            transform.position = Vector3.MoveTowards(transform.position, initialPosition, Time.deltaTime * speed);
+                        }
+                        else
+                        {
+                            invulnerablePhase = InvulnerablePhase.Charging;
+                            numberThrust++;
+                        }
+                    }
+                    break;
+                case InvulnerablePhase.Charging:
+                    {
+                        if (Vector3.Distance(transform.position, initialPosition - (this.transform.forward * 2.0f)) >= 0.01f)
+                        {
+                            thrustObjective = playerTarget.transform.position;
+                            transform.LookAt(thrustObjective);
+                            transform.position = Vector3.MoveTowards(transform.position, initialPosition - (this.transform.forward * 2.0f), Time.deltaTime * 3.0f);
+                            preemptiveShadow.SetActive(true);
+                            preemptiveShadow.transform.position = playerTarget.transform.position;
+                        }
+                        else
+                        {
+                            invulnerablePhase = InvulnerablePhase.Thrusting;
+                        }
+                    }
+                    break;
+                case InvulnerablePhase.Thrusting:
+                    {
+                        if (Vector3.Distance(thrustObjective, transform.position) >= 2.25f)
+                        {
+                            transform.LookAt(thrustObjective);
+                            transform.position = Vector3.MoveTowards(transform.position, thrustObjective, Time.deltaTime * speed);
+                            preemptiveShadow.SetActive(false);
+                        }
+                        else
+                        {
+                            invulnerablePhase = InvulnerablePhase.Returning;
+                            SpawnShockwave();
+                        }
+                    }
+                    break;
+                default:
+                    break;
             }
         }
     }
@@ -225,7 +264,45 @@ public class BossSubBehaviour : MonoBehaviour
         if (behaviour != null)
         {
             behaviour.lifeTimeTotal = 1.0f;
-            behaviour.expansionRate = 1.0f;
+            behaviour.expansionRate = 1.5f;
         }
+    }
+
+    private void MinionState()
+    {
+        currentTimeInvulnerable += Time.deltaTime;
+        if (numberThrust >= 3)
+        {
+            status = BossStatus.Idle;
+            currentTimeInvulnerable = 0.0f;
+            numberThrust = 0;
+            invulnerablePhase = InvulnerablePhase.Charging;
+            preemptiveShadow.SetActive(false);
+            minionAttackType = !minionAttackType;
+            return;
+        }
+
+        transform.Rotate(Vector3.up, Time.deltaTime * 400.0f);
+        thrustObjective = playerTarget.transform.position;
+
+        if (currentTimeInvulnerable >= 1.5f)
+        {
+            if (currentTimeInvulnerable >= 1.5f + timeBetweenBirds)
+            {
+                currentTimeInvulnerable = 1.5f;
+                SpawnMinion();
+                numberThrust++;
+            }
+        }
+    }
+
+    void SpawnMinion()
+    {
+        GameObject bird = Instantiate(minionPrefab, transform.position + new Vector3(1.0f, 0.0f), Quaternion.identity);
+        bird.transform.LookAt(playerTarget.transform.position);
+        bird.GetComponent<MinionBehaviour>().maxVelocity = 9.0f;
+        bird = Instantiate(minionPrefab, transform.position + new Vector3(-1.0f, 0.0f), Quaternion.identity);
+        bird.transform.LookAt(playerTarget.transform.position);
+        bird.GetComponent<MinionBehaviour>().maxVelocity = 9.0f;
     }
 }

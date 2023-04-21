@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd90be6afc3cd104cbb6c7e373a99577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  render: {fileID: 5766766999388290074}
   barrel: {fileID: 5766766999388290076}
   minionPrefab: {fileID: 155583516784818287, guid: 294cf7e30056d51499e1faf2495a677f, type: 3}
   spawnPosition: {fileID: 5914398544989106634}

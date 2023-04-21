@@ -44,12 +44,24 @@ public class MinionHitbox : MonoBehaviour
 
         if (isMinion)
         {
-            if (other.gameObject.tag == "Player"
+            if (behaviour.canFollow)
+            {
+                if (other.gameObject.tag == "Player"
                 || other.gameObject.tag == "Sword"
                 || other.gameObject.tag == "Environment")
+                {
+                    Debug.Log("Enemy death! No damage.");
+                    Die();
+                }
+            }
+            else
             {
-                Debug.Log("Enemy death! No damage.");
-                Die();
+                if (other.gameObject.tag == "Player"
+                || other.gameObject.tag == "Sword")
+                {
+                    Debug.Log("Enemy death! No damage.");
+                    Die();
+                }
             }
         }
     }

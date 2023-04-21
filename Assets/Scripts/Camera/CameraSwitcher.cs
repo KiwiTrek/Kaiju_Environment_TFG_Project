@@ -6,6 +6,7 @@ using UnityEngine;
 public class CameraSwitcher : MonoBehaviour
 {
     public int id = -1;
+    public CharacterMov player;
 
     [Header("CameraList")]
     public CinemachineFreeLook playerCam;
@@ -28,6 +29,11 @@ public class CameraSwitcher : MonoBehaviour
             id = 2;
         }
         else { id = 3; }
+
+        if (player != null)
+        {
+            player.currentCameraId = id;
+        }
     }
     private void Update()
     {
@@ -63,6 +69,11 @@ public class CameraSwitcher : MonoBehaviour
                 if (legCam != null) { legCam.enabled = false; }
                 if (bossCam != null) { bossCam.enabled = false; }
                 break;
+        }
+
+        if (player != null)
+        {
+            player.currentCameraId = id;
         }
     }
 

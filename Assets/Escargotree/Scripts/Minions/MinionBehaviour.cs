@@ -5,6 +5,7 @@ using UnityEngine;
 public class MinionBehaviour : MonoBehaviour
 {
     // Start is called before the first frame update
+    public bool canFollow = true;
     public bool stop;
     public float maxVelocity;
     public float multiplier;
@@ -53,17 +54,22 @@ public class MinionBehaviour : MonoBehaviour
 
             direction = target.transform.position - transform.position;
 
-            if (foundTarget)
+            if (foundTarget && canFollow)
             {
                 Quaternion toRotation = Quaternion.LookRotation(direction);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, turnSpeed * Time.deltaTime);
                 transform.position += transform.forward * velocity * multiplier * Time.deltaTime;
-                velocity = (maxVelocity * (Vector3.Distance(this.transform.position, target.transform.position)/12)) + 3.0f;
+                velocity = (maxVelocity * (Vector3.Distance(this.transform.position, target.transform.position) / 12)) + 3.0f;
             }
             else
             {
                 velocity = maxVelocity + 3.0f;
                 transform.position += transform.forward * velocity * Time.deltaTime;
+                if (!canFollow)
+                {
+                    direction = transform.forward + new Vector3(0, 0, turnSpeed * Time.deltaTime);
+                    transform.rotation = Quaternion.LookRotation(direction);
+                }
             }
         }
     }
