@@ -181,11 +181,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f6b3f8d5b190444597ae86f783e5c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  victoryChecker: {fileID: 0}
-  lives: {fileID: 0}
-  compilator: {fileID: 0}
-  cameraSwitcher: {fileID: 3478307877695400388}
   missionText: {fileID: 2816739903286070552}
+  cameraSwitcher: {fileID: 3478307877695400388}
+  victoryChecker: {fileID: 0}
+  spawnPoint: {fileID: 0}
+  lives: {fileID: 0}
+  bossMov: {fileID: 0}
+  compilator: {fileID: 0}
 --- !u!114 &3478307877695400388
 MonoBehaviour:
   m_ObjectHideFlags: 0
