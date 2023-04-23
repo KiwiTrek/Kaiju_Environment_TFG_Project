@@ -7,6 +7,7 @@ public class CameraSwitcher : MonoBehaviour
 {
     public int id = -1;
     public CharacterMov player;
+    public Light light2D;
 
     [Header("CameraList")]
     public CinemachineFreeLook playerCam;
@@ -37,6 +38,7 @@ public class CameraSwitcher : MonoBehaviour
     }
     private void Update()
     {
+        if (light2D != null) { light2D.enabled = false; }
         switch (id)
         {
             case 0:
@@ -50,6 +52,7 @@ public class CameraSwitcher : MonoBehaviour
                 if (levelCam != null) { levelCam.enabled = true; }
                 if (legCam != null) { legCam.enabled= false; }
                 if (bossCam != null) { bossCam.enabled = false; }
+                if (light2D != null) { light2D.enabled = true; }
                 break;
             case 2:
                 if (playerCam != null) { playerCam.enabled = false; }

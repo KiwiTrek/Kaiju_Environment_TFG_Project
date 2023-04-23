@@ -139,6 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canFollow: 1
+  reverse: 0
   stop: 0
   maxVelocity: 7
   multiplier: 1.15

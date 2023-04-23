@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 5766766999388290077}
   - component: {fileID: 5766766999388290074}
   - component: {fileID: 3855958835163524596}
-  - component: {fileID: 6590887586776942138}
+  - component: {fileID: 8355677875077222976}
   m_Layer: 0
   m_Name: Cannon
   m_TagString: Untagged
@@ -189,8 +189,9 @@ MonoBehaviour:
   spawnPosition: {fileID: 5914398544989106634}
   playerControlled: 0
   maxFrequencyOfUpdate: 2
---- !u!135 &6590887586776942138
-SphereCollider:
+  reverse: 0
+--- !u!136 &8355677875077222976
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -199,9 +200,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 10
-  m_Center: {x: 0.00000005960466, y: 0, z: -0.00000008940697}
+  m_Radius: 2.703786
+  m_Height: 31.7
+  m_Direction: 1
+  m_Center: {x: 2.296232, y: 0.00000035198445, z: -0.00000031600095}
 --- !u!1 &5914398544989106634
 GameObject:
   m_ObjectHideFlags: 0

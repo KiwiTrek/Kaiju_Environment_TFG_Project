@@ -6,6 +6,7 @@ public class MinionBehaviour : MonoBehaviour
 {
     // Start is called before the first frame update
     public bool canFollow = true;
+    public bool reverse = false;
     public bool stop;
     public float maxVelocity;
     public float multiplier;
@@ -67,7 +68,14 @@ public class MinionBehaviour : MonoBehaviour
                 transform.position += transform.forward * velocity * Time.deltaTime;
                 if (!canFollow)
                 {
-                    direction = transform.forward + new Vector3(0, 0, turnSpeed * Time.deltaTime);
+                    if (reverse)
+                    {
+                        direction = transform.forward + new Vector3(0, 0, -turnSpeed * Time.deltaTime);
+                    }
+                    else
+                    {
+                        direction = transform.forward + new Vector3(0, 0, turnSpeed * Time.deltaTime);
+                    }
                     transform.rotation = Quaternion.LookRotation(direction);
                 }
             }

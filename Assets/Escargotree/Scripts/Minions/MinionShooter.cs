@@ -11,6 +11,7 @@ public class MinionShooter : MonoBehaviour
     public GameObject spawnPosition;
     public bool playerControlled = false;
     public float maxFrequencyOfUpdate = 1.5f;
+    public bool reverse = false;
 
     float frequency;
     GameObject target;
@@ -56,6 +57,9 @@ public class MinionShooter : MonoBehaviour
         GameObject minionInstance = Instantiate(minionPrefab, spawnPosition.transform.position, Quaternion.LookRotation(spawnPosition.transform.forward));
         MinionHitbox minionHitbox = minionInstance.GetComponentInChildren<MinionHitbox>();
         if (minionHitbox != null) minionHitbox.isMinion = true;
+
+        MinionBehaviour minionBehaviour = minionInstance.GetComponent<MinionBehaviour>();
+        if (minionBehaviour != null) minionBehaviour.reverse = reverse;
     }
 
     private void OnTriggerEnter(Collider other)
