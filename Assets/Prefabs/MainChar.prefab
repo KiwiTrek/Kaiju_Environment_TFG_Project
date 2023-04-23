@@ -2867,7 +2867,7 @@ MonoBehaviour:
   maxJumpCount: 1
   jumpHeight: 7
   gravity: -18
-  groundDistance: 0.15
+  groundDistance: 0.2
   cam: {fileID: 0}
   playerCam: {fileID: 8878295393832341211}
   controller: {fileID: 8840117093135699264}
@@ -2883,6 +2883,7 @@ MonoBehaviour:
     m_Bits: 256
   trunk: {fileID: 0}
   compilator: {fileID: 0}
+  currentCameraId: 0
   InputX: 0
   InputZ: 0
   desiredMoveDirection: {x: 0, y: 0, z: 0}

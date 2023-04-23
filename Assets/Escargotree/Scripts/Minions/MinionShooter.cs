@@ -14,11 +14,13 @@ public class MinionShooter : MonoBehaviour
 
     float frequency;
     GameObject target;
+    CharacterMov targetMov;
     private bool foundTarget;
 
     private void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player");
+        targetMov = target.GetComponent<CharacterMov>();
     }
 
     // Update is called once per frame
@@ -37,7 +39,7 @@ public class MinionShooter : MonoBehaviour
             if (frequency >= maxFrequencyOfUpdate)
             {
                 frequency = maxFrequencyOfUpdate;
-                if (foundTarget)
+                if (foundTarget && targetMov.currentCameraId == 1)
                 {
                     frequency = 0.0f;
                     render.material.color = Color.yellow;

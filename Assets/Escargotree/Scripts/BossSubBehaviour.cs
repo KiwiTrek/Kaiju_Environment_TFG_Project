@@ -27,6 +27,7 @@ public class BossSubBehaviour : MonoBehaviour
     public BossStatus status = BossStatus.Idle;
 
     [Header("Components")]
+    public BossMov mainBoss = null;
     public GameObject shockwavePrefab = null;
     public GameObject minionPrefab = null;
     public BossSubHitbox subHitbox;
@@ -57,7 +58,10 @@ public class BossSubBehaviour : MonoBehaviour
     {
         if (!bossCamera.enabled)
         {
-            initialPosition = transform.position;
+            if (!mainBoss.isDown)
+            {
+                initialPosition = transform.position;
+            }
             status = BossStatus.Idle;
             preemptiveShadow.SetActive(false);
             if (Vector3.Distance(transform.position, initialPosition) >= 0.01f)
@@ -67,6 +71,7 @@ public class BossSubBehaviour : MonoBehaviour
             }
             else
             {
+                initialPosition = transform.position;
                 transform.LookAt(playerTarget.transform.position);
             }
             currentTimeStrike = 0.0f;
@@ -116,23 +121,25 @@ public class BossSubBehaviour : MonoBehaviour
 
     private void IdleState()
     {
-        preemptiveShadow.SetActive(true);
         currentTimeStrike += Time.deltaTime;
-        gameObject.transform.LookAt(preemptiveShadow.transform.position);
+
+        preemptiveShadow.SetActive(true);
         preemptiveShadow.transform.position = playerTarget.transform.position;
-        Vector3 positionCorrector = new Vector3(preemptiveShadow.transform.localPosition.x, -0.025f, preemptiveShadow.transform.localPosition.z);
+        Vector3 positionCorrector = new Vector3(preemptiveShadow.transform.localPosition.x, -0.545f, preemptiveShadow.transform.localPosition.z);
         preemptiveShadow.transform.localPosition = positionCorrector;
+
+        transform.LookAt(preemptiveShadow.transform.position);
 
         if (currentTimeStrike >= (timeBeforeStrike - 2.0f))
         {
             currentAngle += Time.deltaTime * 10.0f;
             if (Time.timeScale > 0.0f)
             {
-                gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, initialPosition - (this.transform.forward * 2.0f), Time.deltaTime * 2.5f);
+                transform.position = Vector3.MoveTowards(transform.position, initialPosition - (this.transform.forward * 2.0f), Time.deltaTime * 2.5f);
                 Vector3 scale = new Vector3
                     ((Mathf.Sin(currentAngle) / 200) + preemptiveShadow.transform.localScale.x,
-                    preemptiveShadow.transform.localScale.y,
-                    (Mathf.Sin(currentAngle) / 200) + preemptiveShadow.transform.localScale.z);
+                    (Mathf.Sin(currentAngle) / 200) + preemptiveShadow.transform.localScale.y,
+                    preemptiveShadow.transform.localScale.z);
                 preemptiveShadow.transform.localScale = scale;
             }
         }
@@ -153,9 +160,9 @@ public class BossSubBehaviour : MonoBehaviour
             preemptiveShadow.SetActive(false);
         }
 
-        if (Vector3.Distance(thrustObjective, gameObject.transform.position) >= 2.35f)
+        if (Vector3.Distance(thrustObjective, transform.position) >= 2.35f)
         {
-            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, thrustObjective, Time.deltaTime * speed);
+            transform.position = Vector3.MoveTowards(transform.position, thrustObjective, Time.deltaTime * speed);
         }
         else
         {
@@ -226,8 +233,11 @@ public class BossSubBehaviour : MonoBehaviour
                             thrustObjective = playerTarget.transform.position;
                             transform.LookAt(thrustObjective);
                             transform.position = Vector3.MoveTowards(transform.position, initialPosition - (this.transform.forward * 2.0f), Time.deltaTime * 3.0f);
+
                             preemptiveShadow.SetActive(true);
                             preemptiveShadow.transform.position = playerTarget.transform.position;
+                            Vector3 positionCorrector = new Vector3(preemptiveShadow.transform.localPosition.x, -0.545f, preemptiveShadow.transform.localPosition.z);
+                            preemptiveShadow.transform.localPosition = positionCorrector;
                         }
                         else
                         {

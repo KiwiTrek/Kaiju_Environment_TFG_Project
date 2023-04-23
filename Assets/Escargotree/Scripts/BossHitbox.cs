@@ -2,17 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum LegType
+{
+    FrontLeft,
+    BackLeft,
+    BackRight,
+}
 public class BossHitbox : MonoBehaviour
 {
     // Start is called before the first frame update
     [Header("Components")]
-    public DataCompilator compilator = null;
     public Renderer legRenderer = null;
+    public LegType legType = LegType.FrontLeft;
     public Material legMaterial = null;
     public Material legDamagedMaterial = null;
+    public Material legDestroyedMaterial = null;
+    public Material legDestroyedMaterialLeft = null;
+    public Material legDestroyedMaterialRight = null;
+    public Material legDestroyedMaterialBoth = null;
+
+    [Space(10)]
+    public DataCompilator compilator = null;
     public CharacterMov player = null;
     public Collider hitbox = null;
-    public GameObject spikeShield = null;
     public BossHitbox otherLeg = null;
 
     [Space]
@@ -40,9 +52,33 @@ public class BossHitbox : MonoBehaviour
                 this.hitbox.enabled = false;
             }
 
-            if (spikeShield!= null)
+            switch (legType)
             {
-                spikeShield.SetActive(true);
+                case LegType.FrontLeft:
+                    legRenderer.material = legDestroyedMaterial;
+                    break;
+                case LegType.BackLeft:
+                    if (otherLeg.currentHits == otherLeg.maxLives)
+                    {
+                        legRenderer.material = legDestroyedMaterialBoth;
+                    }
+                    else
+                    {
+                        legRenderer.material = legDestroyedMaterialLeft;
+                    }
+                    break;
+                case LegType.BackRight:
+                    if (otherLeg.currentHits == otherLeg.maxLives)
+                    {
+                        legRenderer.material = legDestroyedMaterialBoth;
+                    }
+                    else
+                    {
+                        legRenderer.material = legDestroyedMaterialRight;
+                    }
+                    break;
+                default:
+                    break;
             }
             currentHits = maxLives;
         }
@@ -55,7 +91,35 @@ public class BossHitbox : MonoBehaviour
             }
             else
             {
-                legRenderer.material = legMaterial;
+                switch (legType)
+                {
+                    case LegType.FrontLeft:
+                        legRenderer.material = legMaterial;
+                        break;
+                    case LegType.BackLeft:
+                        if (otherLeg.currentHits == otherLeg.maxLives)
+                        {
+                            legRenderer.material = legDestroyedMaterialRight;
+                        }
+                        else
+                        {
+                            legRenderer.material = legMaterial;
+                        }
+                        break;
+                    case LegType.BackRight:
+                        if (otherLeg.currentHits == otherLeg.maxLives)
+                        {
+                            legRenderer.material = legDestroyedMaterialLeft;
+                        }
+                        else
+                        {
+                            legRenderer.material = legMaterial;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
             }
         }
     }

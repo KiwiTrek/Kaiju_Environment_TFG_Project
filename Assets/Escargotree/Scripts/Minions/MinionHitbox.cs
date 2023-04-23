@@ -57,7 +57,8 @@ public class MinionHitbox : MonoBehaviour
             else
             {
                 if (other.gameObject.tag == "Player"
-                || other.gameObject.tag == "Sword")
+                || other.gameObject.tag == "Sword"
+                || other.gameObject.tag == "EnvironmentIgnoreCam")
                 {
                     Debug.Log("Enemy death! No damage.");
                     Die();

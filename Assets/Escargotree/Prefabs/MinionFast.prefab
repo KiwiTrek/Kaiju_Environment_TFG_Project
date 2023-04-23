@@ -113,7 +113,7 @@ Transform:
   m_GameObject: {fileID: 155583516784818287}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1.5}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3737719693529072888}
@@ -140,8 +140,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canFollow: 1
   stop: 0
-  maxVelocity: 7.5
-  multiplier: 1.25
+  maxVelocity: 7
+  multiplier: 1.15
   turnSpeed: 120
   rotation: {x: 0, y: 0, z: 0, w: 1}
   direction: {x: 0, y: 0, z: 0}
@@ -189,7 +189,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!1 &471551350719565827
 GameObject:
   m_ObjectHideFlags: 0
@@ -650,8 +650,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.75
-  m_Height: 1.020857
+  m_Radius: 0.84
+  m_Height: 1.17
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0.010425329}
 --- !u!114 &4963938998121977462

@@ -7,6 +7,7 @@ public class BossMov : MonoBehaviour
 {
     // Start is called before the first frame update
     [Header("Properties")]
+    public bool isDown = false;
     public bool attacking;
     public int LegToDestroy = 3;
     [Range(0.1f, 5.0f)]
@@ -30,6 +31,7 @@ public class BossMov : MonoBehaviour
     public GameObject collisionAreaBackRight;
 
     [Space(10)]
+    public GameObject spikes = null;
     public GameObject shockwavePrefab;
     public Animator animator;
     public GameObject canvas;
@@ -40,7 +42,7 @@ public class BossMov : MonoBehaviour
     Quaternion legBackLeftInitialRot = Quaternion.identity;
     Quaternion legBackRightInitialRot = Quaternion.identity;
 
-    int legsDestroyed = 0;
+    public int legsDestroyed = 0;
     int isAttackingHash;
     int maxLives;
     void Start()
@@ -66,6 +68,7 @@ public class BossMov : MonoBehaviour
 
         if (legsDestroyed < 3 && attacking)
         {
+            spikes.SetActive(true);
             if (canvas != null)
             {
                 canvas.SetActive(true);
@@ -77,6 +80,36 @@ public class BossMov : MonoBehaviour
             }
 
             legsDestroyed = animator.GetInteger("legsDestroyed");
+            if (Time.timeScale > 0)
+            {
+                Vector3 scale = new Vector3(
+                    Quaternion.Angle(legFrontRightInitialRot, legFrontRight.transform.localRotation) / divider,
+                    Quaternion.Angle(legFrontRightInitialRot, legFrontRight.transform.localRotation) / divider,
+                    collisionAreaFrontRight.transform.localScale.z
+                    );
+                collisionAreaFrontRight.transform.localScale = scale;
+
+                scale = new Vector3(
+                    Quaternion.Angle(legFrontLeftInitialRot, legFrontLeft.transform.localRotation) / divider,
+                    Quaternion.Angle(legFrontLeftInitialRot, legFrontLeft.transform.localRotation) / divider,
+                    collisionAreaFrontLeft.transform.localScale.z
+                    );
+                collisionAreaFrontLeft.transform.localScale = scale;
+
+                scale = new Vector3(
+                    Quaternion.Angle(legBackRightInitialRot, legBackRight.transform.localRotation) / divider,
+                    Quaternion.Angle(legBackRightInitialRot, legBackRight.transform.localRotation) / divider,
+                    collisionAreaBackRight.transform.localScale.z
+                    );
+                collisionAreaBackRight.transform.localScale = scale;
+
+                scale = new Vector3(
+                    Quaternion.Angle(legBackLeftInitialRot, legBackLeft.transform.localRotation) / divider,
+                    Quaternion.Angle(legBackLeftInitialRot, legBackLeft.transform.localRotation) / divider,
+                    collisionAreaBackLeft.transform.localScale.z
+                    );
+                collisionAreaBackLeft.transform.localScale = scale;
+            }
             int newValue = 0;
             if (frontRightHitbox.currentHits >= frontRightHitbox.maxLives)
             {
@@ -104,6 +137,7 @@ public class BossMov : MonoBehaviour
             }
             attacking = false;
             animator.SetBool(isAttackingHash, false);
+            spikes.SetActive(false);
             collisionAreaBackLeft.SetActive(false);
             collisionAreaBackRight.SetActive(false);
             collisionAreaFrontLeft.SetActive(false);
@@ -180,4 +214,8 @@ public class BossMov : MonoBehaviour
         }
     }
 
+    void SwitchDown()
+    {
+        isDown = !isDown;
+    }
 }

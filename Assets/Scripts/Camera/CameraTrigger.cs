@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraTrigger : MonoBehaviour
 {
     public CameraSwitcher switcher;
+    public BossSubHitbox bossLife;
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
@@ -37,6 +38,11 @@ public class CameraTrigger : MonoBehaviour
         {
             Debug.Log("Returning to status");
             switcher.id = 0;
+        }
+
+        if (bossLife != null)
+        {
+            bossLife.currentHits = 0;
         }
     }
 }
