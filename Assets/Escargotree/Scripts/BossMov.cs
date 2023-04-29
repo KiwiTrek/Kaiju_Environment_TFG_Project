@@ -31,7 +31,7 @@ public class BossMov : MonoBehaviour
     public GameObject collisionAreaBackRight;
 
     [Space(10)]
-    public GameObject spikes = null;
+    public List<GameObject> spikes = null;
     public GameObject shockwavePrefab;
     public Animator animator;
     public GameObject canvas;
@@ -68,7 +68,10 @@ public class BossMov : MonoBehaviour
 
         if (legsDestroyed < 3 && attacking)
         {
-            spikes.SetActive(true);
+            foreach (GameObject spike in spikes)
+            {
+                spike.SetActive(true);
+            }
             if (canvas != null)
             {
                 canvas.SetActive(true);
@@ -137,7 +140,10 @@ public class BossMov : MonoBehaviour
             }
             attacking = false;
             animator.SetBool(isAttackingHash, false);
-            spikes.SetActive(false);
+            foreach (GameObject spike in spikes)
+            {
+                spike.SetActive(false);
+            }
             collisionAreaBackLeft.SetActive(false);
             collisionAreaBackRight.SetActive(false);
             collisionAreaFrontLeft.SetActive(false);
