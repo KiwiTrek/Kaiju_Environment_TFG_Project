@@ -8,7 +8,7 @@ TerrainLayer:
   m_PrefabAsset: {fileID: 0}
   m_Name: layer_wrak_zedb956af97c33fc3d7
   m_DiffuseTexture: {fileID: 2800000, guid: f5274adb50c6f2a4cb16ed79e41d4f36, type: 3}
-  m_NormalMapTexture: {fileID: 0}
+  m_NormalMapTexture: {fileID: 2800000, guid: 4f271df11a6dc16478671e26fc84a491, type: 3}
   m_MaskMapTexture: {fileID: 0}
   m_TileSize: {x: 8, y: 8}
   m_TileOffset: {x: 0, y: 0}

@@ -213,8 +213,16 @@ public class CharacterMov : MonoBehaviour {
 			animator.SetBool("attackStart", false);
 		}
 	}
+	public void InvertCamX()
+	{
+		playerCam.m_XAxis.m_InvertInput = !playerCam.m_XAxis.m_InvertInput;
+	}
+    public void InvertCamY()
+    {
+        playerCam.m_XAxis.m_InvertInput = !playerCam.m_XAxis.m_InvertInput;
+    }
 
-	public void RotateToCamera(Transform t)
+    public void RotateToCamera(Transform t)
 	{
 		var forward = cam.transform.forward;
 		desiredMoveDirection = forward;
