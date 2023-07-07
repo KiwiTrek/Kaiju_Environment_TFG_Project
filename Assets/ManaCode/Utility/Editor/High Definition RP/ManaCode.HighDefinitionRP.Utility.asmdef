@@ -1,0 +1,27 @@
+{
+    "name": "ManaCode.HighDefinitionRP.Utility",
+    "rootNamespace": "ManaCode.HighDefinitionRP.Utility",
+    "references": [
+        "GUID:78bd2ddd6e276394a9615c203e574844",
+        "GUID:05c1f40c6423e7341b457182fb222727"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "HDRP_12_OR_NEWER"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.unity.render-pipelines.high-definition",
+            "expression": "12.0.0",
+            "define": "HDRP_12_OR_NEWER"
+        }
+    ],
+    "noEngineReferences": false
+}

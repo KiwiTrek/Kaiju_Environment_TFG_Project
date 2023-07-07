@@ -281,7 +281,7 @@ public class BossSubBehaviour : MonoBehaviour
     private void MinionState()
     {
         currentTimeInvulnerable += Time.deltaTime;
-        if (numberThrust >= 3)
+        if (numberThrust >= 2)
         {
             status = BossStatus.Idle;
             currentTimeInvulnerable = 0.0f;

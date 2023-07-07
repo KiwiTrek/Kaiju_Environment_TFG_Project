@@ -141,7 +141,7 @@ MonoBehaviour:
   canFollow: 1
   reverse: 0
   stop: 0
-  maxVelocity: 7
+  maxVelocity: 6
   multiplier: 1.15
   turnSpeed: 120
   rotation: {x: 0, y: 0, z: 0, w: 1}

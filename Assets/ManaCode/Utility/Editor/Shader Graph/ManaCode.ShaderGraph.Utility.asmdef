@@ -1,0 +1,26 @@
+{
+    "name": "ManaCode.ShaderGraph.Utility",
+    "rootNamespace": "ManaCode.ShaderGraph.Utility",
+    "references": [
+        "GUID:be0903cd8e1546f498710afdc59db5eb"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "SHADER_GRAPH_12_OR_NEWER"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.unity.shadergraph",
+            "expression": "12.0.0",
+            "define": "SHADER_GRAPH_12_OR_NEWER"
+        }
+    ],
+    "noEngineReferences": false
+}
