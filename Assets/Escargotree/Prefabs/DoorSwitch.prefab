@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1205148128416002124}
+  - component: {fileID: 8928557959660563210}
   m_Layer: 0
   m_Name: LeafDoor
   m_TagString: Untagged
@@ -33,6 +34,26 @@ Transform:
   m_Father: {fileID: 7005425247571986598}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &8928557959660563210
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013772567047187190}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 90731090dc08b554e97ae59fe401a797, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3160654445948989345
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,7 +176,7 @@ Transform:
   - {fileID: 8788190998105165166}
   m_Father: {fileID: 3320045727665131789}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.88542193}
 --- !u!1 &5057780005607359991
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,7 +207,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8788190998105165166}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 25.111416}
 --- !u!1 &5120391418884369195
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,7 +239,7 @@ Transform:
   - {fileID: 8407168668158839003}
   m_Father: {fileID: 3667484218663791122}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -23.320875}
 --- !u!1 &5627474460177486669
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,7 +271,7 @@ Transform:
   - {fileID: 6012831750853831711}
   m_Father: {fileID: 1205148128416002124}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -0.0000017075472, y: 89.93262, z: -13.882674}
 --- !u!1 &6584877296107255593
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,6 +399,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7005425247571986598}
   - component: {fileID: 1996543588640908477}
+  - component: {fileID: 5987253148565761867}
   - component: {fileID: 7005425247571986599}
   m_Layer: 3
   m_Name: Door
@@ -416,6 +438,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -7083242107062564134, guid: 9bfcb40c721a9ed4187393fc81013e7a, type: 3}
+--- !u!65 &5987253148565761867
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7005425247571986593}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 0.1964785, y: 0.14542662, z: 0.10776478}
+  m_Center: {x: 0, y: 0.039096307, z: 0.009193581}
 --- !u!114 &7005425247571986599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -547,7 +582,7 @@ Transform:
   - {fileID: 3320045727665131789}
   m_Father: {fileID: 1486250044381173889}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -0.0475905, y: 0.19255438, z: 12.38927}
 --- !u!1 &7924414448790890015
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,4 +677,4 @@ Transform:
   - {fileID: 3667484218663791122}
   m_Father: {fileID: 6012831750853831711}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.5882028}

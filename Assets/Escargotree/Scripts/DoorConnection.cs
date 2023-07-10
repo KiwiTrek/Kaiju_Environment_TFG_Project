@@ -34,7 +34,9 @@ public class DoorConnection : MonoBehaviour
     {
         foreach(GameObject door in doors)
         {
-            door.SetActive(false);
+            door.GetComponent<MeshCollider>().enabled = false;
+            door.GetComponent<BoxCollider>().enabled = true;
+            door.GetComponentInChildren<Animator>().SetBool("isOpen", true);
         }
         //Effects (Door)
 
@@ -44,7 +46,9 @@ public class DoorConnection : MonoBehaviour
     {
         foreach(GameObject door in doors)
         {
-            door.SetActive(true);
+            door.GetComponent<MeshCollider>().enabled = true;
+            door.GetComponent<BoxCollider>().enabled = false;
+            door.GetComponentInChildren<Animator>().SetBool("isOpen", false);
         }
         gameObject.SetActive(true);
     }

@@ -13,7 +13,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: model_cannon
-    second: {fileID: 2100000, guid: 528da85f820bdf345924489f51de6e1d, type: 2}
+    second: {fileID: 2100000, guid: 371aa3b3c39732d498b75aa006d5883e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
