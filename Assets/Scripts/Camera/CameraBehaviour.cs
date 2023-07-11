@@ -9,7 +9,14 @@ public class CameraBehaviour : MonoBehaviour
     public GameObject objective;
     public GameObject player;
 
+    float xOffset = 0.0f;
+
     // Update is called once per frame
+
+    private void Start()
+    {
+        xOffset = transform.localPosition.x;
+    }
     void Update()
     {
         if (objective != null)

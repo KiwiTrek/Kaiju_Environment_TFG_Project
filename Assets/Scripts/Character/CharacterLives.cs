@@ -157,6 +157,15 @@ public class CharacterLives : MonoBehaviour
         }
     }
 
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Checkpoint")
+        {
+            Debug.Log("Checkpoint!");
+            spawnPoint = other.transform;
+        }
+    }
+
     public void HitHard()
     {
         if (invulnerableTimer <= 0)

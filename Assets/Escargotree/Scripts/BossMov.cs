@@ -10,7 +10,7 @@ public class BossMov : MonoBehaviour
     public bool isDown = false;
     public bool attacking;
     public int LegToDestroy = 3;
-    [Range(0.1f, 5.0f)]
+    [Range(0.1f, 30.0f)]
     public float divider = 3.0f;
 
     [Header("Components")]
@@ -26,8 +26,8 @@ public class BossMov : MonoBehaviour
 
     [Space(10)]
     public GameObject collisionAreaFrontLeft;
-    public GameObject collisionAreaBackLeft;
     public GameObject collisionAreaFrontRight;
+    public GameObject collisionAreaBackLeft;
     public GameObject collisionAreaBackRight;
 
     [Space(10)]
@@ -36,11 +36,6 @@ public class BossMov : MonoBehaviour
     public Animator animator;
     public GameObject canvas;
     public Slider healthBar;
-    
-    Quaternion legFrontLeftInitialRot= Quaternion.identity;
-    Quaternion legFrontRightInitialRot = Quaternion.identity;
-    Quaternion legBackLeftInitialRot = Quaternion.identity;
-    Quaternion legBackRightInitialRot = Quaternion.identity;
 
     public int legsDestroyed = 0;
     int isAttackingHash;
@@ -48,12 +43,6 @@ public class BossMov : MonoBehaviour
     void Start()
     {
         isAttackingHash = Animator.StringToHash("isAttacking");
-
-        legBackLeftInitialRot = legBackLeft.transform.localRotation;
-        legFrontLeftInitialRot = legFrontLeft.transform.localRotation;
-        legFrontRightInitialRot = legFrontRight.transform.localRotation;
-        legBackRightInitialRot = legBackRight.transform.localRotation;
-
         maxLives = frontRightHitbox.maxLives + backLeftHitbox.maxLives + backRightHitbox.maxLives;
     }
 
@@ -85,30 +74,31 @@ public class BossMov : MonoBehaviour
             legsDestroyed = animator.GetInteger("legsDestroyed");
             if (Time.timeScale > 0)
             {
-                Vector3 scale = new Vector3(
-                    Quaternion.Angle(legFrontRightInitialRot, legFrontRight.transform.localRotation) / divider,
-                    Quaternion.Angle(legFrontRightInitialRot, legFrontRight.transform.localRotation) / divider,
-                    collisionAreaFrontRight.transform.localScale.z
-                    );
-                collisionAreaFrontRight.transform.localScale = scale;
 
-                scale = new Vector3(
-                    Quaternion.Angle(legFrontLeftInitialRot, legFrontLeft.transform.localRotation) / divider,
-                    Quaternion.Angle(legFrontLeftInitialRot, legFrontLeft.transform.localRotation) / divider,
+                Vector3 scale = new Vector3(
+                    legFrontLeft.transform.position.y / (divider),
+                    legFrontLeft.transform.position.y / (divider),
                     collisionAreaFrontLeft.transform.localScale.z
                     );
                 collisionAreaFrontLeft.transform.localScale = scale;
 
                 scale = new Vector3(
-                    Quaternion.Angle(legBackRightInitialRot, legBackRight.transform.localRotation) / divider,
-                    Quaternion.Angle(legBackRightInitialRot, legBackRight.transform.localRotation) / divider,
+                    legFrontRight.transform.position.y / (divider),
+                    legFrontRight.transform.position.y / (divider),
+                    collisionAreaFrontRight.transform.localScale.z
+                    );
+                collisionAreaFrontRight.transform.localScale = scale;
+
+                scale = new Vector3(
+                    legBackRight.transform.position.y / (divider),
+                    legBackRight.transform.position.y / (divider),
                     collisionAreaBackRight.transform.localScale.z
                     );
                 collisionAreaBackRight.transform.localScale = scale;
 
                 scale = new Vector3(
-                    Quaternion.Angle(legBackLeftInitialRot, legBackLeft.transform.localRotation) / divider,
-                    Quaternion.Angle(legBackLeftInitialRot, legBackLeft.transform.localRotation) / divider,
+                    legBackLeft.transform.position.y / (divider),
+                    legBackLeft.transform.position.y / (divider),
                     collisionAreaBackLeft.transform.localScale.z
                     );
                 collisionAreaBackLeft.transform.localScale = scale;
@@ -192,8 +182,8 @@ public class BossMov : MonoBehaviour
     void ResetAttackPattern()
     {
         collisionAreaFrontLeft.SetActive(true);
-        collisionAreaBackRight.SetActive(true);
         collisionAreaFrontRight.SetActive(false);
+        collisionAreaBackRight.SetActive(true);
         collisionAreaBackLeft.SetActive(false);
     }
 

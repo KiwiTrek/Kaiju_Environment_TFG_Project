@@ -36,7 +36,6 @@ public class CharacterMov : MonoBehaviour {
 	public LayerMask groundMask2;
 
 	[Space]
-	public Collider trunk = null;
     public DataCompilator compilator;
 
 	[Space]
@@ -268,16 +267,6 @@ public class CharacterMov : MonoBehaviour {
         }
 		
 		transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation (desiredMoveDirection), desiredRotationSpeed);
-
-		//Position correction for 2D area (Extremely hardcoded)
-		if (trunk != null && currentCameraId == 1)
-		{
-			if (Vector3.Distance(transform.position, trunk.ClosestPoint(transform.position)) <= 0.44f)
-			{
-				Vector3 direction = transform.position - trunk.ClosestPoint(transform.position);
-				controller.Move(direction);
-			}
-		}
 	}
 
     private void OnDrawGizmosSelected()

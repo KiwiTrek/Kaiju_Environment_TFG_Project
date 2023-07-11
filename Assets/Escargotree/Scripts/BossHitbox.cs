@@ -1,31 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public enum LegType
-{
-    FrontLeft,
-    BackLeft,
-    BackRight,
-}
 public class BossHitbox : MonoBehaviour
 {
     // Start is called before the first frame update
     [Header("Components")]
     public Renderer legRenderer = null;
-    public LegType legType = LegType.FrontLeft;
-    public Material legMaterial = null;
-    public Material legDamagedMaterial = null;
-    public Material legDestroyedMaterial = null;
-    public Material legDestroyedMaterialLeft = null;
-    public Material legDestroyedMaterialRight = null;
-    public Material legDestroyedMaterialBoth = null;
+    public GameObject legBrokenDecals = null;
 
     [Space(10)]
     public DataCompilator compilator = null;
     public CharacterMov player = null;
     public Collider hitbox = null;
-    public BossHitbox otherLeg = null;
 
     [Space]
     public bool isDummy = false;
@@ -52,34 +38,11 @@ public class BossHitbox : MonoBehaviour
                 this.hitbox.enabled = false;
             }
 
-            switch (legType)
+            if (legBrokenDecals != null)
             {
-                case LegType.FrontLeft:
-                    legRenderer.material = legDestroyedMaterial;
-                    break;
-                case LegType.BackLeft:
-                    if (otherLeg.currentHits == otherLeg.maxLives)
-                    {
-                        legRenderer.material = legDestroyedMaterialBoth;
-                    }
-                    else
-                    {
-                        legRenderer.material = legDestroyedMaterialLeft;
-                    }
-                    break;
-                case LegType.BackRight:
-                    if (otherLeg.currentHits == otherLeg.maxLives)
-                    {
-                        legRenderer.material = legDestroyedMaterialBoth;
-                    }
-                    else
-                    {
-                        legRenderer.material = legDestroyedMaterialRight;
-                    }
-                    break;
-                default:
-                    break;
+                legBrokenDecals.SetActive(true);
             }
+
             currentHits = maxLives;
         }
         else
@@ -87,39 +50,11 @@ public class BossHitbox : MonoBehaviour
             if (timerHit < maxHitTime)
             {
                 timerHit += Time.deltaTime;
-                legRenderer.material = legDamagedMaterial;
+                legRenderer.material.color = Color.red;
             }
             else
             {
-                switch (legType)
-                {
-                    case LegType.FrontLeft:
-                        legRenderer.material = legMaterial;
-                        break;
-                    case LegType.BackLeft:
-                        if (otherLeg.currentHits == otherLeg.maxLives)
-                        {
-                            legRenderer.material = legDestroyedMaterialRight;
-                        }
-                        else
-                        {
-                            legRenderer.material = legMaterial;
-                        }
-                        break;
-                    case LegType.BackRight:
-                        if (otherLeg.currentHits == otherLeg.maxLives)
-                        {
-                            legRenderer.material = legDestroyedMaterialLeft;
-                        }
-                        else
-                        {
-                            legRenderer.material = legMaterial;
-                        }
-                        break;
-                    default:
-                        break;
-                }
-
+                legRenderer.material.color = Color.white;
             }
         }
     }
@@ -139,10 +74,7 @@ public class BossHitbox : MonoBehaviour
             compilator.RegisterHitEnemy();
         }
         timerHit = 0.0f;
-        if (otherLeg != null)
-        {
-            otherLeg.timerHit = 0.0f;
-        }
+
         //Play sound
         //Play fx
         if (isDummy)

@@ -33,7 +33,7 @@ public class GameplayDirector : MonoBehaviour
         if (spawnPoint == null) return;
         if (bossMov == null) return;
 
-        if (Vector3.Distance(lives.gameObject.transform.position, spawnPoint.transform.position) <= 5.0f)
+        if (Vector3.Distance(lives.gameObject.transform.position, spawnPoint.transform.position) <= 15.0f)
         {
             missionText.text = "Current objective: \nTrip him up!";
         }

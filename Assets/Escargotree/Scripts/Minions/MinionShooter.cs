@@ -5,7 +5,7 @@ using UnityEngine;
 public class MinionShooter : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Renderer render;
+    public Animator animator;
     public Transform barrel;
     public GameObject minionPrefab;
     public GameObject spawnPosition;
@@ -40,16 +40,20 @@ public class MinionShooter : MonoBehaviour
             if (frequency >= maxFrequencyOfUpdate)
             {
                 frequency = maxFrequencyOfUpdate;
+                animator.SetFloat("cannonDuration", 1.0f);
                 if (foundTarget && targetMov.currentCameraId == 1)
                 {
                     frequency = 0.0f;
-                    render.material.color = Color.yellow;
+                    animator.SetFloat("cannonDuration", -1.0f);
                     SpawnMinion();
                 }
             }
-            float t = frequency / maxFrequencyOfUpdate;
-            render.material.color = Color.Lerp(Color.yellow, Color.red, t);
-
+            else
+            {
+                float t = frequency / maxFrequencyOfUpdate;
+                animator.SetFloat("cannonDuration", t);
+                animator.Play("Rolling", 0, t);
+            }
         }
     }
     void SpawnMinion()

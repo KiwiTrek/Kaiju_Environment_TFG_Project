@@ -1,0 +1,623 @@
+fileFormatVersion: 2
+guid: b2d28538a8ec0764cb44b75a0efefb37
+ModelImporter:
+  serializedVersion: 21300
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:Bark3_2
+    second: {fileID: 2100000, guid: 4b4765ac325b2a546ba8bae749a594f3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:Bark3_2.002
+    second: {fileID: 2100000, guid: 4b4765ac325b2a546ba8bae749a594f3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:Brambles
+    second: {fileID: 2100000, guid: ac1b56fce0a776744b3d30eed5944e7a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:Eye
+    second: {fileID: 2100000, guid: f10d2307a97e075418a3a69e9035023b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:EyeTube
+    second: {fileID: 2100000, guid: 7957b5d2b350697449528eee250d9fff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:Grass
+    second: {fileID: 2100000, guid: faed30313fa01bf4ea0bc3041783a08a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:Larch_branch
+    second: {fileID: 2100000, guid: 4087b146e81fee0428f9425838e040b3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:Leaf_Back
+    second: {fileID: 2100000, guid: f04fe1d32b8579c408a64ee77474c349, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:Leaf_Back.002
+    second: {fileID: 2100000, guid: f04fe1d32b8579c408a64ee77474c349, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:Leaf_Front
+    second: {fileID: 2100000, guid: 607cdeb4f4618fa45b02c10cf7a1db6a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:Leaf_Front.002
+    second: {fileID: 2100000, guid: 607cdeb4f4618fa45b02c10cf7a1db6a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:LegBackL
+    second: {fileID: 2100000, guid: 162a30dbf0b864d449a49d9f3687eb8e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:LegBackR
+    second: {fileID: 2100000, guid: 19934272264b969468e7b064957329ac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:LegClimbable
+    second: {fileID: 2100000, guid: d119df83fe3a32246854da05b2094e87, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:LegFront
+    second: {fileID: 2100000, guid: b10b204f322d71a47952035d05188f2d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:Mid
+    second: {fileID: 2100000, guid: 6bd3a428442734c4aaaaf9e603ca976f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:Spikes
+    second: {fileID: 2100000, guid: 85057ae7d8884204c932eff3f4289216, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:Stump_tip.001
+    second: {fileID: 2100000, guid: dc6ef4881c1190c44864d6da97816786, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:Top
+    second: {fileID: 2100000, guid: b9afb3784afab0f4b96819d24f51cf66, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:Trunk Main
+    second: {fileID: 2100000, guid: 8a95b92385ca2b54babd7cdcb02770ed, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:bark01_bottom.001
+    second: {fileID: 2100000, guid: 907ee3e7a706f2640aebbc6bc707aeeb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:bark01_bottom.002
+    second: {fileID: 2100000, guid: 907ee3e7a706f2640aebbc6bc707aeeb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:beton_01.002
+    second: {fileID: 2100000, guid: 8a924d1e8f4f1394297e4110e95ed8d9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:beton_01.003
+    second: {fileID: 2100000, guid: 8a924d1e8f4f1394297e4110e95ed8d9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:beton_01.004
+    second: {fileID: 2100000, guid: 8a924d1e8f4f1394297e4110e95ed8d9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:branch06_0Mat.001
+    second: {fileID: 2100000, guid: af50b5e9889322f46beca876382abadc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:lambert1.002
+    second: {fileID: 2100000, guid: 0cb7efd1e4355924e9b2d272db62bb64, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:leafBeans
+    second: {fileID: 2100000, guid: ee9eca558774f8f42bb2f17315b7d755, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:otrepy.001
+    second: {fileID: 2100000, guid: 94fdf43b102a19a408739c9df28f3a4f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:otrepy.002
+    second: {fileID: 2100000, guid: 94fdf43b102a19a408739c9df28f3a4f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:otrepy.003
+    second: {fileID: 2100000, guid: 94fdf43b102a19a408739c9df28f3a4f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:podPlanes
+    second: {fileID: 2100000, guid: c36d34d040f81164596fa5c4c798a3fc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:tree_branches.001
+    second: {fileID: 2100000, guid: 19bfd8f0529cc134598d23f2fa42f16c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:tree_branches.002
+    second: {fileID: 2100000, guid: 19bfd8f0529cc134598d23f2fa42f16c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:wood
+    second: {fileID: 2100000, guid: 143323eb50ecf6c41973b0bd0868c11a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:wood.001
+    second: {fileID: 2100000, guid: 9c95f22afa2fc5540bfb5a3922873f6f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:wood.002
+    second: {fileID: 2100000, guid: 7697af52bd5b45740b9da102020479b5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:wood.003
+    second: {fileID: 2100000, guid: 781a50d7f13840445940483db3152be2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:wood.004
+    second: {fileID: 2100000, guid: cbbc55fef338844499313f207dce1a64, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:wood.005
+    second: {fileID: 2100000, guid: 01fcfa9faca18fa47bd02a7a07e01be2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:wrak_zed.001
+    second: {fileID: 2100000, guid: 73a28fb59705b4040868efb2e3ebdfd1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:wrak_zed.002
+    second: {fileID: 2100000, guid: 73a28fb59705b4040868efb2e3ebdfd1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model:wrak_zed.003
+    second: {fileID: 2100000, guid: 73a28fb59705b4040868efb2e3ebdfd1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_Bark3_2
+    second: {fileID: 2100000, guid: 4b4765ac325b2a546ba8bae749a594f3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_Bark3_2.002
+    second: {fileID: 2100000, guid: 4b4765ac325b2a546ba8bae749a594f3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_Brambles
+    second: {fileID: 2100000, guid: 9f01564d8f2aa8446b1e85a0f98f5c27, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_Eye
+    second: {fileID: 2100000, guid: 647a1bccc29252848833d343b28c5a04, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_EyeTube
+    second: {fileID: 2100000, guid: 1567df86e0fad3049a982fbdd7943e01, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_Grass
+    second: {fileID: 2100000, guid: 8bdc398d7018aff4995c86a9617182d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_Larch_branch
+    second: {fileID: 2100000, guid: 4087b146e81fee0428f9425838e040b3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_Leaf_Back
+    second: {fileID: 2100000, guid: e6e9df67dedcf7541a2a8aca37247185, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_Leaf_Back.002
+    second: {fileID: 2100000, guid: e6e9df67dedcf7541a2a8aca37247185, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_Leaf_Front
+    second: {fileID: 2100000, guid: 2b85ddad3fe9e024cb6c90ec975ba74f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_Leaf_Front.002
+    second: {fileID: 2100000, guid: 2b85ddad3fe9e024cb6c90ec975ba74f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_LegBackL
+    second: {fileID: 2100000, guid: 7386e3adf5eaa1f46b990cae7c7d057e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_LegBackR
+    second: {fileID: 2100000, guid: 7f4d5a3172e9e0a4196b560399ab9837, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_LegClimbable
+    second: {fileID: 2100000, guid: 5e0f61f3dc8998243bed6440e25f121c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_LegFront
+    second: {fileID: 2100000, guid: a9af46833e1f87e49864eed785a3a8e3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_Mid
+    second: {fileID: 2100000, guid: 1bcdd279d42536640843335f578198d9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_Spikes
+    second: {fileID: 2100000, guid: f9e01f737c9e244479e17ca93afb53de, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_Stump_tip.001
+    second: {fileID: 2100000, guid: dc6ef4881c1190c44864d6da97816786, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_Top
+    second: {fileID: 2100000, guid: 5e7b91e8200624347bd6d7f7451f6028, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_Trunk Main
+    second: {fileID: 2100000, guid: 2c18703ecac137040a8808b7b40b415b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_bark01_bottom.001
+    second: {fileID: 2100000, guid: 78cb7715d2606b24aa0bce7a4d57218c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_bark01_bottom.002
+    second: {fileID: 2100000, guid: 78cb7715d2606b24aa0bce7a4d57218c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_beton_01.002
+    second: {fileID: 2100000, guid: 3a43b0a1f29377e4a97c6374af39b6c3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_beton_01.003
+    second: {fileID: 2100000, guid: 3a43b0a1f29377e4a97c6374af39b6c3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_beton_01.004
+    second: {fileID: 2100000, guid: 3a43b0a1f29377e4a97c6374af39b6c3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_branch06_0Mat.001
+    second: {fileID: 2100000, guid: b23b1db1010c2344285147ea33276021, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_lambert1.002
+    second: {fileID: 2100000, guid: da15e47f8dfa08246bd7fda892f07f68, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_leafBeans
+    second: {fileID: 2100000, guid: aabab0b67dcc29c448acd284328c0386, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_otrepy.001
+    second: {fileID: 2100000, guid: a99cacdc1e7365f4cb4d2f10e05f7a81, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_otrepy.002
+    second: {fileID: 2100000, guid: a99cacdc1e7365f4cb4d2f10e05f7a81, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_otrepy.003
+    second: {fileID: 2100000, guid: a99cacdc1e7365f4cb4d2f10e05f7a81, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_podPlanes
+    second: {fileID: 2100000, guid: 89cd24d7d6aaa2f4da61279bde422ead, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_tree_branches.001
+    second: {fileID: 2100000, guid: 1d6ac94d4723c2e42b6a2f0499daa148, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_tree_branches.002
+    second: {fileID: 2100000, guid: 1d6ac94d4723c2e42b6a2f0499daa148, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_wood
+    second: {fileID: 2100000, guid: ce9ff9fca87c19f4caed411a0112dafe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_wood.001
+    second: {fileID: 2100000, guid: 3f966b738191c15449f791b394789781, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_wood.002
+    second: {fileID: 2100000, guid: 4221f844ed961fc489d00ab946d1b29b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_wood.003
+    second: {fileID: 2100000, guid: 955e820594c29114ba05a9b68046b5fd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_wood.004
+    second: {fileID: 2100000, guid: dc68861a08569e04cb0ba096879fd2b7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_wood.005
+    second: {fileID: 2100000, guid: dfdeb1aafbe7462428d249411b1f355e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_wrak_zed.001
+    second: {fileID: 2100000, guid: 73a28fb59705b4040868efb2e3ebdfd1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_wrak_zed.002
+    second: {fileID: 2100000, guid: 73a28fb59705b4040868efb2e3ebdfd1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: model_wrak_zed.003
+    second: {fileID: 2100000, guid: 73a28fb59705b4040868efb2e3ebdfd1, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 1
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 1
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.15
+    animationPositionError: 0.15
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Default
+      takeName: Take 001
+      internalID: 1827226128182048838
+      firstFrame: 1
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    - serializedVersion: 16
+      name: Down_Real
+      takeName: Take 001
+      internalID: 9067093048684652814
+      firstFrame: 1
+      lastFrame: 2
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    - serializedVersion: 16
+      name: Stomping_Real
+      takeName: Take 001
+      internalID: -8481709605947105597
+      firstFrame: 3
+      lastFrame: 190
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

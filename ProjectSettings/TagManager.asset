@@ -12,6 +12,7 @@ TagManager:
   - Environment
   - LegZoneCam
   - Minions
+  - Checkpoint
   layers:
   - Default
   - TransparentFX
