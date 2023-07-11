@@ -248,6 +248,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 6016962217342379749}
+  cannonMesh: {fileID: 2267539816203780208}
+  materialIndex: 1
   barrel: {fileID: 5766766999388290076}
   minionPrefab: {fileID: 155583516784818287, guid: 4f9e28b779c39d14993a9fa30f0d0eeb, type: 3}
   spawnPosition: {fileID: 5914398544989106634}
@@ -352,6 +354,7 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 371aa3b3c39732d498b75aa006d5883e, type: 2}
+  - {fileID: 2100000, guid: 7801896e8d5481145b2348ca5905324d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -450,6 +453,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 371aa3b3c39732d498b75aa006d5883e, type: 2}
+  - {fileID: 2100000, guid: 7801896e8d5481145b2348ca5905324d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

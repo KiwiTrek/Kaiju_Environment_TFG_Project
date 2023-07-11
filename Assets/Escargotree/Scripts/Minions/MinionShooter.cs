@@ -6,6 +6,8 @@ public class MinionShooter : MonoBehaviour
 {
     // Start is called before the first frame update
     public Animator animator;
+    public MeshRenderer cannonMesh;
+    public int materialIndex;
     public Transform barrel;
     public GameObject minionPrefab;
     public GameObject spawnPosition;
@@ -41,10 +43,12 @@ public class MinionShooter : MonoBehaviour
             {
                 frequency = maxFrequencyOfUpdate;
                 animator.SetFloat("cannonDuration", 1.0f);
+                cannonMesh.materials[materialIndex].SetFloat("_Fill", 1.0f);
                 if (foundTarget && targetMov.currentCameraId == 1)
                 {
                     frequency = 0.0f;
                     animator.SetFloat("cannonDuration", -1.0f);
+                    cannonMesh.materials[materialIndex].SetFloat("_Fill", 0.0f);
                     SpawnMinion();
                 }
             }
@@ -52,6 +56,7 @@ public class MinionShooter : MonoBehaviour
             {
                 float t = frequency / maxFrequencyOfUpdate;
                 animator.SetFloat("cannonDuration", t);
+                cannonMesh.materials[materialIndex].SetFloat("_Fill", t);
                 animator.Play("Rolling", 0, t);
             }
         }
