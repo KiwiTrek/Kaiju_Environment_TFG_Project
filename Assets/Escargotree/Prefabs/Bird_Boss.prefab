@@ -731,6 +731,9 @@ MonoBehaviour:
   speed: 30
   timeBeforeStrike: 8
   timeStunned: 5
+  sizeReduce: 250
+  height: -0.35
+  height2: -0.35
   status: 0
   mainBoss: {fileID: 0}
   shockwavePrefab: {fileID: 6596379300243454722, guid: 99cb0a36f252ccb41bec72d0ecee3e79, type: 3}

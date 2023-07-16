@@ -83,4 +83,10 @@ public class MinionHitbox : MonoBehaviour
         //PlaySound
         Destroy(transform.parent.gameObject);
     }
+
+    public void SwitchCollider()
+    {
+        Collider collider = GetComponent<Collider>();
+        collider.enabled = !collider.enabled;
+    }
 }

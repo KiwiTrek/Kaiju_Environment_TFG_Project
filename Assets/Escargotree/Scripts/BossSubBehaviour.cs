@@ -24,6 +24,9 @@ public class BossSubBehaviour : MonoBehaviour
     public float speed = 1.0f;
     public float timeBeforeStrike = 0.0f;
     public float timeStunned = 5.0f;
+    public float sizeReduce = 200.0f;
+    public float height = 0.0f;
+    public float height2 = 0.0f;
     public BossStatus status = BossStatus.Idle;
 
     [Header("Components")]
@@ -125,7 +128,7 @@ public class BossSubBehaviour : MonoBehaviour
 
         preemptiveShadow.SetActive(true);
         preemptiveShadow.transform.position = playerTarget.transform.position;
-        Vector3 positionCorrector = new Vector3(preemptiveShadow.transform.localPosition.x, -0.545f, preemptiveShadow.transform.localPosition.z);
+        Vector3 positionCorrector = new Vector3(preemptiveShadow.transform.localPosition.x, height, preemptiveShadow.transform.localPosition.z);
         preemptiveShadow.transform.localPosition = positionCorrector;
 
         transform.LookAt(preemptiveShadow.transform.position);
@@ -137,8 +140,8 @@ public class BossSubBehaviour : MonoBehaviour
             {
                 transform.position = Vector3.MoveTowards(transform.position, initialPosition - (this.transform.forward * 2.0f), Time.deltaTime * 2.5f);
                 Vector3 scale = new Vector3
-                    ((Mathf.Sin(currentAngle) / 200) + preemptiveShadow.transform.localScale.x,
-                    (Mathf.Sin(currentAngle) / 200) + preemptiveShadow.transform.localScale.y,
+                    ((Mathf.Sin(currentAngle) / sizeReduce) + preemptiveShadow.transform.localScale.x,
+                    (Mathf.Sin(currentAngle) / sizeReduce) + preemptiveShadow.transform.localScale.y,
                     preemptiveShadow.transform.localScale.z);
                 preemptiveShadow.transform.localScale = scale;
             }
@@ -230,14 +233,14 @@ public class BossSubBehaviour : MonoBehaviour
                     {
                         if (Vector3.Distance(transform.position, initialPosition - (this.transform.forward * 2.0f)) >= 0.01f)
                         {
-                            thrustObjective = playerTarget.transform.position;
-                            transform.LookAt(thrustObjective);
-                            transform.position = Vector3.MoveTowards(transform.position, initialPosition - (this.transform.forward * 2.0f), Time.deltaTime * 3.0f);
-
                             preemptiveShadow.SetActive(true);
                             preemptiveShadow.transform.position = playerTarget.transform.position;
-                            Vector3 positionCorrector = new Vector3(preemptiveShadow.transform.localPosition.x, -0.545f, preemptiveShadow.transform.localPosition.z);
+                            Vector3 positionCorrector = new Vector3(preemptiveShadow.transform.localPosition.x, height2, preemptiveShadow.transform.localPosition.z);
                             preemptiveShadow.transform.localPosition = positionCorrector;
+
+                            thrustObjective = preemptiveShadow.transform.position;
+                            transform.LookAt(thrustObjective);
+                            transform.position = Vector3.MoveTowards(transform.position, initialPosition - (this.transform.forward * 2.0f), Time.deltaTime * 3.0f);
                         }
                         else
                         {

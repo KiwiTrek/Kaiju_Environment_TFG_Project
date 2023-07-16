@@ -202,6 +202,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: -1
   player: {fileID: 0}
+  light2D: {fileID: 0}
+  materialsToCull:
+  - {fileID: 2100000, guid: 85377100fe71c2e4e823f6fee8c42e3c, type: 2}
+  - {fileID: 2100000, guid: e7f5b0552c3cff548a13ae83a7582faa, type: 2}
+  - {fileID: 2100000, guid: a70962f4d27f607418066fd59a2bee78, type: 2}
+  size: 3
   playerCam: {fileID: 0}
   levelCam: {fileID: 0}
   legCam: {fileID: 0}
