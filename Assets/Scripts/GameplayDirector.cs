@@ -84,7 +84,7 @@ public class GameplayDirector : MonoBehaviour
             {
                 compilator.EndSession(DateTime.Now);
             }
-
+            Debug.Log("You win!");
             SceneManager.LoadScene(1);
         }
     }

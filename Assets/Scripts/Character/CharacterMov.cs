@@ -25,6 +25,7 @@ public class CharacterMov : MonoBehaviour {
 
 	[Space]
 	[Header("Components")]
+	public GameObject[] slashes;
 	public Camera cam;
 	public CinemachineFreeLook playerCam;
 	public CharacterController controller;
@@ -266,4 +267,17 @@ public class CharacterMov : MonoBehaviour {
         Gizmos.color = Color.yellow;
 		Gizmos.DrawSphere(groundChecker.position, groundDistance);
     }
+
+	public void SlashActivate(int i)
+	{
+		slashes[i].SetActive(true);
+	}
+
+	public void ResetSlashes()
+	{
+		foreach(var slash in slashes)
+		{
+			slash.SetActive(false);
+		}
+	}
 }

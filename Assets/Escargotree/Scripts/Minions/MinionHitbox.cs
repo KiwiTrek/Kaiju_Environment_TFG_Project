@@ -6,6 +6,7 @@ using UnityEngine;
 public class MinionHitbox : MonoBehaviour
 {
     // Start is called before the first frame update
+    public GameObject explosionVFX;
     public bool isMinion = true;
 
     // Minion Behaviour Stuff
@@ -79,7 +80,8 @@ public class MinionHitbox : MonoBehaviour
     }
     private void Die()
     {
-        //Instantiate(explosionPrefab, this.position, this.rotation);
+        GameObject explosion = Instantiate(explosionVFX, transform.position, transform.rotation);
+        Destroy(explosion, 2.0f);
         //PlaySound
         Destroy(transform.parent.gameObject);
     }

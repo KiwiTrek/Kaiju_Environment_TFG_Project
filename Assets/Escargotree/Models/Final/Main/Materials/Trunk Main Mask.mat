@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 5
+  version: 7
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -22,16 +22,20 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Trunk Main Mask
   m_Shader: {fileID: -6465566751694194690, guid: d16793538440b88409d3a533aced8095, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _SURFACE_TYPE_TRANSPARENT
-  m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_InvalidKeywords:
+  - _NORMALMAP
+  m_LightmapFlags: 6
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
+  m_DoubleSidedGI: 1
   m_CustomRenderQueue: 3000
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -119,9 +123,11 @@ Material:
     m_Floats:
     - _ActivateMask: 1
     - _AlphaClip: 0
+    - _AlphaToMask: 0
     - _BASE_COLOR_WEIGHT: 1
     - _BUMP_MAP_STRENGTH: 0.3
     - _Blend: 0
+    - _BlendModePreserveSpecular: 0
     - _BumpScale: 1
     - _CastShadows: 1
     - _ClearCoatMask: 0
@@ -149,7 +155,7 @@ Material:
     - _REFLECTIONS_ROUGHNESS: 1
     - _REFLECTIONS_WEIGHT: 1
     - _ReceiveShadows: 1
-    - _Size: 3
+    - _Size: 0
     - _Smoothness: 0.433
     - _SmoothnessMask: 0.6
     - _SmoothnessTextureChannel: 1

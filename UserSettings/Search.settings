@@ -1,4 +1,5 @@
 trackSelection = true
+refreshSearchWindowsInPlayMode = false
 fetchPreview = true
 defaultFlags = 0
 keepOpen = false
@@ -10,6 +11,19 @@ scopes = {
 	"last_search.DD5CDD96" = ""
 	"OpenInspectorPreview.DD5CDD96" = "0"
 	"currentGroup.DD5CDD96" = "scene"
+	"last_search.110DEAF1" = ""
+	"OpenInspectorPreview.110DEAF1" = "0"
+	"currentGroup.110DEAF1" = "asset"
+	"picker_window_position_offset.3172962C" = "947.3334;408.6667;320;550"
+	"picker_search_text.3172962C" = "cyl "
+	"last_search.3172962C" = "cyl "
+	"OpenInspectorPreview.3172962C" = "0"
+	"currentGroup.3172962C" = "all"
+	"picker_window_position_offset.7E63D72B" = "1083.333;411.3333;320;550"
+	"picker_search_text.7E63D72B" = ""
+	"last_search.7E63D72B" = ""
+	"OpenInspectorPreview.7E63D72B" = "0"
+	"currentGroup.7E63D72B" = "all"
 }
 providers = {
 	adb = {
@@ -52,18 +66,31 @@ providers = {
 		priority = 50
 		defaultAction = null
 	}
+	profilermarkers = {
+		active = false
+		priority = 100
+		defaultAction = null
+	}
 }
 objectSelectors = {
 }
 recentSearches = [
+	""
+	"find:"
+	"m:"
+	"h: ref=\"Assets/VFX_Klaus/Prefabs/Stylized_Element_Splash_vol.1/FX_splash_demon_air.prefab\""
+	"h: ref=\"Assets/VFX_Klaus/Prefabs/Stylized_Element_Splash_vol.1\""
 ]
 searchItemFavorites = [
 ]
 savedSearchesSortOrder = 0
 showSavedSearchPanel = false
+hideTabs = false
 expandedQueries = [
 ]
 queryBuilder = false
 ignoredProperties = "id;name;classname;imagecontentshash"
-helperWidgetCurrentArea = "all"
+helperWidgetCurrentArea = "find:"
 disabledIndexers = ""
+minIndexVariations = 2
+findProviderIndexHelper = true

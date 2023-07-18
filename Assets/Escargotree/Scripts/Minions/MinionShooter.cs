@@ -15,6 +15,8 @@ public class MinionShooter : MonoBehaviour
     public float maxFrequencyOfUpdate = 1.5f;
     public bool reverse = false;
 
+    public GameObject explosionGO;
+
     float frequency;
     GameObject target;
     CharacterMov targetMov;
@@ -69,6 +71,9 @@ public class MinionShooter : MonoBehaviour
 
         MinionBehaviour minionBehaviour = minionInstance.GetComponent<MinionBehaviour>();
         if (minionBehaviour != null) minionBehaviour.reverse = reverse;
+
+        GameObject explosionVFX = Instantiate(explosionGO, spawnPosition.transform.position, Quaternion.identity);
+        Destroy(explosionVFX, 0.75f);
     }
 
     private void OnTriggerEnter(Collider other)

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ShockwaveSpawner : MonoBehaviour
 {
+    public MeshRenderer rendererEmissive;
     public GameObject shockwavePrefab;
     public float spawnRate;
     float spawnTime;
@@ -16,6 +17,7 @@ public class ShockwaveSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        rendererEmissive.material.SetFloat("_Fill", spawnTime);
         spawnTime += Time.deltaTime;
         if (spawnTime > spawnRate)
         {
