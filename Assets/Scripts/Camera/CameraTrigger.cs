@@ -65,10 +65,5 @@ public class CameraTrigger : MonoBehaviour
             Debug.Log("Returning to status");
             switcher.id = 0;
         }
-
-        if (bossLife != null)
-        {
-            bossLife.currentHits = 0;
-        }
     }
 }

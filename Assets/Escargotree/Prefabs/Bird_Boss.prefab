@@ -731,7 +731,7 @@ MonoBehaviour:
   speed: 30
   timeBeforeStrike: 8
   timeStunned: 5
-  sizeReduce: 250
+  sizeReduce: 275
   height: -0.35
   height2: -0.35
   status: 0

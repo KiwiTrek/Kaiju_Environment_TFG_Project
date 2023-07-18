@@ -187,6 +187,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 0}
   lives: {fileID: 0}
   bossMov: {fileID: 0}
+  debugColliderMaterial: {fileID: 2100000, guid: e687abd2423ff824598ea575dd1b00e5, type: 2}
   compilator: {fileID: 0}
 --- !u!114 &3478307877695400388
 MonoBehaviour:

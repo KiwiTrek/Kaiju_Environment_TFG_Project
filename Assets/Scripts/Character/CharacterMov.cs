@@ -54,7 +54,6 @@ public class CharacterMov : MonoBehaviour {
 	bool jumpPressed;
 	int jumpHash;
 	Vector3 lastP;
-	float timeWithoutAttacking;
 
 	int isHurtHardHash;
 	int isMovingHash;
@@ -143,35 +142,23 @@ public class CharacterMov : MonoBehaviour {
 			jumpPressed = true;
 		}
 
-		timeWithoutAttacking += Time.deltaTime;
-		if (timeWithoutAttacking > 2.0f)
-		{
-			timeWithoutAttacking = 0;
-			numberClicks = 0;
-            animator.SetBool("attackStart", false);
-            animator.SetInteger("hitCount", numberClicks);
-			canAttack = true;
-        }
-
-		if (Input.GetButtonDown("Fire1"))
-		{
+        if (Input.GetButtonDown("Fire1"))
+        {
             if (compilator != null)
             {
                 compilator.RegisterAttack();
             }
-            timeWithoutAttacking = 0;
             if (canAttack && numberClicks < 3)
-			{
-				numberClicks++;
-				if (numberClicks == 1)
+            {
+                numberClicks++;
+                if (numberClicks == 1)
                 {
-					animator.SetBool("attackStart", true);
-					animator.SetInteger("hitCount", numberClicks);
+                    animator.SetBool("attackStart", true);
+                    animator.SetInteger("hitCount", numberClicks);
                 }
-				canAttack = false;
-			}
+                canAttack = false;
+            }
         }
-
 	}
 
 	//For animation
@@ -220,6 +207,11 @@ public class CharacterMov : MonoBehaviour {
     {
         playerCam.m_XAxis.m_InvertInput = !playerCam.m_XAxis.m_InvertInput;
     }
+	public void SwitchSensitivity(float sensitivity)
+	{
+		playerCam.m_XAxis.m_MaxSpeed = 2.0f * sensitivity;
+		playerCam.m_YAxis.m_MaxSpeed = sensitivity / 33;
+	}
 
     public void RotateToCamera(Transform t)
 	{

@@ -17,12 +17,16 @@ public class GameplayDirector : MonoBehaviour
     public GameObject spawnPoint = null;
     public CharacterLives lives = null;
     public BossMov bossMov = null;
+    public Material debugColliderMaterial = null;
 
     [Space(10)]
     public DataCompilator compilator= null;
     void Start()
     {
         missionText.text = "Current objective: \nFind Escargotree!";
+        Color color = debugColliderMaterial.color;
+        color.a = 0;
+        debugColliderMaterial.color = color;
     }
 
     // Update is called once per frame
@@ -50,7 +54,28 @@ public class GameplayDirector : MonoBehaviour
 
         if (lives.dead && lives.deathCounter >= 3.0f)
         {
-            cameraSwitcher.id = 0;
+            cameraSwitcher.id = lives.cameraID;
+            if (victoryChecker != null)
+            {
+                victoryChecker.currentHits = 0;
+            }
+        }
+
+        if (Input.GetKey(KeyCode.F2))
+        {
+            if (debugColliderMaterial != null)
+            {
+                Color color = debugColliderMaterial.color;
+                if (color.a > 0)
+                {
+                    color.a = 0;
+                }
+                else
+                {
+                    color.a = 0.2f;
+                }
+                debugColliderMaterial.color = color;
+            }
         }
 
         if (victoryChecker.currentHits == victoryChecker.maxLives)
@@ -62,5 +87,15 @@ public class GameplayDirector : MonoBehaviour
 
             SceneManager.LoadScene(1);
         }
+    }
+
+    public void QuitApp()
+    {
+        Debug.Log("Quitting App!");
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }

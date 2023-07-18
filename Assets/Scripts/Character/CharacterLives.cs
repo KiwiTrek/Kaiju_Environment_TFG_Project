@@ -10,7 +10,8 @@ public class CharacterLives : MonoBehaviour
     [Header("Components")]
     public Image blackScreen;
     public TMP_Text livesUI;
-    public Transform spawnPoint;
+    public GameObject spawnPoint;
+    public int cameraID;
     public Animator animator;
     public CharacterController controller;
     public CharacterMov movementScript;
@@ -84,6 +85,11 @@ public class CharacterLives : MonoBehaviour
             torso.SetActive(true);
             legs.SetActive(true);
             sword.SetActive(true);
+
+            movementScript.numberClicks = 0;
+            movementScript.animator.SetBool("attackStart", false);
+            movementScript.animator.SetInteger("hitCount", movementScript.numberClicks);
+            movementScript.canAttack = true;
         }
 
         if (dead)
@@ -94,8 +100,9 @@ public class CharacterLives : MonoBehaviour
             {
                 //Reset & Respawn
                 controller.enabled = false;
-                transform.SetPositionAndRotation(spawnPoint.transform.position, Quaternion.LookRotation(-spawnPoint.forward));
+                transform.SetPositionAndRotation(spawnPoint.transform.position, Quaternion.LookRotation(-spawnPoint.transform.forward));
                 controller.enabled = true;
+                cameraID = spawnPoint.GetComponent<CheckpointID>().cameraId;
                 lives = maxLives;
 
                 Color tmp = blackScreen.color;
@@ -162,7 +169,7 @@ public class CharacterLives : MonoBehaviour
         if (other.tag == "Checkpoint")
         {
             Debug.Log("Checkpoint!");
-            spawnPoint = other.transform;
+            spawnPoint = other.gameObject;
         }
     }
 
