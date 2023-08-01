@@ -13,6 +13,7 @@ public class MinionBehaviour : MonoBehaviour
     public float turnSpeed;
     public Quaternion rotation = Quaternion.identity;
     public Vector3 direction = Vector3.zero;
+    public Animator animator;
 
     public GameObject target = null;
     public bool foundTarget = false;
@@ -61,6 +62,10 @@ public class MinionBehaviour : MonoBehaviour
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, turnSpeed * Time.deltaTime);
                 transform.position += transform.forward * velocity * multiplier * Time.deltaTime;
                 velocity = (maxVelocity * (Vector3.Distance(this.transform.position, target.transform.position) / 12)) + 3.0f;
+                if (animator != null)
+                {
+                    animator.SetBool("foundTarget", foundTarget);
+                }
             }
             else
             {

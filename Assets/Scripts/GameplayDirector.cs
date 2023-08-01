@@ -78,7 +78,7 @@ public class GameplayDirector : MonoBehaviour
             }
         }
 
-        if (victoryChecker.currentHits == victoryChecker.maxLives)
+        if (victoryChecker.currentHits >= victoryChecker.maxLives)
         {
             if (compilator != null)
             {

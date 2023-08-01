@@ -9616,6 +9616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4b31895086f6a4e9dfb20240ee0eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionVFX: {fileID: 0}
   isMinion: 0
   lifeTimeTotal: 0
 --- !u!1 &1673641486601522184
@@ -10516,6 +10517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4b31895086f6a4e9dfb20240ee0eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionVFX: {fileID: 0}
   isMinion: 0
   lifeTimeTotal: 0
 --- !u!1 &1880255078992215869
@@ -11158,7 +11160,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2014107865192537228}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.033691153, y: 0.6255602, z: 0.3302008, w: 0.7060501}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.5545, y: 0.0078, z: -0.0011}
   m_LocalScale: {x: 0.0020000015, y: 0.0019999994, z: 0.0020000015}
   m_ConstrainProportionsScale: 0
@@ -17171,6 +17173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4b31895086f6a4e9dfb20240ee0eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionVFX: {fileID: 0}
   isMinion: 0
   lifeTimeTotal: 0
 --- !u!1 &3263637642725161246
@@ -17827,6 +17830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4b31895086f6a4e9dfb20240ee0eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionVFX: {fileID: 0}
   isMinion: 0
   lifeTimeTotal: 0
 --- !u!1 &3263637642793354744
@@ -18155,7 +18159,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3263637642804800963}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.002961742, y: -0.99581033, z: 0.091395535, w: -0.00021350376}
+  m_LocalRotation: {x: 0.0029611494, y: -0.9958103, z: 0.09139547, w: -0.00021366765}
   m_LocalPosition: {x: 2.3, y: 17.8, z: 75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -18419,6 +18423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4b31895086f6a4e9dfb20240ee0eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionVFX: {fileID: 0}
   isMinion: 0
   lifeTimeTotal: 0
 --- !u!1 &3263637642852417300
@@ -20666,6 +20671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4b31895086f6a4e9dfb20240ee0eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionVFX: {fileID: 0}
   isMinion: 0
   lifeTimeTotal: 0
 --- !u!1 &3263637643281557477
@@ -21769,6 +21775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4b31895086f6a4e9dfb20240ee0eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionVFX: {fileID: 0}
   isMinion: 0
   lifeTimeTotal: 0
 --- !u!1 &3263637643503925548
@@ -22481,6 +22488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4b31895086f6a4e9dfb20240ee0eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionVFX: {fileID: 0}
   isMinion: 0
   lifeTimeTotal: 0
 --- !u!1 &3263637643593333140
@@ -22797,6 +22805,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4b31895086f6a4e9dfb20240ee0eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionVFX: {fileID: 0}
   isMinion: 0
   lifeTimeTotal: 0
 --- !u!1 &3263637643674232291
@@ -23955,6 +23964,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4b31895086f6a4e9dfb20240ee0eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionVFX: {fileID: 0}
   isMinion: 0
   lifeTimeTotal: 0
 --- !u!1 &3263637643771052671
@@ -24111,6 +24121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4b31895086f6a4e9dfb20240ee0eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionVFX: {fileID: 0}
   isMinion: 0
   lifeTimeTotal: 0
 --- !u!1 &3263637643789474715
@@ -26150,6 +26161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4b31895086f6a4e9dfb20240ee0eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionVFX: {fileID: 0}
   isMinion: 0
   lifeTimeTotal: 0
 --- !u!1 &3263637644104602325
@@ -26218,6 +26230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4b31895086f6a4e9dfb20240ee0eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionVFX: {fileID: 0}
   isMinion: 0
   lifeTimeTotal: 0
 --- !u!1 &3263637644119677340
@@ -26601,6 +26614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4b31895086f6a4e9dfb20240ee0eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionVFX: {fileID: 0}
   isMinion: 0
   lifeTimeTotal: 0
 --- !u!1 &3263637644159962808
@@ -26842,6 +26856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4b31895086f6a4e9dfb20240ee0eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionVFX: {fileID: 0}
   isMinion: 0
   lifeTimeTotal: 0
 --- !u!1 &3263637644192942092
@@ -27386,6 +27401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4b31895086f6a4e9dfb20240ee0eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionVFX: {fileID: 0}
   isMinion: 0
   lifeTimeTotal: 0
 --- !u!1 &3263637644400333200
@@ -27508,6 +27524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4b31895086f6a4e9dfb20240ee0eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionVFX: {fileID: 0}
   isMinion: 0
   lifeTimeTotal: 0
 --- !u!1 &3263637644430887502
@@ -28574,6 +28591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4b31895086f6a4e9dfb20240ee0eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionVFX: {fileID: 0}
   isMinion: 0
   lifeTimeTotal: 0
 --- !u!1 &3263637644598649354
@@ -29457,6 +29475,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4b31895086f6a4e9dfb20240ee0eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionVFX: {fileID: 0}
   isMinion: 0
   lifeTimeTotal: 0
 --- !u!1 &3263637644804154579
@@ -29610,6 +29629,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4b31895086f6a4e9dfb20240ee0eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionVFX: {fileID: 0}
   isMinion: 0
   lifeTimeTotal: 0
 --- !u!1 &3275071401516899146
@@ -33473,6 +33493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4b31895086f6a4e9dfb20240ee0eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionVFX: {fileID: 0}
   isMinion: 0
   lifeTimeTotal: 0
 --- !u!1 &3922336075959776335
@@ -39601,6 +39622,7 @@ Transform:
   - {fileID: 3263637643789474714}
   - {fileID: 3263637643818605734}
   - {fileID: 7862081131291803520}
+  - {fileID: 4595361513790891125}
   - {fileID: 910218225647975721}
   - {fileID: 7580378939580904628}
   - {fileID: 5779145515537897815}
@@ -39612,7 +39634,6 @@ Transform:
   - {fileID: 7064181108958779638}
   - {fileID: 1054740337208491073}
   - {fileID: 2362399665269965853}
-  - {fileID: 4595361513790891125}
   - {fileID: 3794946145936490995}
   - {fileID: 3165421978058394577}
   - {fileID: 6627295862801117112}
@@ -42009,8 +42030,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5611261009570867811}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.00000021420414, y: -0.9732492, z: 0.22975218, w: 0.00000026822084}
-  m_LocalPosition: {x: 0.000011175863, y: 49.699913, z: 99.39996}
+  m_LocalRotation: {x: 0.6881539, y: -0.68822825, z: 0.16246825, w: -0.16245046}
+  m_LocalPosition: {x: -49.699955, y: 0.0053709387, z: 99.40005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -52372,7 +52393,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1909794516406298819}
   - component: {fileID: 2565800752640392739}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: model:tree_eye_tube_lp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54596,6 +54617,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4b31895086f6a4e9dfb20240ee0eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionVFX: {fileID: 0}
   isMinion: 0
   lifeTimeTotal: 0
 --- !u!1 &8019234611863696971
