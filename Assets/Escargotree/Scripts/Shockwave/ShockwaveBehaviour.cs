@@ -6,15 +6,20 @@ using UnityEngine;
 public class ShockwaveBehaviour : MonoBehaviour
 {
     // Minion Behaviour Stuff
+    [Header("Components")]
     public CapsuleCollider safeZone = null;
     public ShockwaveSafezone safeTrigger = null;
-    public float lifeTimeTotal = 0.0f;
-    float lifeTimeRemaining = 0.0f;
 
+    [Header("Parameters")]
+    public float lifeTimeTotal = 0.0f;
+    public float speed = 1.0f;
+    public float finalHeightMultiplier = 0.666666667f;
     public bool expand = true;
     public bool canHurt = true;
     public float lockedSize = 1.0f;
     public float expansionRate = 1.0f;
+    
+    float lifeTimeRemaining = 0.0f;
     float currentSize = 0.0f;
 
     private void Start()
@@ -29,14 +34,18 @@ public class ShockwaveBehaviour : MonoBehaviour
 
             if (lifeTimeRemaining < lifeTimeTotal)
             {
-                currentSize += expansionRate * Time.deltaTime;
-                Vector3 scale = new Vector3(
-                    currentSize,
-                    currentSize,
-                    transform.localScale.z
-                    );
-                transform.localScale = scale;
-                safeZone.height += currentSize * 100;
+                currentSize += expansionRate * Time.deltaTime * speed;
+
+                if (Time.timeScale > 0.0f)
+                {
+                    Vector3 scale = new Vector3(
+                        currentSize,
+                        currentSize,
+                        transform.parent.localScale.z + currentSize * (finalHeightMultiplier / 100.0f)
+                        );
+                    transform.parent.localScale = scale;
+                    safeZone.height += currentSize * 100;
+                }
             }
             else
             {
@@ -49,9 +58,9 @@ public class ShockwaveBehaviour : MonoBehaviour
             Vector3 scale = new Vector3(
                 currentSize,
                 currentSize,
-                transform.localScale.z
+                transform.parent.localScale.z
                 );
-            transform.localScale = scale;
+            transform.parent.localScale = scale;
             safeZone.height = currentSize * 100;
         }
     }
@@ -77,6 +86,6 @@ public class ShockwaveBehaviour : MonoBehaviour
     private void Die()
     {
         //Instantiate(explosionPrefab, this.position, this.rotation);
-        Destroy(gameObject);
+        Destroy(transform.parent.gameObject);
     }
 }

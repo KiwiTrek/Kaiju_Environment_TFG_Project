@@ -36,15 +36,20 @@ public class BossSubBehaviour : MonoBehaviour
     public Vector2 timeBeforeStrikeRange = new Vector2(0.0f, 1.0f);
     public float timeStunned = 5.0f;
     public float sizeReduce = 200.0f;
+    public float distanceBeforeImpact = 2.35f;
     public float height = 0.0f;
     public float height2 = 0.0f;
+    public float finalHeightMultiplier = 0.1f;
     public BossStatus status = BossStatus.Idle;
 
     [Header("Components")]
     public Animator animator;
     public BossMov mainBoss = null;
+    public GameObject motionVFX = null;
     public GameObject shockwavePrefab = null;
+    public GameObject particlesPrefab = null;
     public GameObject minionPrefab = null;
+    public GameObject minionVFX = null;
     public BossSubHitbox subHitbox;
     public CinemachineVirtualCamera bossCamera;
     public GameObject playerTarget;
@@ -111,6 +116,7 @@ public class BossSubBehaviour : MonoBehaviour
             canReturn = false;
             animator.SetFloat("speedIdle", 1.0f);
             animator.SetFloat("speedReadying", 1.0f);
+            motionVFX.SetActive(false);
             return;
         }
 
@@ -153,6 +159,7 @@ public class BossSubBehaviour : MonoBehaviour
     {
         currentTimeStrike += Time.deltaTime;
         animator.SetFloat("speedReadying", 1.0f);
+        motionVFX.SetActive(false);
 
         preemptiveShadow.SetActive(true);
         preemptiveShadow.transform.position = playerTarget.transform.position;
@@ -206,15 +213,17 @@ public class BossSubBehaviour : MonoBehaviour
         {
             thrustObjective = preemptiveShadow.transform.position;
             preemptiveShadow.SetActive(false);
+            motionVFX.SetActive(true);
         }
 
-        if (Vector3.Distance(thrustObjective, transform.position) >= 2.35f)
+        if (Vector3.Distance(thrustObjective, transform.position) >= distanceBeforeImpact)
         {
             currentRotation = transform.rotation;
             transform.position = Vector3.MoveTowards(transform.position, thrustObjective, Time.deltaTime * speed);
         }
         else
         {
+            motionVFX.SetActive(false);
             SwitchAnimation(CurrentAnimation.HitGround);
             timeCountStruggle = 0.0f;
             SpawnShockwave();
@@ -251,8 +260,11 @@ public class BossSubBehaviour : MonoBehaviour
         }
         else
         {
+            Quaternion finalRotation = Quaternion.LookRotation(Vector3.down, Vector3.forward);
             SwitchAnimation(CurrentAnimation.Struggling);
-            transform.rotation = Quaternion.Lerp(currentRotation, Quaternion.LookRotation(Vector3.down, Vector3.forward), timeCountStruggle * 0.65f);
+            Debug.Log(Mathf.Abs(Mathf.Cos(Quaternion.Angle(currentRotation, finalRotation) * Mathf.Deg2Rad)));
+            transform.position = Vector3.Lerp(transform.position, new Vector3(thrustObjective.x, thrustObjective.y - (Mathf.Abs(Mathf.Cos(Quaternion.Angle(currentRotation, finalRotation) * Mathf.Deg2Rad)) * 1.3f) + 2.15f, thrustObjective.z), timeCountStruggle * 0.65f);
+            transform.rotation = Quaternion.Lerp(currentRotation, finalRotation, timeCountStruggle * 0.65f);
             timeCountStruggle += Time.deltaTime;
         }
     }
@@ -285,6 +297,7 @@ public class BossSubBehaviour : MonoBehaviour
                 case InvulnerablePhase.Returning:
                     {
                         SwitchAnimation(CurrentAnimation.Thrust);
+                        motionVFX.SetActive(true);
                         if (Vector3.Distance(transform.position, initialPosition) >= 0.01f)
                         {
                             transform.LookAt(initialPosition);
@@ -300,6 +313,7 @@ public class BossSubBehaviour : MonoBehaviour
                 case InvulnerablePhase.Charging:
                     {
                         SwitchAnimation(CurrentAnimation.Readying);
+                        motionVFX.SetActive(false);
                         if (Vector3.Distance(transform.position, initialPosition - (this.transform.forward * 2.0f)) >= 0.01f)
                         {
                             preemptiveShadow.SetActive(true);
@@ -320,7 +334,8 @@ public class BossSubBehaviour : MonoBehaviour
                 case InvulnerablePhase.Thrusting:
                     {
                         SwitchAnimation(CurrentAnimation.Thrust);
-                        if (Vector3.Distance(thrustObjective, transform.position) >= 2.25f)
+                        motionVFX.SetActive(true);
+                        if (Vector3.Distance(thrustObjective, transform.position) >= distanceBeforeImpact)
                         {
                             transform.LookAt(thrustObjective);
                             transform.position = Vector3.MoveTowards(transform.position, thrustObjective, Time.deltaTime * speed);
@@ -341,14 +356,16 @@ public class BossSubBehaviour : MonoBehaviour
     void SpawnShockwave()
     {
         GameObject instance = Instantiate(shockwavePrefab, transform.position + shockwavePrefab.transform.position, shockwavePrefab.transform.rotation);
-        Vector3 scale = new Vector3(instance.transform.localScale.x, instance.transform.localScale.y, 0.3f);
-        instance.transform.localScale = scale;
-        ShockwaveBehaviour behaviour = instance.GetComponent<ShockwaveBehaviour>();
+        ShockwaveBehaviour behaviour = instance.GetComponentInChildren<ShockwaveBehaviour>();
         if (behaviour != null)
         {
-            behaviour.lifeTimeTotal = 1.0f;
-            behaviour.expansionRate = 1.5f;
+            behaviour.lifeTimeTotal = 2.0f;
+            behaviour.expansionRate = 1.75f;
+            behaviour.finalHeightMultiplier = finalHeightMultiplier;
         }
+
+        GameObject particles = Instantiate(particlesPrefab, transform.position + particlesPrefab.transform.position, particlesPrefab.transform.rotation);
+        Destroy(particles, 2.0f);
     }
 
     private void MinionState()
@@ -389,6 +406,9 @@ public class BossSubBehaviour : MonoBehaviour
         bird = Instantiate(minionPrefab, transform.position + new Vector3(-1.0f, 0.0f), Quaternion.identity);
         bird.transform.LookAt(playerTarget.transform.position);
         bird.GetComponent<MinionBehaviour>().maxVelocity = 9.0f;
+
+        GameObject birdVFX = Instantiate(minionVFX, bird.transform);
+        Destroy(birdVFX, 0.6f);
     }
 
     void SwitchAnimation(CurrentAnimation animation)

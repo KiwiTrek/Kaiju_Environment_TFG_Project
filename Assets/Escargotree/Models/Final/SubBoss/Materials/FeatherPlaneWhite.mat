@@ -146,7 +146,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 1.0076064, g: 1.0076064, b: 1.0076064, a: 1}
+    - _EmissionColor: {r: 1.0592737, g: 1.0592737, b: 1.0592737, a: 1}
     - _In: {r: 0, g: 0, b: 0, a: 0}
     - _Out: {r: 0, g: 0, b: 0, a: 0}
     - _PlayerPosition: {r: 0, g: 0, b: 0, a: 0}

@@ -20,6 +20,12 @@ public class BossMov : MonoBehaviour
     public GameObject legBackRight;
 
     [Space(10)]
+    public AudioSource legFrontLeftAudio;
+    public AudioSource legFrontRightAudio;
+    public AudioSource legBackLeftAudio;
+    public AudioSource legBackRightAudio;
+
+    [Space(10)]
     public BossHitbox frontRightHitbox;
     public BossHitbox backLeftHitbox;
     public BossHitbox backRightHitbox;
@@ -33,6 +39,8 @@ public class BossMov : MonoBehaviour
     [Space(10)]
     public List<GameObject> spikes = null;
     public GameObject shockwavePrefab;
+    public GameObject shockwavePrefab2;
+    public float finalHeightMultiplier = 0.6666666667f;
     public Animator animator;
     public GameObject canvas;
     public Slider healthBar;
@@ -40,6 +48,7 @@ public class BossMov : MonoBehaviour
     public int legsDestroyed = 0;
     int isAttackingHash;
     int maxLives;
+
     void Start()
     {
         isAttackingHash = Animator.StringToHash("isAttacking");
@@ -53,6 +62,10 @@ public class BossMov : MonoBehaviour
         {
             attacking = !attacking;
             animator.SetBool(isAttackingHash, attacking);
+            if (legsDestroyed < 3 && attacking == true && canvas != null)
+            {
+                canvas.SetActive(true);
+            }
         }
 
         if (legsDestroyed < 3 && attacking)
@@ -60,10 +73,6 @@ public class BossMov : MonoBehaviour
             foreach (GameObject spike in spikes)
             {
                 spike.SetActive(true);
-            }
-            if (canvas != null)
-            {
-                canvas.SetActive(true);
             }
 
             if (healthBar != null)
@@ -119,6 +128,7 @@ public class BossMov : MonoBehaviour
             legsDestroyed = newValue;
             animator.SetInteger("legsDestroyed", legsDestroyed);
             float legSpeed = 0.48f + legsDestroyed * 0.18f;
+            finalHeightMultiplier = 0.26f + legsDestroyed * 0.075f;
             animator.SetFloat("legSpeed", legSpeed);
         }
         else
@@ -191,22 +201,38 @@ public class BossMov : MonoBehaviour
     {
         if (!collisionAreaBackLeft.activeSelf)
         {
-            Instantiate(shockwavePrefab, collisionAreaBackLeft.transform.position + shockwavePrefab.transform.position, shockwavePrefab.transform.rotation);
+            GameObject wave = Instantiate(shockwavePrefab, collisionAreaBackLeft.transform.position + shockwavePrefab.transform.position, shockwavePrefab.transform.rotation);
+            wave.GetComponentInChildren<ShockwaveBehaviour>().finalHeightMultiplier = finalHeightMultiplier;
+            GameObject particles = Instantiate(shockwavePrefab2, collisionAreaBackLeft.transform.position + shockwavePrefab2.transform.position, shockwavePrefab2.transform.rotation);
+            Destroy(particles, 1.5f);
+            legBackLeftAudio.Play();
         }
 
         if (!collisionAreaBackRight.activeSelf)
         {
-            Instantiate(shockwavePrefab, collisionAreaBackRight.transform.position + shockwavePrefab.transform.position, shockwavePrefab.transform.rotation);
+            GameObject wave = Instantiate(shockwavePrefab, collisionAreaBackRight.transform.position + shockwavePrefab.transform.position, shockwavePrefab.transform.rotation);
+            wave.GetComponentInChildren<ShockwaveBehaviour>().finalHeightMultiplier = finalHeightMultiplier;
+            GameObject particles = Instantiate(shockwavePrefab2, collisionAreaBackRight.transform.position + shockwavePrefab2.transform.position, shockwavePrefab2.transform.rotation);
+            Destroy(particles, 1.5f);
+            legBackRightAudio.Play();
         }
 
         if (!collisionAreaFrontLeft.activeSelf)
         {
-            Instantiate(shockwavePrefab, collisionAreaFrontLeft.transform.position + shockwavePrefab.transform.position, shockwavePrefab.transform.rotation);
+            GameObject wave = Instantiate(shockwavePrefab, collisionAreaFrontLeft.transform.position + shockwavePrefab.transform.position, shockwavePrefab.transform.rotation);
+            wave.GetComponentInChildren<ShockwaveBehaviour>().finalHeightMultiplier = finalHeightMultiplier;
+            GameObject particles = Instantiate(shockwavePrefab2, collisionAreaFrontLeft.transform.position + shockwavePrefab2.transform.position, shockwavePrefab2.transform.rotation);
+            Destroy(particles, 1.5f);
+            legFrontLeftAudio.Play();
         }
 
         if (!collisionAreaFrontRight.activeSelf)
         {
-            Instantiate(shockwavePrefab, collisionAreaFrontRight.transform.position + shockwavePrefab.transform.position, shockwavePrefab.transform.rotation);
+            GameObject wave = Instantiate(shockwavePrefab, collisionAreaFrontRight.transform.position + shockwavePrefab.transform.position, shockwavePrefab.transform.rotation);
+            wave.GetComponentInChildren<ShockwaveBehaviour>().finalHeightMultiplier = finalHeightMultiplier;
+            GameObject particles = Instantiate(shockwavePrefab2, collisionAreaFrontRight.transform.position + shockwavePrefab2.transform.position, shockwavePrefab2.transform.rotation);
+            Destroy(particles, 1.5f);
+            legFrontRightAudio.Play();
         }
     }
 

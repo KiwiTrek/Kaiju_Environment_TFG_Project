@@ -29,7 +29,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -135,7 +135,7 @@ Material:
     - _ReceiveShadows: 1
     - _Reverse: 0
     - _Size: 0
-    - _Smoothness: 0.6
+    - _Smoothness: 0.448
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _Speed: 0.1
@@ -154,7 +154,7 @@ Material:
     - _In: {r: 0.33, g: 1, b: 0, a: 0}
     - _MaskingPoint: {r: 0, g: 19.19, b: 0, a: 0}
     - _Out: {r: 0, g: 1, b: 0, a: 0}
-    - _PlayerPosition: {r: 0, g: 0, b: 0, a: 0}
+    - _PlayerPosition: {r: 0, g: -0.1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Tiling: {r: 8, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []

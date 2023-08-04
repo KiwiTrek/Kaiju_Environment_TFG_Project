@@ -7,6 +7,12 @@ public class BossHitbox : MonoBehaviour
     [Header("Components")]
     public Renderer legRenderer = null;
     public GameObject legBrokenDecals = null;
+    public AudioSource legAudioSource = null;
+    public GameObject woodVFX = null;
+
+    [Space]
+    [Header("Audio Clips")]
+    public AudioClip[] legSFX = null;
 
     [Space(10)]
     public DataCompilator compilator = null;
@@ -75,8 +81,18 @@ public class BossHitbox : MonoBehaviour
         }
         timerHit = 0.0f;
 
-        //Play sound
-        //Play fx
+        legAudioSource.clip = legSFX[Random.Range(0, legSFX.Length)];
+        legAudioSource.pitch = Random.Range(0.9f, 1.1f);
+        legAudioSource.Play();
+
+        GameObject wood = Instantiate(woodVFX, this.transform.position, this.transform.rotation);
+        wood.transform.LookAt(player.transform.position);
+        Vector3 eulerAngles = wood.transform.eulerAngles;
+        eulerAngles.x = 0.0f;
+        wood.transform.eulerAngles = eulerAngles;
+        Destroy( wood , 1.0f);
+
+
         if (isDummy)
         {
             currentHits = player.numberClicks;

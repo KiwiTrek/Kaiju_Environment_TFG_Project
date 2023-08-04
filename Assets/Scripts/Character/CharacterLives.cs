@@ -9,7 +9,7 @@ public class CharacterLives : MonoBehaviour
     // Start is called before the first frame update
     [Header("Components")]
     public Image blackScreen;
-    public TMP_Text livesUI;
+    public HeartController livesUI;
     public GameObject spawnPoint;
     public int cameraID;
     public Animator animator;
@@ -46,6 +46,7 @@ public class CharacterLives : MonoBehaviour
     void Start()
     {
         lives = maxLives;
+        livesUI.CreateHeart(maxLives);
 
         isHurtHash = Animator.StringToHash("isHurt");
         isHurtHardHash = Animator.StringToHash("isHurtHard");
@@ -54,8 +55,6 @@ public class CharacterLives : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        livesUI.text = "Lives: " + lives;
-
         if (invulnerableTimer > 0.0f)
         {
             invulnerableTimer -= Time.deltaTime;
@@ -104,6 +103,7 @@ public class CharacterLives : MonoBehaviour
                 controller.enabled = true;
                 cameraID = spawnPoint.GetComponent<CheckpointID>().cameraId;
                 lives = maxLives;
+                livesUI.CreateHeart(maxLives);
 
                 Color tmp = blackScreen.color;
                 float curr = deathCounter - (respawnTime / 2.0f);
@@ -131,6 +131,7 @@ public class CharacterLives : MonoBehaviour
         if (invulnerableTimer <= 0 && lives > 0)
         {
             lives--;
+            livesUI.DestroyHeart(1);
             if (compilator != null)
             {
                 compilator.RegisterRecieveDamage();

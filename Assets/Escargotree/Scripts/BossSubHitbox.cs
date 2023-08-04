@@ -1,10 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
-
+public enum SoundTypeBird
+{
+    Flapping,
+    HitBloody,
+    Hurt
+}
 public class BossSubHitbox : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -13,12 +19,15 @@ public class BossSubHitbox : MonoBehaviour
     public Slider healthBar;
     public List<GameObject> body = new List<GameObject>();
     public CharacterMov player = null;
+    public GameObject featherVFX = null;
     public BossSubBehaviour behaviour = null;
+    public AnimationFunctions animationFunctions = null;
 
     [Space]
-    bool activeMesh = true;
+    [Header("Parameters")]
     public int maxLives = 18;
     public int currentHits = 0;
+    bool activeMesh = true;
     float timerHit = 0.0f;
     float maxHitTime = 0.15f;
     void Start()
@@ -90,8 +99,12 @@ public class BossSubHitbox : MonoBehaviour
             compilator.RegisterHitEnemy();
         }
         timerHit = 0.0f;
-        //Play sound
-        //Play fx
+
+        animationFunctions.PlaySound(SoundTypeBird.Hurt);
+        animationFunctions.PlaySound(SoundTypeBird.HitBloody);
+
+        GameObject vfx = Instantiate(featherVFX, transform);
+        Destroy(vfx, 1.0f);
         Debug.Log(player.numberClicks);
         currentHits += player.numberClicks;
     }

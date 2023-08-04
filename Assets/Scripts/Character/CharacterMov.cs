@@ -3,7 +3,18 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+public enum SoundType
+{
+	Jump,
+	Land,
+	GruntSwing,
+	Sword,
+	GruntSwingBig,
+	Hurt,
+	Thud,
+	Death,
+	GetUp
+}
 //This script requires you to have setup your animator with 3 parameters, "InputMagnitude", "InputX", "InputZ"
 //With a blend tree to control the inputmagnitude and allow blending between animations.
 [RequireComponent(typeof(CharacterController))]
@@ -25,6 +36,9 @@ public class CharacterMov : MonoBehaviour {
 
 	[Space]
 	[Header("Components")]
+	public AudioSource mov;
+	public AudioSource grunt;
+	public AudioSource swing;
 	public GameObject[] slashes;
 	public Camera cam;
 	public CinemachineFreeLook playerCam;
@@ -37,6 +51,17 @@ public class CharacterMov : MonoBehaviour {
 	public LayerMask groundMask2;
 
 	[Space]
+	[Header("Sound Clip")]
+    public AudioClip[] swordSFX;
+    public AudioClip[] jumpsSFX;
+    public AudioClip[] hurtSFX;
+    public AudioClip[] gruntSwingSFX;
+	public AudioClip[] getUpSFX;
+	public AudioClip gruntSwingBigSFX;
+    public AudioClip deathSFX;
+    public AudioClip thudSFX;
+
+    [Space]
     public DataCompilator compilator;
 
 	[Space]
@@ -108,7 +133,10 @@ public class CharacterMov : MonoBehaviour {
 		if (jumpPressed)
         {
 			jumpPressed = false;
-			verticalMov.y += Mathf.Sqrt(jumpHeight * -2.0f * gravity);
+            PlaySound(SoundType.Jump);
+            verticalMov.y += Mathf.Sqrt(jumpHeight * -2.0f * gravity);
+			canAttack = true;
+            numberClicks = 0;
         }
 
 		verticalMov.y += gravity * Time.deltaTime;
@@ -278,6 +306,74 @@ public class CharacterMov : MonoBehaviour {
 		foreach(var slash in slashes)
 		{
 			slash.SetActive(false);
+		}
+	}
+
+	public void PlaySound(SoundType type)
+	{
+		mov.pitch = Random.Range(0.90f, 1.1f);
+		grunt.pitch = Random.Range(0.95f, 1.05f);
+		swing.pitch = Random.Range(0.9f, 1.1f);
+		switch (type)
+		{
+            case SoundType.Jump:
+                {
+                    mov.clip = jumpsSFX[Random.Range(0, jumpsSFX.Length)];
+					mov.Play();
+                    break;
+                }
+            case SoundType.Land:
+                {
+                    grunt.clip = hurtSFX[Random.Range(1, hurtSFX.Length)];
+                    grunt.Play();
+                    break;
+                }
+            case SoundType.GruntSwing:
+                {
+                    grunt.clip = gruntSwingSFX[Random.Range(0, gruntSwingSFX.Length)];
+					grunt.Play();
+                    break;
+                }
+            case SoundType.Sword:
+                {
+                    swing.clip = swordSFX[Random.Range(0, swordSFX.Length)];
+					swing.Play();
+                    break;
+                }
+            case SoundType.GruntSwingBig:
+                {
+					swing.clip = gruntSwingBigSFX;
+					swing.Play();
+                    break;
+                }
+            case SoundType.Hurt:
+                {
+                    grunt.clip = hurtSFX[Random.Range(0, hurtSFX.Length)];
+					grunt.Play();
+                    break;
+                }
+            case SoundType.Thud:
+                {
+                    mov.clip = thudSFX;
+                    mov.pitch = Random.Range(0.85f, 1.00f);
+					mov.Play();
+                    break;
+                }
+            case SoundType.Death:
+                {
+                    grunt.clip = deathSFX;
+					grunt.Play();
+                    break;
+                }
+			case SoundType.GetUp:
+				{
+					grunt.clip = getUpSFX[Random.Range(0, getUpSFX.Length)];
+					grunt.pitch = Random.Range(0.8f, 1.0f);
+					grunt.Play();
+					break;
+				}
+            default:
+				break;
 		}
 	}
 }
