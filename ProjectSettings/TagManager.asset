@@ -13,6 +13,7 @@ TagManager:
   - LegZoneCam
   - Minions
   - Checkpoint
+  - JumpToTrunk
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - SecurityWall
   - Minions
   - EnvironmentIgnoreCam
-  - 
+  - CutsceneTrigger
   - 
   - 
   - 

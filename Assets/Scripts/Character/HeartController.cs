@@ -20,6 +20,7 @@ public class HeartController : MonoBehaviour
         for (int i = 0; i != number; i++)
         {
             Destroy(hearts[hearts.Count - 1]);
+            hearts.Remove(hearts[hearts.Count - 1]);
         }
     }
     public void ClearHearts()

@@ -33707,12 +33707,5 @@ AnimationClip:
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 1
-    messageOptions: 0
-  - time: 0.033333335
-    functionName: PlaySound
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
     intParameter: 6
     messageOptions: 0

@@ -13,6 +13,7 @@ public class BossHitbox : MonoBehaviour
     [Space]
     [Header("Audio Clips")]
     public AudioClip[] legSFX = null;
+    public AudioClip legDestroyedSFX = null;
 
     [Space(10)]
     public DataCompilator compilator = null;
@@ -21,6 +22,7 @@ public class BossHitbox : MonoBehaviour
 
     [Space]
     public bool isDummy = false;
+    public float speedDummy = 1.0f;
     public int maxLives = 12;
     public int currentHits = 0;
     float timerHit = 0.0f;
@@ -37,16 +39,22 @@ public class BossHitbox : MonoBehaviour
         {
             if (isDummy)
             {
-                this.gameObject.SetActive(false);
+                Quaternion rotation = this.transform.rotation;
+                rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.Euler(-90.0f, -230.0f, 0.0f), Time.deltaTime * speedDummy);
+                this.transform.rotation = rotation;
             }
-            else
-            {
-                this.hitbox.enabled = false;
-            }
+            this.hitbox.enabled = false;
 
             if (legBrokenDecals != null)
             {
-                legBrokenDecals.SetActive(true);
+                if (legBrokenDecals.activeSelf == false)
+                {
+                    legAudioSource.clip = legDestroyedSFX;
+                    legAudioSource.pitch = Random.Range(0.9f, 1.1f);
+                    legAudioSource.Play();
+
+                    legBrokenDecals.SetActive(true);
+                }
             }
 
             currentHits = maxLives;

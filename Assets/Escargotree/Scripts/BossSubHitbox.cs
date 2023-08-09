@@ -9,7 +9,10 @@ public enum SoundTypeBird
 {
     Flapping,
     HitBloody,
-    Hurt
+    Hurt,
+    Thrust,
+    Shockwave,
+    EggPop
 }
 public class BossSubHitbox : MonoBehaviour
 {

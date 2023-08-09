@@ -2,6 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static Unity.VisualScripting.Member;
+
+public enum SoundTypeEscargotree
+{
+    LegRising,
+    AboutToHit,
+    Explosion,
+    LegDeath
+}
 
 public class BossMov : MonoBehaviour
 {
@@ -12,6 +21,12 @@ public class BossMov : MonoBehaviour
     public int LegToDestroy = 3;
     [Range(0.1f, 30.0f)]
     public float divider = 3.0f;
+    [Space]
+    [Header("Audio Clips")]
+    public AudioClip[] legRising = null;
+    public AudioClip[] aboutToHit = null;
+    public AudioClip[] explosion = null;
+    public AudioClip[] legDeath = null;
 
     [Header("Components")]
     public GameObject legFrontLeft;
@@ -20,6 +35,7 @@ public class BossMov : MonoBehaviour
     public GameObject legBackRight;
 
     [Space(10)]
+    public AudioSource mouthSound;
     public AudioSource legFrontLeftAudio;
     public AudioSource legFrontRightAudio;
     public AudioSource legBackLeftAudio;
@@ -83,7 +99,6 @@ public class BossMov : MonoBehaviour
             legsDestroyed = animator.GetInteger("legsDestroyed");
             if (Time.timeScale > 0)
             {
-
                 Vector3 scale = new Vector3(
                     legFrontLeft.transform.position.y / (divider),
                     legFrontLeft.transform.position.y / (divider),
@@ -125,15 +140,19 @@ public class BossMov : MonoBehaviour
             {
                 newValue++;
             }
+
+            if (newValue != legsDestroyed)
+            {
+                PlaySoundMouth(SoundTypeEscargotree.LegDeath);
+            }
             legsDestroyed = newValue;
             animator.SetInteger("legsDestroyed", legsDestroyed);
             float legSpeed = 0.48f + legsDestroyed * 0.18f;
-            finalHeightMultiplier = 0.26f + legsDestroyed * 0.075f;
+            finalHeightMultiplier = 0.185f + legsDestroyed * 0.075f;
             animator.SetFloat("legSpeed", legSpeed);
         }
         else
         {
-
             if (canvas != null)
             {
                 canvas.SetActive(false);
@@ -153,6 +172,7 @@ public class BossMov : MonoBehaviour
 
     void SwitchActiveColliders()
     {
+        float legSpeed = 0.48f + legsDestroyed * 0.18f;
         if (collisionAreaBackLeft.activeSelf)
         {
             collisionAreaBackLeft.SetActive(false);
@@ -160,6 +180,7 @@ public class BossMov : MonoBehaviour
         else
         {
             collisionAreaBackLeft.SetActive(true);
+            PlaySoundLeg(legBackLeftAudio, SoundTypeEscargotree.LegRising, 3.5f - legSpeed);
         }
 
         if (collisionAreaBackRight.activeSelf)
@@ -169,6 +190,7 @@ public class BossMov : MonoBehaviour
         else
         {
             collisionAreaBackRight.SetActive(true);
+            PlaySoundLeg(legBackRightAudio, SoundTypeEscargotree.LegRising, 3.5f - legSpeed);
         }
 
         if (collisionAreaFrontLeft.activeSelf)
@@ -178,6 +200,7 @@ public class BossMov : MonoBehaviour
         else
         {
             collisionAreaFrontLeft.SetActive(true);
+            PlaySoundLeg(legFrontLeftAudio, SoundTypeEscargotree.LegRising, 3.5f - legSpeed);
         }
 
         if (collisionAreaFrontRight.activeSelf)
@@ -187,6 +210,7 @@ public class BossMov : MonoBehaviour
         else
         {
             collisionAreaFrontRight.SetActive(true);
+            PlaySoundLeg(legFrontRightAudio, SoundTypeEscargotree.LegRising, 3.5f - legSpeed);
         }
     }
     void ResetAttackPattern()
@@ -205,7 +229,7 @@ public class BossMov : MonoBehaviour
             wave.GetComponentInChildren<ShockwaveBehaviour>().finalHeightMultiplier = finalHeightMultiplier;
             GameObject particles = Instantiate(shockwavePrefab2, collisionAreaBackLeft.transform.position + shockwavePrefab2.transform.position, shockwavePrefab2.transform.rotation);
             Destroy(particles, 1.5f);
-            legBackLeftAudio.Play();
+            PlaySoundLeg(legBackLeftAudio, SoundTypeEscargotree.Explosion);
         }
 
         if (!collisionAreaBackRight.activeSelf)
@@ -214,7 +238,7 @@ public class BossMov : MonoBehaviour
             wave.GetComponentInChildren<ShockwaveBehaviour>().finalHeightMultiplier = finalHeightMultiplier;
             GameObject particles = Instantiate(shockwavePrefab2, collisionAreaBackRight.transform.position + shockwavePrefab2.transform.position, shockwavePrefab2.transform.rotation);
             Destroy(particles, 1.5f);
-            legBackRightAudio.Play();
+            PlaySoundLeg(legBackRightAudio, SoundTypeEscargotree.Explosion);
         }
 
         if (!collisionAreaFrontLeft.activeSelf)
@@ -223,7 +247,7 @@ public class BossMov : MonoBehaviour
             wave.GetComponentInChildren<ShockwaveBehaviour>().finalHeightMultiplier = finalHeightMultiplier;
             GameObject particles = Instantiate(shockwavePrefab2, collisionAreaFrontLeft.transform.position + shockwavePrefab2.transform.position, shockwavePrefab2.transform.rotation);
             Destroy(particles, 1.5f);
-            legFrontLeftAudio.Play();
+            PlaySoundLeg(legFrontLeftAudio, SoundTypeEscargotree.Explosion);
         }
 
         if (!collisionAreaFrontRight.activeSelf)
@@ -232,12 +256,61 @@ public class BossMov : MonoBehaviour
             wave.GetComponentInChildren<ShockwaveBehaviour>().finalHeightMultiplier = finalHeightMultiplier;
             GameObject particles = Instantiate(shockwavePrefab2, collisionAreaFrontRight.transform.position + shockwavePrefab2.transform.position, shockwavePrefab2.transform.rotation);
             Destroy(particles, 1.5f);
-            legFrontRightAudio.Play();
+            PlaySoundLeg(legFrontRightAudio, SoundTypeEscargotree.Explosion);
         }
     }
 
     void SwitchDown()
     {
         isDown = !isDown;
+    }
+
+    public void PlaySoundMouth(SoundTypeEscargotree type)
+    {
+        mouthSound.pitch = Random.Range(0.95f, 1.1f);
+        switch (type)
+        {
+            case SoundTypeEscargotree.LegRising:
+                mouthSound.pitch = Random.Range(0.90f, 1.1f);
+                mouthSound.clip = legRising[Random.Range(0, legRising.Length)];
+                break;
+            case SoundTypeEscargotree.AboutToHit:
+                mouthSound.clip = aboutToHit[Random.Range(0, aboutToHit.Length)];
+                break;
+            case SoundTypeEscargotree.Explosion:
+                mouthSound.pitch = Random.Range(0.90f, 1.1f);
+                mouthSound.clip = explosion[Random.Range(0, explosion.Length)];
+                break;
+            case SoundTypeEscargotree.LegDeath:
+                mouthSound.clip = legDeath[Random.Range(0, legDeath.Length)];
+                break;
+            default:
+                break;
+        }
+        mouthSound.Play();
+    }
+    public void PlaySoundLeg(AudioSource source, SoundTypeEscargotree type, float delayTime = 0.0f)
+    {
+        source.pitch = Random.Range(0.90f, 1.1f);
+        switch (type)
+        {
+            case SoundTypeEscargotree.LegRising:
+                source.clip = legRising[Random.Range(0, legRising.Length)];
+                break;
+            case SoundTypeEscargotree.AboutToHit:
+                source.pitch = Random.Range(0.95f, 1.1f);
+                source.clip = aboutToHit[Random.Range(0, aboutToHit.Length)];
+                break;
+            case SoundTypeEscargotree.Explosion:
+                source.clip = explosion[Random.Range(0, explosion.Length)];
+                break;
+            case SoundTypeEscargotree.LegDeath:
+                source.pitch = Random.Range(0.95f, 1.1f);
+                source.clip = legDeath[Random.Range(0, legDeath.Length)];
+                break;
+            default:
+                break;
+        }
+        source.PlayDelayed(delayTime);
     }
 }

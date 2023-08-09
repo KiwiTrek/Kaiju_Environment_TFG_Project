@@ -3,6 +3,8 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
+
 public enum SoundType
 {
 	Jump,
@@ -47,6 +49,7 @@ public class CharacterMov : MonoBehaviour {
 	public CharacterLives health;
 	public Animator animator;
 	public Transform groundChecker;
+	public Transform jumpToTrunkFinalPos;
 	public LayerMask groundMask;
 	public LayerMask groundMask2;
 
@@ -74,10 +77,11 @@ public class CharacterMov : MonoBehaviour {
 	public bool isGrounded;
 	public bool canAttack = true;
 	public int numberClicks = 0;
+	public bool cutsceneJumpMode = false;
 
-    private Vector3 verticalMov;
+    public Vector3 verticalMov;
 	public int currentJumpCount;
-	bool jumpPressed;
+	public bool jumpPressed;
 	int jumpHash;
 	Vector3 lastP;
 
@@ -112,7 +116,7 @@ public class CharacterMov : MonoBehaviour {
         }
 
 		bool isHurtHard = animator.GetBool(isHurtHardHash);
-		if (!health.dead || !isHurtHard)
+		if (!health.dead || !isHurtHard || !cutsceneJumpMode)
 		{
 			InputMagnitude();
 
@@ -124,7 +128,7 @@ public class CharacterMov : MonoBehaviour {
         animator.SetBool("grounded", isGrounded);
         if (isGrounded & verticalMov.y < 0)
         {
-			verticalMov.y = -1.0f;
+			verticalMov.y = -0.01f;
 			currentJumpCount = maxJumpCount;
         }
 
@@ -137,6 +141,17 @@ public class CharacterMov : MonoBehaviour {
             verticalMov.y += Mathf.Sqrt(jumpHeight * -2.0f * gravity);
 			canAttack = true;
             numberClicks = 0;
+        }
+
+		if (cutsceneJumpMode)
+		{
+            controller.enabled = false;
+            this.transform.position = Vector3.MoveTowards(this.transform.position, jumpToTrunkFinalPos.position, Time.deltaTime * 10.0f);
+            controller.enabled = true;
+            if (Vector3.Distance(this.transform.position, jumpToTrunkFinalPos.position) <= 0.1f)
+			{
+				cutsceneJumpMode = false;
+            }
         }
 
 		verticalMov.y += gravity * Time.deltaTime;
@@ -234,7 +249,7 @@ public class CharacterMov : MonoBehaviour {
 	}
     public void InvertCamY()
     {
-        playerCam.m_XAxis.m_InvertInput = !playerCam.m_XAxis.m_InvertInput;
+        playerCam.m_YAxis.m_InvertInput = !playerCam.m_YAxis.m_InvertInput;
     }
 	public void SwitchSensitivity(float sensitivity)
 	{

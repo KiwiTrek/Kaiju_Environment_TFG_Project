@@ -19,12 +19,14 @@ public class GameplayDirector : MonoBehaviour
     public float betweenTimeNoticeMe = 0.25f;
     float timer = 0.0f;
     float timerBetween = 0.0f;
+    public TMP_Text prevText = null;
 
     [Header("Music")]
     public AudioClip wind = null;
     public AudioClip first = null;
     public AudioClip second = null;
     public AudioClip third = null;
+    AudioClip previous = null;
     
     [Header("Game Objects in Scene")]
     public BossSubHitbox victoryChecker = null;
@@ -35,17 +37,17 @@ public class GameplayDirector : MonoBehaviour
 
     [Space(10)]
     public DataCompilator compilator= null;
-    AudioClip previous = null;
     void Start()
     {
         missionText.text = "Current objective: \nFind Escargotree!";
+        prevText.text = missionText.text;
         Color color = debugColliderMaterial.color;
         color.a = 0;
         debugColliderMaterial.color = color;
         music.clip = wind;
         previous = wind;
         music.Play();
-        timer = 0.0f;
+        timer = -0.5f;
         timerBetween = 0.0f;
     }
 
@@ -57,6 +59,7 @@ public class GameplayDirector : MonoBehaviour
         if (spawnPoint == null) return;
         if (bossMov == null) return;
 
+       
         if (timer < maxTimeNoticeMe)
         {
             timer += Time.deltaTime;
@@ -85,11 +88,16 @@ public class GameplayDirector : MonoBehaviour
             music.Play();
         }
 
+        if (prevText.text != missionText.text)
+        {
+            prevText.text = missionText.text;
+            timer = 0.0f;
+        }
+
         if (Vector3.Distance(lives.gameObject.transform.position, spawnPoint.transform.position) <= 15.0f)
         {
             missionText.text = "Current objective: \nTumble it down!";
             music.clip = first;
-            if (timer >= maxTimeNoticeMe && bossMov.canvas.activeSelf == false) timer = 0.0f;
             bossMov.canvas.SetActive(true);
         }
 
@@ -97,7 +105,6 @@ public class GameplayDirector : MonoBehaviour
         {
             missionText.text = "Current objective: \nClimb to the top!";
             music.clip = second;
-            if (timer >= maxTimeNoticeMe) timer = 0.0f;
         }
 
         if (cameraSwitcher.id == 1 || cameraSwitcher.id == 2)
@@ -109,7 +116,6 @@ public class GameplayDirector : MonoBehaviour
         {
             missionText.text = "Current objective: \nDefeat Carpintroyer!";
             music.clip = third;
-            if (timer >= maxTimeNoticeMe) timer = 0.0f;
         }
 
         if (lives.dead && lives.deathCounter >= 3.0f)

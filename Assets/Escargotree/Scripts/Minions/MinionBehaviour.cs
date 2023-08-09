@@ -1,10 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
+
+public enum SoundTypeMinion
+{
+    Flapping,
+    Beeping
+}
 
 public class MinionBehaviour : MonoBehaviour
 {
     // Start is called before the first frame update
+    [Header("Parameters")]
     public bool canFollow = true;
     public bool reverse = false;
     public bool stop;
@@ -13,8 +21,13 @@ public class MinionBehaviour : MonoBehaviour
     public float turnSpeed;
     public Quaternion rotation = Quaternion.identity;
     public Vector3 direction = Vector3.zero;
-    public Animator animator;
 
+    [Space]
+    [Header("Components")]
+    public Animator animator;
+    public AnimationFunctions animationFunctions;
+
+    [Space]
     public GameObject target = null;
     public bool foundTarget = false;
     float velocity;
@@ -93,6 +106,11 @@ public class MinionBehaviour : MonoBehaviour
         {
             Debug.Log("Target nearby");
             foundTarget = true;
+            if (canFollow)
+            {
+                animationFunctions.PlaySoundMinion(SoundTypeMinion.Beeping);
+                animationFunctions.voiceSFX.loop = true;
+            }
         }
     }
 
@@ -103,6 +121,11 @@ public class MinionBehaviour : MonoBehaviour
         {
             Debug.Log("Target has left radious");
             foundTarget = false;
+            if (canFollow)
+            {
+                animationFunctions.voiceSFX.Stop();
+                animationFunctions.voiceSFX.loop = false;
+            }
         }
     }
 }

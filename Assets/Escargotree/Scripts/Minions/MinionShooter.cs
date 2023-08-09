@@ -5,18 +5,25 @@ using UnityEngine;
 public class MinionShooter : MonoBehaviour
 {
     // Start is called before the first frame update
+    [Header("Components")]
     public Animator animator;
+    public AudioSource audioSource;
     public MeshRenderer cannonMesh;
-    public int materialIndex;
     public Transform barrel;
     public GameObject minionPrefab;
     public GameObject spawnPosition;
+    public GameObject explosionGO;
+
+    [Space]
+    [Header("Audio Clips")]
+    public AudioClip[] eggPopSFX;
+
+    [Space]
+    [Header("Parameters")]
+    public int materialIndex;
     public bool playerControlled = false;
     public float maxFrequencyOfUpdate = 1.5f;
     public bool reverse = false;
-
-    public GameObject explosionGO;
-
     float frequency;
     GameObject target;
     CharacterMov targetMov;
@@ -74,6 +81,10 @@ public class MinionShooter : MonoBehaviour
 
         GameObject explosionVFX = Instantiate(explosionGO, spawnPosition.transform.position, Quaternion.identity);
         Destroy(explosionVFX, 0.75f);
+
+        audioSource.clip = eggPopSFX[Random.Range(0, eggPopSFX.Length)];
+        audioSource.pitch = Random.Range(0.85f, 1.15f);
+        audioSource.Play();
     }
 
     private void OnTriggerEnter(Collider other)

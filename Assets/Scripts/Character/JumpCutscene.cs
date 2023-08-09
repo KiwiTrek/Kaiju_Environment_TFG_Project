@@ -1,0 +1,38 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
+using UnityEngine;
+
+public class JumpCutscene : MonoBehaviour
+{
+    [SerializeField] private CharacterMov character = null;
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            if (Input.GetButtonDown("Jump"))
+            {
+                character.verticalMov.y = 0.0f;
+                character.verticalMov.y += Mathf.Sqrt(character.jumpHeight * -1.5f * character.gravity);
+                character.cutsceneJumpMode = true;
+                Debug.Log("Jump to trunk mode: On!");
+            }
+            Debug.Log("It's a cutscene!");
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            if (Input.GetButtonDown("Jump"))
+            {
+                character.verticalMov.y = 0.0f;
+                character.verticalMov.y += Mathf.Sqrt(character.jumpHeight * -1.5f * character.gravity);
+                character.cutsceneJumpMode = true;
+                Debug.Log("Jump to trunk mode: On!");
+            }
+            Debug.Log("It's a cutscene!");
+        }
+    }
+}

@@ -44,6 +44,7 @@ public class BossSubBehaviour : MonoBehaviour
 
     [Header("Components")]
     public Animator animator;
+    public AnimationFunctions animationFunctions = null;
     public BossMov mainBoss = null;
     public GameObject motionVFX = null;
     public GameObject shockwavePrefab = null;
@@ -205,6 +206,7 @@ public class BossSubBehaviour : MonoBehaviour
             currentAngle = 0.0f;
             box.enabled = false;
             capsule.enabled = true;
+            animationFunctions.PlaySound(SoundTypeBird.Thrust);
         }
     }
     private void ThrustState()
@@ -327,6 +329,7 @@ public class BossSubBehaviour : MonoBehaviour
                         }
                         else
                         {
+                            animationFunctions.PlaySound(SoundTypeBird.Thrust);
                             invulnerablePhase = InvulnerablePhase.Thrusting;
                         }
                     }
@@ -393,6 +396,7 @@ public class BossSubBehaviour : MonoBehaviour
             {
                 currentTimeInvulnerable = 1.5f;
                 SpawnMinion();
+                animationFunctions.PlaySound(SoundTypeBird.EggPop);
                 numberThrust++;
             }
         }

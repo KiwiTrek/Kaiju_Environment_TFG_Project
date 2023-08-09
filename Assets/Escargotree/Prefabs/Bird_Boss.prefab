@@ -9829,6 +9829,7 @@ MonoBehaviour:
   finalHeightMultiplier: 0.03
   status: 0
   animator: {fileID: 4579142901202622595}
+  animationFunctions: {fileID: 4702994047455962457}
   mainBoss: {fileID: 0}
   motionVFX: {fileID: 6190342169300444961}
   shockwavePrefab: {fileID: 6596379300243454722, guid: e29e841873d17874eae6b71b229bd579, type: 3}
@@ -12562,11 +12563,20 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5c3a8c3a96a6e2f4293a07adc26c08bf, type: 3}
   - {fileID: 8300000, guid: 174112da511a92d469b891241db24e33, type: 3}
   - {fileID: 8300000, guid: a9869fe1331a6ae4d804da3440caa5d5, type: 3}
+  beeping: {fileID: 0}
   hitBloody:
   - {fileID: 8300000, guid: 724b7f51aaa89434f8cbc8479138b9a9, type: 3}
   - {fileID: 8300000, guid: f9e24dcee2748584dbb308d225f705b5, type: 3}
   - {fileID: 8300000, guid: bc6e8850af4b9a54bb173bd400ba81bb, type: 3}
-  hurt: []
+  hurt:
+  - {fileID: 8300000, guid: fdea2bd4d62cc2f4ca35012e277098c0, type: 3}
+  - {fileID: 8300000, guid: 5a268ef9468bd1c42875993b50669caf, type: 3}
+  - {fileID: 8300000, guid: 7d9a87d40c365254bb6e8d33efd14d12, type: 3}
+  eggPopSFX:
+  - {fileID: 8300000, guid: 6052e66353b11f7428a56fd9986a5472, type: 3}
+  - {fileID: 8300000, guid: e67313d311c1f564c892dd1e46cc986c, type: 3}
+  shockwaveSFX: {fileID: 8300000, guid: d5ba4403c0f67de40984cbc0f4d947a2, type: 3}
+  thrustSFX: {fileID: 8300000, guid: 300594354b7336b4198b7b916dbf05da, type: 3}
 --- !u!82 &3071567418028627859
 AudioSource:
   m_ObjectHideFlags: 0
@@ -12578,7 +12588,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -979665029506882956, guid: 48057aeca37aef046a9bb87ae2577111, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -12674,7 +12684,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -979665029506882956, guid: 48057aeca37aef046a9bb87ae2577111, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -12770,7 +12780,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -979665029506882956, guid: 48057aeca37aef046a9bb87ae2577111, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
