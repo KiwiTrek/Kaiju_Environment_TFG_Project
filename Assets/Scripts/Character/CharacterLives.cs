@@ -55,76 +55,84 @@ public class CharacterLives : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (invulnerableTimer > 0.0f)
+        if (GameplayDirector.cutsceneMode == CutsceneType.None || GameplayDirector.cutsceneMode == CutsceneType.JumpToBoss)
         {
-            invulnerableTimer -= Time.deltaTime;
-            activeMesh = !activeMesh;
-            if(activeMesh)
+            livesUI.gameObject.SetActive(true);
+            if (invulnerableTimer > 0.0f)
             {
+                invulnerableTimer -= Time.deltaTime;
+                activeMesh = !activeMesh;
+                if (activeMesh)
+                {
+                    hair.SetActive(true);
+                    head.SetActive(true);
+                    torso.SetActive(true);
+                    legs.SetActive(true);
+                    sword.SetActive(true);
+                }
+                else
+                {
+                    hair.SetActive(false);
+                    head.SetActive(false);
+                    torso.SetActive(false);
+                    legs.SetActive(false);
+                    sword.SetActive(false);
+                }
+            }
+            else if (invulnerableTimer < 0.0f)
+            {
+                invulnerableTimer = 0.0f;
                 hair.SetActive(true);
                 head.SetActive(true);
                 torso.SetActive(true);
                 legs.SetActive(true);
                 sword.SetActive(true);
+
+                movementScript.numberClicks = 0;
+                movementScript.animator.SetBool("attackStart", false);
+                movementScript.animator.SetInteger("hitCount", movementScript.numberClicks);
+                movementScript.canAttack = true;
             }
-            else
+
+            if (dead)
             {
-                hair.SetActive(false);
-                head.SetActive(false);
-                torso.SetActive(false);
-                legs.SetActive(false);
-                sword.SetActive(false);
+                Debug.Log("Dead!");
+                deathCounter += Time.deltaTime;
+                if (deathCounter >= (respawnTime / 2.0f))
+                {
+                    //Reset & Respawn
+                    controller.enabled = false;
+                    transform.SetPositionAndRotation(spawnPoint.transform.position, Quaternion.LookRotation(-spawnPoint.transform.forward));
+                    controller.enabled = true;
+                    cameraID = spawnPoint.GetComponent<CheckpointID>().cameraId;
+                    lives = maxLives;
+                    livesUI.CreateHeart(maxLives);
+
+                    Color tmp = blackScreen.color;
+                    float curr = deathCounter - (respawnTime / 2.0f);
+                    tmp.a = 1.0f - (curr / (respawnTime / 2.0f));
+                    blackScreen.color = tmp;
+                }
+                else
+                {
+                    Color tmp = blackScreen.color;
+                    tmp.a = (deathCounter / (respawnTime / 2.0f));
+                    blackScreen.color = tmp;
+                }
+
+                if (deathCounter > respawnTime)
+                {
+                    dead = false;
+                    deathCounter = -1.0f;
+                }
             }
+
+            animator.SetFloat("deadCounter", deathCounter);
         }
-        else if (invulnerableTimer < 0.0f)
+        else
         {
-            invulnerableTimer = 0.0f;
-            hair.SetActive(true);
-            head.SetActive(true);
-            torso.SetActive(true);
-            legs.SetActive(true);
-            sword.SetActive(true);
-
-            movementScript.numberClicks = 0;
-            movementScript.animator.SetBool("attackStart", false);
-            movementScript.animator.SetInteger("hitCount", movementScript.numberClicks);
-            movementScript.canAttack = true;
+            livesUI.gameObject.SetActive(false);
         }
-
-        if (dead)
-        {
-            Debug.Log("Dead!");
-            deathCounter += Time.deltaTime;
-            if (deathCounter >= (respawnTime/2.0f))
-            {
-                //Reset & Respawn
-                controller.enabled = false;
-                transform.SetPositionAndRotation(spawnPoint.transform.position, Quaternion.LookRotation(-spawnPoint.transform.forward));
-                controller.enabled = true;
-                cameraID = spawnPoint.GetComponent<CheckpointID>().cameraId;
-                lives = maxLives;
-                livesUI.CreateHeart(maxLives);
-
-                Color tmp = blackScreen.color;
-                float curr = deathCounter - (respawnTime / 2.0f);
-                tmp.a = 1.0f - (curr / (respawnTime / 2.0f));
-                blackScreen.color = tmp;
-            }
-            else
-            {
-                Color tmp = blackScreen.color;
-                tmp.a = (deathCounter / (respawnTime / 2.0f));
-                blackScreen.color = tmp;
-            }
-
-            if (deathCounter > respawnTime)
-            {
-                dead = false;
-                deathCounter = -1.0f;
-            }
-        }
-
-        animator.SetFloat("deadCounter", deathCounter);
     }
     public void Hit()
     {
@@ -167,7 +175,7 @@ public class CharacterLives : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Checkpoint")
+        if (other.CompareTag("Checkpoint"))
         {
             Debug.Log("Checkpoint!");
             spawnPoint = other.gameObject;
@@ -179,6 +187,7 @@ public class CharacterLives : MonoBehaviour
         if (invulnerableTimer <= 0)
         {
             lives--;
+            livesUI.DestroyHeart(1);
             if (compilator != null)
             {
                 compilator.RegisterRecieveDamage();

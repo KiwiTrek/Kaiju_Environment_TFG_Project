@@ -486,6 +486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f6b3f8d5b190444597ae86f783e5c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  missionPanel: {fileID: 8223555244993157402}
   missionText: {fileID: 2816739903286070552}
   cameraSwitcher: {fileID: 3478307877695400388}
   music: {fileID: 0}
@@ -494,6 +495,7 @@ MonoBehaviour:
   maxTimeNoticeMe: 1.5
   betweenTimeNoticeMe: 0.25
   prevText: {fileID: 7043850799144061038}
+  cutsceneBars: {fileID: 992235961346791410}
   wind: {fileID: 8300000, guid: 5cdedcae1d532214ea7995684af40e38, type: 3}
   first: {fileID: 8300000, guid: d60fc7081c504224ca593bf8618920b2, type: 3}
   second: {fileID: 8300000, guid: a4a6ffe49b6eabb46a265768dcd12933, type: 3}

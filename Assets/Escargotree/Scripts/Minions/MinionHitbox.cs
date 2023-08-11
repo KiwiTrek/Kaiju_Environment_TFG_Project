@@ -29,10 +29,13 @@ public class MinionHitbox : MonoBehaviour
             return;
         }
 
-        lifeTimeRemaining += Time.deltaTime;
-        if (lifeTimeRemaining >= lifeTimeTotal)
+        if (GameplayDirector.cutsceneMode == CutsceneType.None)
         {
-            Die();
+            lifeTimeRemaining += Time.deltaTime;
+            if (lifeTimeRemaining >= lifeTimeTotal)
+            {
+                Die();
+            }
         }
     }
     private void OnTriggerEnter(Collider other)

@@ -64,6 +64,7 @@ public class BossMov : MonoBehaviour
     public int legsDestroyed = 0;
     int isAttackingHash;
     int maxLives;
+    public bool switchToSecondCam = false;
 
     void Start()
     {
@@ -99,28 +100,28 @@ public class BossMov : MonoBehaviour
             legsDestroyed = animator.GetInteger("legsDestroyed");
             if (Time.timeScale > 0)
             {
-                Vector3 scale = new Vector3(
+                Vector3 scale = new(
                     legFrontLeft.transform.position.y / (divider),
                     legFrontLeft.transform.position.y / (divider),
                     collisionAreaFrontLeft.transform.localScale.z
                     );
                 collisionAreaFrontLeft.transform.localScale = scale;
 
-                scale = new Vector3(
+                scale = new(
                     legFrontRight.transform.position.y / (divider),
                     legFrontRight.transform.position.y / (divider),
                     collisionAreaFrontRight.transform.localScale.z
                     );
                 collisionAreaFrontRight.transform.localScale = scale;
 
-                scale = new Vector3(
+                scale = new(
                     legBackRight.transform.position.y / (divider),
                     legBackRight.transform.position.y / (divider),
                     collisionAreaBackRight.transform.localScale.z
                     );
                 collisionAreaBackRight.transform.localScale = scale;
 
-                scale = new Vector3(
+                scale = new(
                     legBackLeft.transform.position.y / (divider),
                     legBackLeft.transform.position.y / (divider),
                     collisionAreaBackLeft.transform.localScale.z
@@ -170,7 +171,7 @@ public class BossMov : MonoBehaviour
         }
     }
 
-    void SwitchActiveColliders()
+    public void SwitchActiveColliders()
     {
         float legSpeed = 0.48f + legsDestroyed * 0.18f;
         if (collisionAreaBackLeft.activeSelf)
@@ -213,7 +214,7 @@ public class BossMov : MonoBehaviour
             PlaySoundLeg(legFrontRightAudio, SoundTypeEscargotree.LegRising, 3.5f - legSpeed);
         }
     }
-    void ResetAttackPattern()
+    public void ResetAttackPattern()
     {
         collisionAreaFrontLeft.SetActive(true);
         collisionAreaFrontRight.SetActive(false);
@@ -221,7 +222,7 @@ public class BossMov : MonoBehaviour
         collisionAreaBackLeft.SetActive(false);
     }
 
-    void SpawnShockwave()
+    public void SpawnShockwave()
     {
         if (!collisionAreaBackLeft.activeSelf)
         {
@@ -260,7 +261,7 @@ public class BossMov : MonoBehaviour
         }
     }
 
-    void SwitchDown()
+    public void SwitchDown()
     {
         isDown = !isDown;
     }
@@ -312,5 +313,10 @@ public class BossMov : MonoBehaviour
                 break;
         }
         source.PlayDelayed(delayTime);
+    }
+
+    public void SwitchToSecondCam()
+    {
+        if (!switchToSecondCam) switchToSecondCam = true;
     }
 }

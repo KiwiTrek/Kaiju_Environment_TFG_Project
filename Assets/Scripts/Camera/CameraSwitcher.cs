@@ -80,9 +80,12 @@ public class CameraSwitcher : MonoBehaviour
                     if (levelCam != null) { levelCam.enabled = false; }
                     if (legCam != null) { legCam.enabled = false; }
                     if (bossCam != null) { bossCam.enabled = true; }
-                    foreach (var m in materialsToCull)
+                    if (GameplayDirector.cutsceneMode == CutsceneType.None)
                     {
-                        m.SetFloat(SizeId, size);
+                        foreach (var m in materialsToCull)
+                        {
+                            m.SetFloat(SizeId, size);
+                        }
                     }
                     break;
                 }

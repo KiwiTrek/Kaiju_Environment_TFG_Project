@@ -26,7 +26,7 @@ public class BossHitbox : MonoBehaviour
     public int maxLives = 12;
     public int currentHits = 0;
     float timerHit = 0.0f;
-    float maxHitTime = 0.15f;
+    readonly float maxHitTime = 0.15f;
     void Start()
     {
         timerHit = maxHitTime;
@@ -39,8 +39,7 @@ public class BossHitbox : MonoBehaviour
         {
             if (isDummy)
             {
-                Quaternion rotation = this.transform.rotation;
-                rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.Euler(-90.0f, -230.0f, 0.0f), Time.deltaTime * speedDummy);
+                Quaternion rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(-90.0f, -230.0f, 0.0f), Time.deltaTime * speedDummy);
                 this.transform.rotation = rotation;
             }
             this.hitbox.enabled = false;
@@ -75,7 +74,7 @@ public class BossHitbox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Sword")
+        if (other.gameObject.CompareTag("Sword"))
         {
             Hit();
         }

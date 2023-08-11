@@ -40,7 +40,7 @@ public class MinionBehaviour : MonoBehaviour
         for (int i = 0; i < player.transform.childCount; i++)
         {
             GameObject tmp = player.transform.GetChild(i).gameObject;
-            if (tmp.tag == "Target")
+            if (tmp.CompareTag("Target"))
             {
                 Debug.Log("Found target");
                 target = tmp;
@@ -59,7 +59,7 @@ public class MinionBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!stop)
+        if (!stop && GameplayDirector.cutsceneMode == CutsceneType.None)
         {
             if (target == null)
             {
@@ -73,7 +73,7 @@ public class MinionBehaviour : MonoBehaviour
             {
                 Quaternion toRotation = Quaternion.LookRotation(direction);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, turnSpeed * Time.deltaTime);
-                transform.position += transform.forward * velocity * multiplier * Time.deltaTime;
+                transform.position += multiplier * Time.deltaTime * velocity * transform.forward;
                 velocity = (maxVelocity * (Vector3.Distance(this.transform.position, target.transform.position) / 12)) + 3.0f;
                 if (animator != null)
                 {
@@ -83,7 +83,7 @@ public class MinionBehaviour : MonoBehaviour
             else
             {
                 velocity = maxVelocity + 3.0f;
-                transform.position += transform.forward * velocity * Time.deltaTime;
+                transform.position += Time.deltaTime * velocity * transform.forward;
                 if (!canFollow)
                 {
                     if (reverse)

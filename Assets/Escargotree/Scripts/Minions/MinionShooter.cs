@@ -45,7 +45,7 @@ public class MinionShooter : MonoBehaviour
                 SpawnMinion();
             }
         }
-        else
+        else if (GameplayDirector.cutsceneMode == CutsceneType.None)
         {
             frequency += Time.deltaTime;
             if (frequency >= maxFrequencyOfUpdate)

@@ -12,15 +12,11 @@ public class SimpleCollectibleScript : MonoBehaviour
 
 	bool picked = false;
 	float timer = 0.0f;
-
-	// Use this for initialization
-	void Start ()
-	{}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		if (rotate) transform.Rotate (Vector3.up * rotationSpeed * Time.deltaTime, Space.World);
+		if (rotate) transform.Rotate (rotationSpeed * Time.deltaTime * Vector3.up, Space.World);
 		if (picked)
 		{
 			timer += Time.deltaTime;
@@ -33,7 +29,7 @@ public class SimpleCollectibleScript : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.tag == "Player") Collect (other.gameObject.GetComponent<CharacterLives>());
+		if (other.CompareTag("Player")) Collect (other.gameObject.GetComponent<CharacterLives>());
 	}
 
 	public void Collect(CharacterLives t)

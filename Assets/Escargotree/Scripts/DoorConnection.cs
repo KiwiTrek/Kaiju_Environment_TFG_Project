@@ -12,15 +12,13 @@ public class DoorConnection : MonoBehaviour
     public GameObject spawnVFX;
     public GameObject keyVFX;
     public AudioSource keyAudio;
+    public AudioSource doorAudio;
+
+    public bool hasCutscene;
+    public bool activateCutscene;
 
     float timer = 0.0f;
     bool picked = false;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -36,7 +34,7 @@ public class DoorConnection : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Sword")
+        if (other.CompareTag("Sword"))
         {
             foreach (GameObject go in keyMeshes)
             {
@@ -50,15 +48,29 @@ public class DoorConnection : MonoBehaviour
             GameObject vfx = Instantiate(keyVFX, spawnVFX.transform);
             Destroy(vfx, 0.5f);
 
-            ActivateDoors(doors);
+            if (!hasCutscene)
+            {
+                ActivateDoors(doors);
+            }
+            else
+            {
+                activateCutscene = true;
+            }
         }
     }
 
-    private void ActivateDoors(List<GameObject> doors)
+    public void ActivateDoors(List<GameObject> doors)
     {
         foreach(GameObject door in doors)
         {
-            door.GetComponent<MeshCollider>().enabled = false;
+            if (door.GetComponent<MeshCollider>().enabled)
+            {
+                door.GetComponent<MeshCollider>().enabled = false;
+                if (door.TryGetComponent(out AudioSource source))
+                {
+                    source.Play();
+                }
+            }
             if (door.GetComponent<BoxCollider>() != null)
             {
                 door.GetComponent<BoxCollider>().enabled = true;

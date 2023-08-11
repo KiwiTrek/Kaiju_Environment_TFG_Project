@@ -33,7 +33,7 @@ public class BossSubBehaviour : MonoBehaviour
     [Header("Parameters")]
     [Range(1.0f, 50.0f)]
     public float speed = 1.0f;
-    public Vector2 timeBeforeStrikeRange = new Vector2(0.0f, 1.0f);
+    public Vector2 timeBeforeStrikeRange = new(0.0f, 1.0f);
     public float timeStunned = 5.0f;
     public float sizeReduce = 200.0f;
     public float distanceBeforeImpact = 2.35f;
@@ -71,7 +71,7 @@ public class BossSubBehaviour : MonoBehaviour
     float currentTimeStrike = 0.0f;
     float currentTimeStuck = 0.0f;
     float currentTimeInvulnerable = 0.0f;
-    float timeBetweenBirds = 0.5f;
+    readonly float timeBetweenBirds = 0.5f;
     int numberThrust = 0;
     InvulnerablePhase invulnerablePhase = InvulnerablePhase.Thrusting;
     void Start()
@@ -79,6 +79,7 @@ public class BossSubBehaviour : MonoBehaviour
         initialPosition = transform.position;
         timeBeforeStrike = Random.Range(timeBeforeStrikeRange.x, timeBeforeStrikeRange.y);
         status = BossStatus.Idle;
+        healthBarUI.SetActive(false);
     }
 
     // Update is called once per frame
@@ -121,38 +122,45 @@ public class BossSubBehaviour : MonoBehaviour
             return;
         }
 
-        healthBarUI.SetActive(true);
-        switch (status)
+        if (GameplayDirector.cutsceneMode == CutsceneType.None)
         {
-            case BossStatus.Idle:
-                {
-                    IdleState();
-                }
-                break;
-            case BossStatus.Thrust:
-                {
-                    ThrustState();
-                }
-                break;
-            case BossStatus.Stuck:
-                {
-                    StuckState();
-                }
-                break;
-            case BossStatus.Invulnerable:
-                {
-                    if (minionAttackType)
+            healthBarUI.SetActive(true);
+            switch (status)
+            {
+                case BossStatus.Idle:
                     {
-                        MinionState();
+                        IdleState();
                     }
-                    else
+                    break;
+                case BossStatus.Thrust:
                     {
-                        InvulnerableState();
+                        ThrustState();
                     }
-                }
-                break;
-            default:
-                break;
+                    break;
+                case BossStatus.Stuck:
+                    {
+                        StuckState();
+                    }
+                    break;
+                case BossStatus.Invulnerable:
+                    {
+                        if (minionAttackType)
+                        {
+                            MinionState();
+                        }
+                        else
+                        {
+                            InvulnerableState();
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+        else
+        {
+            healthBarUI.SetActive(false);
         }
     }
 
@@ -164,7 +172,7 @@ public class BossSubBehaviour : MonoBehaviour
 
         preemptiveShadow.SetActive(true);
         preemptiveShadow.transform.position = playerTarget.transform.position;
-        Vector3 positionCorrector = new Vector3(preemptiveShadow.transform.localPosition.x, height, preemptiveShadow.transform.localPosition.z);
+        Vector3 positionCorrector = new(preemptiveShadow.transform.localPosition.x, height, preemptiveShadow.transform.localPosition.z);
         preemptiveShadow.transform.localPosition = positionCorrector;
 
         transform.LookAt(preemptiveShadow.transform.position);
@@ -176,7 +184,7 @@ public class BossSubBehaviour : MonoBehaviour
             if (Time.timeScale > 0.0f)
             {
                 transform.position = Vector3.MoveTowards(transform.position, initialPosition - (this.transform.forward * 2.0f), Time.deltaTime * 2.5f);
-                Vector3 scale = new Vector3
+                Vector3 scale = new
                     ((Mathf.Sin(currentAngle) / sizeReduce) + preemptiveShadow.transform.localScale.x,
                     (Mathf.Sin(currentAngle) / sizeReduce) + preemptiveShadow.transform.localScale.y,
                     preemptiveShadow.transform.localScale.z);
@@ -265,8 +273,9 @@ public class BossSubBehaviour : MonoBehaviour
             Quaternion finalRotation = Quaternion.LookRotation(Vector3.down, Vector3.forward);
             SwitchAnimation(CurrentAnimation.Struggling);
             Debug.Log(Mathf.Abs(Mathf.Cos(Quaternion.Angle(currentRotation, finalRotation) * Mathf.Deg2Rad)));
-            transform.position = Vector3.Lerp(transform.position, new Vector3(thrustObjective.x, thrustObjective.y - (Mathf.Abs(Mathf.Cos(Quaternion.Angle(currentRotation, finalRotation) * Mathf.Deg2Rad)) * 1.3f) + 2.15f, thrustObjective.z), timeCountStruggle * 0.65f);
-            transform.rotation = Quaternion.Lerp(currentRotation, finalRotation, timeCountStruggle * 0.65f);
+            transform.SetPositionAndRotation(
+                Vector3.Lerp(transform.position, new Vector3(thrustObjective.x, thrustObjective.y - (Mathf.Abs(Mathf.Cos(Quaternion.Angle(currentRotation, finalRotation) * Mathf.Deg2Rad)) * 1.3f) + 2.15f, thrustObjective.z), timeCountStruggle * 0.65f),
+                Quaternion.Lerp(currentRotation, finalRotation, timeCountStruggle * 0.65f));
             timeCountStruggle += Time.deltaTime;
         }
     }
@@ -320,7 +329,7 @@ public class BossSubBehaviour : MonoBehaviour
                         {
                             preemptiveShadow.SetActive(true);
                             preemptiveShadow.transform.position = playerTarget.transform.position;
-                            Vector3 positionCorrector = new Vector3(preemptiveShadow.transform.localPosition.x, height2, preemptiveShadow.transform.localPosition.z);
+                            Vector3 positionCorrector = new(preemptiveShadow.transform.localPosition.x, height2, preemptiveShadow.transform.localPosition.z);
                             preemptiveShadow.transform.localPosition = positionCorrector;
 
                             thrustObjective = preemptiveShadow.transform.position;
@@ -415,7 +424,7 @@ public class BossSubBehaviour : MonoBehaviour
         Destroy(birdVFX, 0.6f);
     }
 
-    void SwitchAnimation(CurrentAnimation animation)
+    public void SwitchAnimation(CurrentAnimation animation)
     {
         animator.SetInteger("currentAnimation", (int)animation);
     }

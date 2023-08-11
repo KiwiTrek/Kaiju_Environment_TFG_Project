@@ -28,7 +28,7 @@ public class ShockwaveBehaviour : MonoBehaviour
     }
     public void Update()
     {
-        if (expand)
+        if (expand || GameplayDirector.cutsceneMode == CutsceneType.None)
         {
             lifeTimeRemaining += Time.deltaTime;
 
@@ -38,7 +38,7 @@ public class ShockwaveBehaviour : MonoBehaviour
 
                 if (Time.timeScale > 0.0f)
                 {
-                    Vector3 scale = new Vector3(
+                    Vector3 scale = new(
                         currentSize,
                         currentSize,
                         transform.parent.localScale.z + currentSize * (finalHeightMultiplier / 100.0f)
@@ -55,7 +55,7 @@ public class ShockwaveBehaviour : MonoBehaviour
         else
         {
             currentSize = lockedSize;
-            Vector3 scale = new Vector3(
+            Vector3 scale = new(
                 currentSize,
                 currentSize,
                 transform.parent.localScale.z
@@ -70,14 +70,13 @@ public class ShockwaveBehaviour : MonoBehaviour
         {
             if (canHurt)
             {
-                CharacterLives lives = other.gameObject.GetComponent<CharacterLives>();
-                if (lives != null)
+                if (other.gameObject.TryGetComponent(out CharacterLives lives))
                 {
                     lives.HitHard();
                 }
             }
 
-            if (other.gameObject.tag == "Player")
+            if (other.gameObject.CompareTag("Player"))
             {
                 Die();
             }

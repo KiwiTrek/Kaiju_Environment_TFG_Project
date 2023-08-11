@@ -7994,6 +7994,38 @@ MonoBehaviour:
   canvas: {fileID: 692959459019790769}
   healthBar: {fileID: 8477394202081704567}
   legsDestroyed: 0
+  switchToSecondCam: 0
+--- !u!1 &1326090096728130337
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5407731564036615362}
+  m_Layer: 0
+  m_Name: TargetDoor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5407731564036615362
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326090096728130337}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4463998463262411351}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1332268485996134570
 GameObject:
   m_ObjectHideFlags: 0
@@ -19809,6 +19841,9 @@ MonoBehaviour:
   spawnVFX: {fileID: 0}
   keyVFX: {fileID: 0}
   keyAudio: {fileID: 0}
+  doorAudio: {fileID: 0}
+  hasCutscene: 0
+  activateCutscene: 0
 --- !u!64 &3263637643044019202
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -20024,6 +20059,7 @@ MonoBehaviour:
   player: {fileID: 0}
   hitbox: {fileID: 3263637643051924970}
   isDummy: 0
+  speedDummy: 1
   maxLives: 24
   currentHits: 0
 --- !u!82 &2080952420992699621
@@ -24212,6 +24248,9 @@ MonoBehaviour:
   spawnVFX: {fileID: 0}
   keyVFX: {fileID: 0}
   keyAudio: {fileID: 0}
+  doorAudio: {fileID: 0}
+  hasCutscene: 0
+  activateCutscene: 0
 --- !u!1 &3263637643745868175
 GameObject:
   m_ObjectHideFlags: 0
@@ -25653,6 +25692,7 @@ MonoBehaviour:
   player: {fileID: 0}
   hitbox: {fileID: 3263637643923492844}
   isDummy: 0
+  speedDummy: 1
   maxLives: 24
   currentHits: 0
 --- !u!82 &489335982741586562
@@ -28522,6 +28562,9 @@ MonoBehaviour:
   spawnVFX: {fileID: 0}
   keyVFX: {fileID: 0}
   keyAudio: {fileID: 0}
+  doorAudio: {fileID: 0}
+  hasCutscene: 0
+  activateCutscene: 0
 --- !u!1 &3263637644494913642
 GameObject:
   m_ObjectHideFlags: 0
@@ -30013,6 +30056,7 @@ MonoBehaviour:
   player: {fileID: 0}
   hitbox: {fileID: 3263637644786931700}
   isDummy: 0
+  speedDummy: 1
   maxLives: 24
   currentHits: 0
 --- !u!82 &4764517888162846741
@@ -35182,6 +35226,37 @@ Transform:
   m_Children:
   - {fileID: 4127748846648759511}
   m_Father: {fileID: 8682045527765882789}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4189043428283865331
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4629572792409695629}
+  m_Layer: 0
+  m_Name: StartPositionBoss
+  m_TagString: Checkpoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4629572792409695629
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4189043428283865331}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.5641, y: 0.0824, z: -0.0001}
+  m_LocalScale: {x: 0.03453923, y: 0.03453923, z: 0.03453923}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1068925277886910014}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4193114951130848120
 GameObject:
@@ -40492,6 +40567,7 @@ Transform:
   - {fileID: 3165421978058394577}
   - {fileID: 6627295862801117112}
   - {fileID: 137638553561370865}
+  - {fileID: 4629572792409695629}
   m_Father: {fileID: 3038686620796027639}
   m_LocalEulerAnglesHint: {x: 0.004930751, y: 0.003415803, z: 56.58892}
 --- !u!1 &5127664234590396370
@@ -64415,6 +64491,10 @@ PrefabInstance:
       propertyPath: keyVFX
       value: 
       objectReference: {fileID: 568770921219004055, guid: 85b634a657d14884e82517eb88caf769, type: 3}
+    - target: {fileID: 7005425246267603554, guid: 43dc832fd91fc3044b6c4c84a90019f4, type: 3}
+      propertyPath: hasCutscene
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7005425247571986593, guid: 43dc832fd91fc3044b6c4c84a90019f4, type: 3}
       propertyPath: m_Name
       value: Door (1)
@@ -64589,9 +64669,17 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: fe1bdf437d0479b4fa0ede9a231e5857, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1205148128416002124, guid: 43dc832fd91fc3044b6c4c84a90019f4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5407731564036615362}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43dc832fd91fc3044b6c4c84a90019f4, type: 3}
+--- !u!4 &4463998463262411351 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1205148128416002124, guid: 43dc832fd91fc3044b6c4c84a90019f4, type: 3}
+  m_PrefabInstance: {fileID: 3263637643079137819}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5508606031799692150 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7005425245921055085, guid: 43dc832fd91fc3044b6c4c84a90019f4, type: 3}
