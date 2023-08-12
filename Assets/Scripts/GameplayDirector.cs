@@ -31,7 +31,7 @@ public class GameplayDirector : MonoBehaviour
     public Image noticeMe = null;
     public float maxTimeNoticeMe = 2.0f;
     public float betweenTimeNoticeMe = 0.25f;
-    float timer = 0.0f;
+    float timerNoticeMe = 0.0f;
     float timerBetween = 0.0f;
     public TMP_Text prevText = null;
 
@@ -41,22 +41,30 @@ public class GameplayDirector : MonoBehaviour
     public static CutsceneType cutsceneMode = CutsceneType.None;
 
     [Space(5)]
-    float timerFirstCutscene = 0.0f;
-    public GameObject camFirstPhase1 = null;
-    public GameObject camFirstPhase2 = null;
+    public GameObject camIntro1 = null;
+    public GameObject camIntro2 = null;
+    CinemachineVirtualCamera camIntroScript2 = null;
+    CinemachineBasicMultiChannelPerlin camIntroNoise2 = null;
+    public Transform playerPosition = null;
+    float timerBossIntro = 0.0f;
 
     [Space(5)]
-    float timerDoorCutscene = 0.0f;
+    public GameObject camFirstPhase1 = null;
+    public GameObject camFirstPhase2 = null;
+    float timerFirstCutscene = 0.0f;
+
+    [Space(5)]
     public GameObject camDoorPhase = null;
     CinemachineVirtualCamera camDoorScript = null;
     CinemachineTrackedDolly camDoorDolly = null;
     public DoorConnection doorFirstCutscene = null;
+    float timerDoorCutscene = 0.0f;
 
     [Space(5)]
-    float timerBirdTantrum = 0.0f;
     public GameObject camBirdBoss = null;
     CinemachineVirtualCamera camBirdScript = null;
     CinemachineTrackedDolly camBirdDolly = null;
+    float timerBirdTantrum = 0.0f;
 
 
     [Space]
@@ -92,11 +100,14 @@ public class GameplayDirector : MonoBehaviour
         camDoorDolly = camDoorScript.GetCinemachineComponent<CinemachineTrackedDolly>();
         camBirdScript = camBirdBoss.GetComponent<CinemachineVirtualCamera>();
         camBirdDolly = camBirdScript.GetCinemachineComponent<CinemachineTrackedDolly>();
+        camIntroScript2 = camIntro2.GetComponent<CinemachineVirtualCamera>();
+        camIntroNoise2 = camIntroScript2.GetComponentInChildren<CinemachineBasicMultiChannelPerlin>();
         bossSubBehaviour = victoryChecker.GetComponent<BossSubBehaviour>();
-        timer = -0.5f;
+        timerNoticeMe = -0.5f;
         timerBetween = 0.0f;
         timerFirstCutscene = 0.0f;
         timerDoorCutscene = 0.0f;
+        timerBossIntro = 0.0f;
     }
 
     // Update is called once per frame
@@ -126,14 +137,14 @@ public class GameplayDirector : MonoBehaviour
 
         if (cutsceneMode == CutsceneType.None)
         {
-            if (timer < maxTimeNoticeMe)
+            if (timerNoticeMe < maxTimeNoticeMe)
             {
-                timer += Time.deltaTime;
+                timerNoticeMe += Time.deltaTime;
                 timerBetween += Time.deltaTime;
                 if (timerBetween >= betweenTimeNoticeMe)
                 {
                     timerBetween = 0.0f;
-                    Debug.Log("Hey! Listen! Timer: " + timer);
+                    Debug.Log("Hey! Listen! Timer: " + timerNoticeMe);
                     if (!noticeMe.enabled)
                     {
                         noticeMeAudio.Play();
@@ -143,7 +154,7 @@ public class GameplayDirector : MonoBehaviour
             }
             else
             {
-                timer = maxTimeNoticeMe;
+                timerNoticeMe = maxTimeNoticeMe;
                 timerBetween = 0.0f;
                 noticeMe.enabled = false;
             }
@@ -156,6 +167,11 @@ public class GameplayDirector : MonoBehaviour
             if (prevText.text == "Current objective: \nTumble it down!")
             {
                 //Intro Cutscene
+                cutsceneMode = CutsceneType.BossIntro;
+                Vector3 euler = bossMov.transform.eulerAngles;
+                euler.y -= 180.0f;
+                bossMov.transform.eulerAngles = euler;
+                music.Pause();
                 chanChan.Play();
             }
             else if (prevText.text == "Current objective: \nClimb to the top!")
@@ -170,7 +186,7 @@ public class GameplayDirector : MonoBehaviour
                 music.Pause();
                 chanChan.Play();
             }
-            timer = 0.0f;
+            timerNoticeMe = 0.0f;
         }
 
         if (cutsceneMode == CutsceneType.None)
@@ -186,7 +202,6 @@ public class GameplayDirector : MonoBehaviour
         {
             missionText.text = "Current objective: \nTumble it down!";
             music.clip = first;
-            bossMov.canvas.SetActive(true);
         }
 
         if (bossMov.legsDestroyed >= 3 || bossMov.isDown)
@@ -243,21 +258,51 @@ public class GameplayDirector : MonoBehaviour
             case CutsceneType.None:
                 break;
             case CutsceneType.BossIntro:
-                music.Stop();
-                break;
+                {
+                    if (bossMov.switchToSecondCam)
+                    {
+                        camIntro1.SetActive(false);
+                        camIntro2.SetActive(true);
+                        camIntroNoise2.m_AmplitudeGain -= Time.deltaTime * 5.0f;
+                        if (camIntroNoise2.m_AmplitudeGain <= 0)
+                        {
+                            camIntroNoise2.m_AmplitudeGain = 0;
+                        }
+                        timerBossIntro += Time.deltaTime;
+                        if (timerBossIntro >= 3.0f)
+                        {
+                            cutsceneMode = CutsceneType.None;
+                            bossMov.canvas.SetActive(true);
+                            bossMov.animator.SetInteger("cutsceneId", 0);
+                            camIntro1.SetActive(false);
+                            camIntro2.SetActive(false);
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        bossMov.animator.SetInteger("cutsceneId", 1);
+                        camIntro1.SetActive(true);
+                        camIntro2.SetActive(false);
+                    }
+                    break;
+                }
             case CutsceneType.BossFirstPhaseEnd:
                 {
+                    music.Pause();
                     if (bossMov.switchToSecondCam)
                     {
                         camFirstPhase1.SetActive(false);
                         camFirstPhase2.SetActive(true);
                         timerFirstCutscene += Time.deltaTime;
-                        if (timerFirstCutscene >= 5.0f)
+                        if (timerFirstCutscene >= 3.0f)
                         {
                             camFirstPhase1.SetActive(false);
                             camFirstPhase2.SetActive(false);
                             timerFirstCutscene = 5.0f;
                             cutsceneMode = CutsceneType.None;
+                            music.Play();
+                            break;
                         }
                     }
                     else
@@ -310,7 +355,7 @@ public class GameplayDirector : MonoBehaviour
                         compilator.EndSession(DateTime.Now);
                     }
                     Debug.Log("You win!");
-                    SceneManager.LoadScene(1);
+                    SceneManager.LoadScene("CreditsScene", LoadSceneMode.Single);
 
                     break;
                 }

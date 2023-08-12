@@ -31,6 +31,7 @@ public class BossSubBehaviour : MonoBehaviour
 {
     // Start is called before the first frame update
     [Header("Parameters")]
+    public Transform initialPosition = null;
     [Range(1.0f, 50.0f)]
     public float speed = 1.0f;
     public Vector2 timeBeforeStrikeRange = new(0.0f, 1.0f);
@@ -63,7 +64,6 @@ public class BossSubBehaviour : MonoBehaviour
     public bool canReturn = false;
     float timeBeforeStrike = 0.0f;
     bool minionAttackType = true;
-    Vector3 initialPosition = Vector3.zero;
     Vector3 thrustObjective = Vector3.zero;
     Quaternion currentRotation = Quaternion.identity;
     float timeCountStruggle = 0.0f;
@@ -76,7 +76,6 @@ public class BossSubBehaviour : MonoBehaviour
     InvulnerablePhase invulnerablePhase = InvulnerablePhase.Thrusting;
     void Start()
     {
-        initialPosition = transform.position;
         timeBeforeStrike = Random.Range(timeBeforeStrikeRange.x, timeBeforeStrikeRange.y);
         status = BossStatus.Idle;
         healthBarUI.SetActive(false);
@@ -87,21 +86,16 @@ public class BossSubBehaviour : MonoBehaviour
     {
         if (!bossCamera.enabled)
         {
-            if (!mainBoss.isDown)
-            {
-                initialPosition = transform.position;
-            }
             status = BossStatus.Idle;
             SwitchAnimation(CurrentAnimation.Idle);
             preemptiveShadow.SetActive(false);
-            if (Vector3.Distance(transform.position, initialPosition) >= 0.01f)
+            if (Vector3.Distance(transform.position, initialPosition.position) >= 0.01f)
             {
                 transform.LookAt(initialPosition);
-                transform.position = Vector3.MoveTowards(transform.position, initialPosition, Time.deltaTime * speed / 1.5f);
+                transform.position = Vector3.MoveTowards(transform.position, initialPosition.position, Time.deltaTime * speed / 1.5f);
             }
             else
             {
-                initialPosition = transform.position;
                 transform.LookAt(playerTarget.transform.position);
             }
             box.enabled = false;
@@ -183,7 +177,7 @@ public class BossSubBehaviour : MonoBehaviour
             currentAngle += Time.deltaTime * 10.0f;
             if (Time.timeScale > 0.0f)
             {
-                transform.position = Vector3.MoveTowards(transform.position, initialPosition - (this.transform.forward * 2.0f), Time.deltaTime * 2.5f);
+                transform.position = Vector3.MoveTowards(transform.position, initialPosition.position - (this.transform.forward * 2.0f), Time.deltaTime * 2.5f);
                 Vector3 scale = new
                     ((Mathf.Sin(currentAngle) / sizeReduce) + preemptiveShadow.transform.localScale.x,
                     (Mathf.Sin(currentAngle) / sizeReduce) + preemptiveShadow.transform.localScale.y,
@@ -251,9 +245,9 @@ public class BossSubBehaviour : MonoBehaviour
             SwitchAnimation(CurrentAnimation.Release);
             if (canReturn)
             {
-                if (Vector3.Distance(transform.position, initialPosition) >= 0.01f)
+                if (Vector3.Distance(transform.position, initialPosition.position) >= 0.01f)
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, initialPosition, Time.deltaTime * speed / 1.5f);
+                    transform.position = Vector3.MoveTowards(transform.position, initialPosition.position, Time.deltaTime * speed / 1.5f);
                     transform.LookAt(thrustObjective);
                 }
                 else
@@ -288,6 +282,7 @@ public class BossSubBehaviour : MonoBehaviour
             SwitchAnimation(CurrentAnimation.Idle);
             status = BossStatus.Idle;
             currentTimeInvulnerable = 0.0f;
+            currentTimeStrike = 0.0f;
             numberThrust = 0;
             invulnerablePhase = InvulnerablePhase.Charging;
             preemptiveShadow.SetActive(false);
@@ -309,10 +304,10 @@ public class BossSubBehaviour : MonoBehaviour
                     {
                         SwitchAnimation(CurrentAnimation.Thrust);
                         motionVFX.SetActive(true);
-                        if (Vector3.Distance(transform.position, initialPosition) >= 0.01f)
+                        if (Vector3.Distance(transform.position, initialPosition.position) >= 0.01f)
                         {
                             transform.LookAt(initialPosition);
-                            transform.position = Vector3.MoveTowards(transform.position, initialPosition, Time.deltaTime * speed);
+                            transform.position = Vector3.MoveTowards(transform.position, initialPosition.position, Time.deltaTime * speed);
                         }
                         else
                         {
@@ -325,8 +320,9 @@ public class BossSubBehaviour : MonoBehaviour
                     {
                         SwitchAnimation(CurrentAnimation.Readying);
                         motionVFX.SetActive(false);
-                        if (Vector3.Distance(transform.position, initialPosition - (this.transform.forward * 2.0f)) >= 0.01f)
+                        if (currentTimeStrike <= 2.0f)
                         {
+                            currentTimeStrike += Time.deltaTime;
                             preemptiveShadow.SetActive(true);
                             preemptiveShadow.transform.position = playerTarget.transform.position;
                             Vector3 positionCorrector = new(preemptiveShadow.transform.localPosition.x, height2, preemptiveShadow.transform.localPosition.z);
@@ -334,12 +330,13 @@ public class BossSubBehaviour : MonoBehaviour
 
                             thrustObjective = preemptiveShadow.transform.position;
                             transform.LookAt(thrustObjective);
-                            transform.position = Vector3.MoveTowards(transform.position, initialPosition - (this.transform.forward * 2.0f), Time.deltaTime * 3.0f);
+                            transform.position = Vector3.MoveTowards(transform.position, initialPosition.position - (this.transform.forward * 2.0f), Time.deltaTime * 3.0f);
                         }
                         else
                         {
                             animationFunctions.PlaySound(SoundTypeBird.Thrust);
                             invulnerablePhase = InvulnerablePhase.Thrusting;
+                            currentTimeStrike = 0.0f;
                         }
                     }
                     break;

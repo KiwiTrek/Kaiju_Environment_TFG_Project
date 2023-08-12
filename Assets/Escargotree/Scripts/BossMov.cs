@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,6 +36,7 @@ public class BossMov : MonoBehaviour
     public GameObject legBackRight;
 
     [Space(10)]
+    public AudioSource cutsceneAudio;
     public AudioSource mouthSound;
     public AudioSource legFrontLeftAudio;
     public AudioSource legFrontRightAudio;
@@ -64,12 +66,28 @@ public class BossMov : MonoBehaviour
     public int legsDestroyed = 0;
     int isAttackingHash;
     int maxLives;
+
+    [Space(10)]
     public bool switchToSecondCam = false;
+    public GameObject camIntro2 = null;
+    CinemachineVirtualCamera camIntroScript2 = null;
+    CinemachineBasicMultiChannelPerlin camIntroNoise2 = null;
+    Vector3 angleFinal = new(0.0f,0.0f,0.0f);
 
     void Start()
     {
         isAttackingHash = Animator.StringToHash("isAttacking");
         maxLives = frontRightHitbox.maxLives + backLeftHitbox.maxLives + backRightHitbox.maxLives;
+
+        if (camIntro2 != null)
+        {
+            camIntroScript2 = camIntro2.GetComponent<CinemachineVirtualCamera>();
+            camIntroNoise2 = camIntroScript2.GetComponentInChildren<CinemachineBasicMultiChannelPerlin>();
+        }
+
+        Vector3 euler = transform.eulerAngles;
+        euler.y -= 180.0f;
+        angleFinal = euler;
     }
 
     // Update is called once per frame
@@ -83,6 +101,7 @@ public class BossMov : MonoBehaviour
             {
                 canvas.SetActive(true);
             }
+            transform.eulerAngles = angleFinal;
         }
 
         if (legsDestroyed < 3 && attacking)
@@ -98,7 +117,7 @@ public class BossMov : MonoBehaviour
             }
 
             legsDestroyed = animator.GetInteger("legsDestroyed");
-            if (Time.timeScale > 0)
+            if (Time.timeScale > 0 && GameplayDirector.cutsceneMode == CutsceneType.None)
             {
                 Vector3 scale = new(
                     legFrontLeft.transform.position.y / (divider),
@@ -128,6 +147,15 @@ public class BossMov : MonoBehaviour
                     );
                 collisionAreaBackLeft.transform.localScale = scale;
             }
+            else
+            {
+                Vector3 scale = new(0.01f, 0.01f, 0.0025f);
+                collisionAreaFrontLeft.transform.localScale = scale;
+                collisionAreaFrontRight.transform.localScale = scale;
+                collisionAreaBackRight.transform.localScale = scale;
+                collisionAreaBackLeft.transform.localScale = scale;
+            }
+
             int newValue = 0;
             if (frontRightHitbox.currentHits >= frontRightHitbox.maxLives)
             {
@@ -222,6 +250,14 @@ public class BossMov : MonoBehaviour
         collisionAreaBackLeft.SetActive(false);
     }
 
+    public void SetAllCollidersToTrue()
+    {
+        collisionAreaFrontLeft.SetActive(true);
+        collisionAreaFrontRight.SetActive(true);
+        collisionAreaBackRight.SetActive(true);
+        collisionAreaBackLeft.SetActive(true);
+    }
+
     public void SpawnShockwave()
     {
         if (!collisionAreaBackLeft.activeSelf)
@@ -260,6 +296,32 @@ public class BossMov : MonoBehaviour
             PlaySoundLeg(legFrontRightAudio, SoundTypeEscargotree.Explosion);
         }
     }
+    public void SpawnShockwaveLeg()
+    {
+        GameObject wave = Instantiate(shockwavePrefab, legBackLeft.transform.position + shockwavePrefab.transform.position, shockwavePrefab.transform.rotation);
+        wave.GetComponentInChildren<ShockwaveBehaviour>().finalHeightMultiplier = finalHeightMultiplier;
+        GameObject particles = Instantiate(shockwavePrefab2, legBackLeft.transform.position + shockwavePrefab2.transform.position, shockwavePrefab2.transform.rotation);
+        Destroy(particles, 1.5f);
+        PlaySoundLeg(legBackLeftAudio, SoundTypeEscargotree.Explosion);
+
+        wave = Instantiate(shockwavePrefab, legBackRight.transform.position + shockwavePrefab.transform.position, shockwavePrefab.transform.rotation);
+        wave.GetComponentInChildren<ShockwaveBehaviour>().finalHeightMultiplier = finalHeightMultiplier;
+        particles = Instantiate(shockwavePrefab2, legBackRight.transform.position + shockwavePrefab2.transform.position, shockwavePrefab2.transform.rotation);
+        Destroy(particles, 1.5f);
+        PlaySoundLeg(legBackRightAudio, SoundTypeEscargotree.Explosion);
+
+        wave = Instantiate(shockwavePrefab, legFrontLeft.transform.position + shockwavePrefab.transform.position, shockwavePrefab.transform.rotation);
+        wave.GetComponentInChildren<ShockwaveBehaviour>().finalHeightMultiplier = finalHeightMultiplier;
+        particles = Instantiate(shockwavePrefab2, legFrontLeft.transform.position + shockwavePrefab2.transform.position, shockwavePrefab2.transform.rotation);
+        Destroy(particles, 1.5f);
+        PlaySoundLeg(legFrontLeftAudio, SoundTypeEscargotree.Explosion);
+
+        wave = Instantiate(shockwavePrefab, legFrontRight.transform.position + shockwavePrefab.transform.position, shockwavePrefab.transform.rotation);
+        wave.GetComponentInChildren<ShockwaveBehaviour>().finalHeightMultiplier = finalHeightMultiplier;
+        particles = Instantiate(shockwavePrefab2, legFrontRight.transform.position + shockwavePrefab2.transform.position, shockwavePrefab2.transform.rotation);
+        Destroy(particles, 1.5f);
+        PlaySoundLeg(legFrontRightAudio, SoundTypeEscargotree.Explosion);
+    }
 
     public void SwitchDown()
     {
@@ -284,6 +346,7 @@ public class BossMov : MonoBehaviour
                 break;
             case SoundTypeEscargotree.LegDeath:
                 mouthSound.clip = legDeath[Random.Range(0, legDeath.Length)];
+                if (camIntroNoise2 != null) camIntroNoise2.m_AmplitudeGain = 5.0f;
                 break;
             default:
                 break;
@@ -315,8 +378,35 @@ public class BossMov : MonoBehaviour
         source.PlayDelayed(delayTime);
     }
 
+    public void PlaySoundCutscene(SoundTypeEscargotree type)
+    {
+        cutsceneAudio.pitch = Random.Range(0.95f, 1.1f);
+        switch (type)
+        {
+            case SoundTypeEscargotree.LegRising:
+                cutsceneAudio.pitch = Random.Range(0.90f, 1.1f);
+                cutsceneAudio.clip = legRising[Random.Range(0, legRising.Length)];
+                break;
+            case SoundTypeEscargotree.AboutToHit:
+                cutsceneAudio.clip = aboutToHit[Random.Range(0, aboutToHit.Length)];
+                break;
+            case SoundTypeEscargotree.Explosion:
+                cutsceneAudio.pitch = Random.Range(0.90f, 1.1f);
+                cutsceneAudio.clip = explosion[Random.Range(0, explosion.Length)];
+                break;
+            case SoundTypeEscargotree.LegDeath:
+                cutsceneAudio.clip = legDeath[Random.Range(0, legDeath.Length)];
+                if (camIntroNoise2 != null) camIntroNoise2.m_AmplitudeGain = 5.0f;
+                break;
+            default:
+                break;
+        }
+        cutsceneAudio.Play();
+    }
+
     public void SwitchToSecondCam()
     {
         if (!switchToSecondCam) switchToSecondCam = true;
+        else switchToSecondCam = false;
     }
 }

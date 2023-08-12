@@ -50,6 +50,7 @@ public class CharacterMov : MonoBehaviour {
     public Animator animator;
     public Transform groundChecker;
     public Transform jumpToTrunkFinalPos;
+    public Transform bossIntroPos;
     public Transform birdBossPos;
     public LayerMask groundMask;
     public LayerMask groundMask2;
@@ -160,9 +161,9 @@ public class CharacterMov : MonoBehaviour {
         if (GameplayDirector.cutsceneMode == CutsceneType.JumpToBoss)
         {
             controller.enabled = false;
-            this.transform.position = Vector3.MoveTowards(this.transform.position, jumpToTrunkFinalPos.position, Time.deltaTime * 10.0f);
+            transform.position = Vector3.MoveTowards(transform.position, jumpToTrunkFinalPos.position, Time.deltaTime * 10.0f);
             controller.enabled = true;
-            if (Vector3.Distance(this.transform.position, jumpToTrunkFinalPos.position) <= 0.1f || timerToSpareJump >= 4.0f)
+            if (Vector3.Distance(transform.position, jumpToTrunkFinalPos.position) <= 0.1f || timerToSpareJump >= 4.0f)
             {
                 GameplayDirector.cutsceneMode = CutsceneType.None;
             }
@@ -173,12 +174,27 @@ public class CharacterMov : MonoBehaviour {
             timerToSpareJump = 0.0f;
         }
 
-        if (GameplayDirector.cutsceneMode == CutsceneType.BirdIntro)
+        if (GameplayDirector.cutsceneMode == CutsceneType.BossIntro)
         {
             controller.enabled = false;
-            this.transform.position = birdBossPos.position;
+            transform.SetPositionAndRotation(bossIntroPos.position, bossIntroPos.rotation);
             controller.enabled = true;
+            animator.SetBool("forceIdle", true);
+            animator.SetBool("isMoving", false);
         }
+        else if (GameplayDirector.cutsceneMode == CutsceneType.BirdIntro)
+        {
+            controller.enabled = false;
+            transform.position = birdBossPos.position;
+            controller.enabled = true;
+            animator.SetBool("forceIdle", true);
+            animator.SetBool("isMoving", false);
+        }
+        else
+        {
+            animator.SetBool("forceIdle", false);
+        }
+
 
         verticalMov.y += gravity * Time.deltaTime;
         controller.Move(verticalMov * Time.deltaTime);
