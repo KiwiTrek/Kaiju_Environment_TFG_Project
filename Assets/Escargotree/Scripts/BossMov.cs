@@ -1,16 +1,15 @@
 using Cinemachine;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static Unity.VisualScripting.Member;
 
 public enum SoundTypeEscargotree
 {
     LegRising,
     AboutToHit,
     Explosion,
-    LegDeath
+    LegDeath,
+    WoodCreak
 }
 
 public class BossMov : MonoBehaviour
@@ -28,6 +27,7 @@ public class BossMov : MonoBehaviour
     public AudioClip[] aboutToHit = null;
     public AudioClip[] explosion = null;
     public AudioClip[] legDeath = null;
+    public AudioClip woodCreakSingle = null;
 
     [Header("Components")]
     public GameObject legFrontLeft;
@@ -398,6 +398,9 @@ public class BossMov : MonoBehaviour
                 cutsceneAudio.clip = legDeath[Random.Range(0, legDeath.Length)];
                 if (camIntroNoise2 != null) camIntroNoise2.m_AmplitudeGain = 5.0f;
                 break;
+            case SoundTypeEscargotree.WoodCreak:
+                cutsceneAudio.clip = woodCreakSingle;
+                break;
             default:
                 break;
         }
@@ -408,5 +411,7 @@ public class BossMov : MonoBehaviour
     {
         if (!switchToSecondCam) switchToSecondCam = true;
         else switchToSecondCam = false;
+
+        Debug.Log("SwitchCam: " + switchToSecondCam);
     }
 }

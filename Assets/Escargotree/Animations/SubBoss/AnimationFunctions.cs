@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AnimationFunctions : MonoBehaviour
@@ -24,6 +22,10 @@ public class AnimationFunctions : MonoBehaviour
     public AudioClip[] eggPopSFX = null;
     public AudioClip shockwaveSFX = null;
     public AudioClip thrustSFX = null;
+
+    [Space]
+    public bool gravity = false;
+    public bool startFadeOutDeath = false;
 
     public void ReturnToInitial()
     {
@@ -121,5 +123,15 @@ public class AnimationFunctions : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void GoDownDeath()
+    {
+        gravity = true;
+    }
+
+    public void StartFadeOut()
+    {
+        startFadeOutDeath = true;
     }
 }

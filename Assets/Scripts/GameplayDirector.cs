@@ -1,7 +1,5 @@
 using Cinemachine;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -66,6 +64,12 @@ public class GameplayDirector : MonoBehaviour
     CinemachineTrackedDolly camBirdDolly = null;
     float timerBirdTantrum = 0.0f;
 
+    [Space(5)]
+    public GameObject camBirdDeath = null;
+    public Image fadeToBlack = null;
+    public float timeBirdDeath = 5.0f;
+    float currentTimerBirdDeath = 0.0f;
+    bool startFadeOut = false;
 
     [Space]
     [Header("Music")]
@@ -144,7 +148,6 @@ public class GameplayDirector : MonoBehaviour
                 if (timerBetween >= betweenTimeNoticeMe)
                 {
                     timerBetween = 0.0f;
-                    Debug.Log("Hey! Listen! Timer: " + timerNoticeMe);
                     if (!noticeMe.enabled)
                     {
                         noticeMeAudio.Play();
@@ -263,13 +266,13 @@ public class GameplayDirector : MonoBehaviour
                     {
                         camIntro1.SetActive(false);
                         camIntro2.SetActive(true);
-                        camIntroNoise2.m_AmplitudeGain -= Time.deltaTime * 5.0f;
+                        camIntroNoise2.m_AmplitudeGain -= Time.deltaTime * 3.0f;
                         if (camIntroNoise2.m_AmplitudeGain <= 0)
                         {
                             camIntroNoise2.m_AmplitudeGain = 0;
                         }
                         timerBossIntro += Time.deltaTime;
-                        if (timerBossIntro >= 3.0f)
+                        if (timerBossIntro >= 3.85f)
                         {
                             cutsceneMode = CutsceneType.None;
                             bossMov.canvas.SetActive(true);
@@ -292,6 +295,10 @@ public class GameplayDirector : MonoBehaviour
                     music.Pause();
                     if (bossMov.switchToSecondCam)
                     {
+                        if (timerFirstCutscene <= 0)
+                        {
+                            music.Play();
+                        }
                         camFirstPhase1.SetActive(false);
                         camFirstPhase2.SetActive(true);
                         timerFirstCutscene += Time.deltaTime;
@@ -301,7 +308,6 @@ public class GameplayDirector : MonoBehaviour
                             camFirstPhase2.SetActive(false);
                             timerFirstCutscene = 5.0f;
                             cutsceneMode = CutsceneType.None;
-                            music.Play();
                             break;
                         }
                     }
@@ -345,18 +351,32 @@ public class GameplayDirector : MonoBehaviour
                     {
                         camBirdBoss.SetActive(false);
                         cutsceneMode = CutsceneType.None;
+                        music.Play();
                     }
                     break;
                 }
             case CutsceneType.BirdEnd:
                 {
-                    if (compilator != null)
+                    music.Stop();
+                    camBirdDeath.SetActive(true);
+                    startFadeOut = victoryChecker.animationFunctions.startFadeOutDeath;
+                    if (startFadeOut)
                     {
-                        compilator.EndSession(DateTime.Now);
-                    }
-                    Debug.Log("You win!");
-                    SceneManager.LoadScene("CreditsScene", LoadSceneMode.Single);
+                        currentTimerBirdDeath += Time.deltaTime;
+                        Color tmp = fadeToBlack.color;
+                        tmp.a = currentTimerBirdDeath / timeBirdDeath;
+                        fadeToBlack.color = tmp;
 
+                        if (currentTimerBirdDeath >= timeBirdDeath)
+                        {
+                            if (compilator != null)
+                            {
+                                compilator.EndSession(DateTime.Now);
+                            }
+                            Debug.Log("You win!");
+                            SceneManager.LoadScene("CreditsScene", LoadSceneMode.Single);
+                        }
+                    }
                     break;
                 }
             default:

@@ -6,12 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/TitleScreen.unity
+    guid: e7fa948e2a4492c46a838775074ea1d3
+  - enabled: 1
     path: Assets/Scenes/Final/destroyed_city.unity
     guid: 4b04375b845f3d642bd1734c7ef561ae
+  - enabled: 1
+    path: Assets/Scenes/CreditsScene.unity
+    guid: da5e65515e54a9c45b0b8a00a25cf87e
   - enabled: 0
     path: Assets/Scenes/Session1/Playtesting/destroyed_city.unity
     guid: e2e9d5ed6e0e18242a324943827241e3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/VictoryScreen.unity
     guid: 0a81697cb3534fb43ae6e14749885fd8
   m_configObjects: {}

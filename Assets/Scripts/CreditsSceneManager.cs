@@ -10,10 +10,10 @@ public class CreditsSceneManager : MonoBehaviour
 	[SerializeField] private Vector2 mousePosition = Vector2.zero;
 	[SerializeField] private RectTransform credits;
 	[SerializeField] private float finalPositionY = 2900.0f;
-
-	private void OnEnable()
+    private void OnEnable()
 	{
-		Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = false;
 		skipButton.SetActive(false);
 		mousePosition = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 	}

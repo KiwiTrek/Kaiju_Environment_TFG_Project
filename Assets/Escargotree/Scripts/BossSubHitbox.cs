@@ -1,9 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 public enum SoundTypeBird
 {
@@ -42,11 +38,6 @@ public class BossSubHitbox : MonoBehaviour
     void Update()
     {
         healthBar.value = maxLives - currentHits;
-
-        if (currentHits >= maxLives)
-        {
-            Die();
-        }
 
         if (timerHit < maxHitTime)
         {
@@ -110,12 +101,5 @@ public class BossSubHitbox : MonoBehaviour
         Destroy(vfx, 1.0f);
         Debug.Log(player.numberClicks);
         currentHits += player.numberClicks;
-    }
-
-    private void Die()
-    {
-        //Instantiate(explosionPrefab, this.position, this.rotation);
-        //PlaySound
-        Destroy(gameObject);
     }
 }

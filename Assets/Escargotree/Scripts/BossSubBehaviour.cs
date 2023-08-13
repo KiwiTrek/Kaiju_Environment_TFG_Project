@@ -1,8 +1,4 @@
 using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
-using Unity.VisualScripting;
 using UnityEngine;
 public enum BossStatus
 {
@@ -25,7 +21,8 @@ public enum CurrentAnimation
     HitGround,
     Struggling,
     Release,
-    Tantrum
+    Tantrum,
+    Death
 }
 public class BossSubBehaviour : MonoBehaviour
 {
@@ -155,6 +152,24 @@ public class BossSubBehaviour : MonoBehaviour
         else
         {
             healthBarUI.SetActive(false);
+            if (GameplayDirector.cutsceneMode == CutsceneType.BirdEnd)
+            {
+                SwitchAnimation(CurrentAnimation.Death);
+                if (animationFunctions.gravity)
+                {
+                    transform.transform.position = Vector3.MoveTowards(transform.position, preemptiveShadow.transform.position, Time.deltaTime * 9.8f);
+                }
+                else
+                {
+                    transform.SetPositionAndRotation(
+                        Vector3.MoveTowards(transform.position, initialPosition.position, Time.deltaTime * speed / 1.5f),
+                        Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(mainBoss.transform.forward), Time.deltaTime * 10.0f));
+
+                    preemptiveShadow.transform.position = transform.position;
+                    Vector3 positionCorrector = new(preemptiveShadow.transform.localPosition.x, height + 0.05f, preemptiveShadow.transform.localPosition.z);
+                    preemptiveShadow.transform.localPosition = positionCorrector;
+                }
+            }
         }
     }
 

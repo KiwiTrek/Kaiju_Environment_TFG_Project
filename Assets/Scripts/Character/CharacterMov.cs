@@ -1,9 +1,5 @@
-
 using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 public enum SoundType
 {
@@ -182,7 +178,7 @@ public class CharacterMov : MonoBehaviour {
             animator.SetBool("forceIdle", true);
             animator.SetBool("isMoving", false);
         }
-        else if (GameplayDirector.cutsceneMode == CutsceneType.BirdIntro)
+        else if (GameplayDirector.cutsceneMode == CutsceneType.BirdIntro || GameplayDirector.cutsceneMode == CutsceneType.BirdEnd)
         {
             controller.enabled = false;
             transform.position = birdBossPos.position;

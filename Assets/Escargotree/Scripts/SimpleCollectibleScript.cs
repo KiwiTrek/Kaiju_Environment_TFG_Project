@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 public class SimpleCollectibleScript : MonoBehaviour
 {
 	public bool rotate = true;
