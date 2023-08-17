@@ -103,7 +103,6 @@ public class CharacterLives : MonoBehaviour
                     controller.enabled = true;
                     cameraID = spawnPoint.GetComponent<CheckpointID>().cameraId;
                     lives = maxLives;
-                    livesUI.CreateHeart(maxLives);
 
                     Color tmp = blackScreen.color;
                     float curr = deathCounter - (respawnTime / 2.0f);
@@ -120,6 +119,7 @@ public class CharacterLives : MonoBehaviour
                 if (deathCounter > respawnTime)
                 {
                     dead = false;
+                    livesUI.CreateHeart(maxLives);
                     deathCounter = -1.0f;
                 }
             }

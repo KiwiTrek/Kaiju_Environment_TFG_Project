@@ -25,12 +25,14 @@ public class MinionShooter : MonoBehaviour
     float frequency;
     GameObject target;
     CharacterMov targetMov;
+    CharacterLives targetLives;
     private bool foundTarget;
 
     private void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player");
         targetMov = target.GetComponent<CharacterMov>();
+        targetLives = target.GetComponent<CharacterLives>();
     }
 
     // Update is called once per frame
@@ -51,7 +53,7 @@ public class MinionShooter : MonoBehaviour
                 frequency = maxFrequencyOfUpdate;
                 animator.SetFloat("cannonDuration", 1.0f);
                 cannonMesh.materials[materialIndex].SetFloat("_Fill", 1.0f);
-                if (foundTarget && targetMov.currentCameraId == 1)
+                if (foundTarget && targetMov.currentCameraId == 1 && !targetLives.dead)
                 {
                     frequency = 0.0f;
                     animator.SetFloat("cannonDuration", -1.0f);

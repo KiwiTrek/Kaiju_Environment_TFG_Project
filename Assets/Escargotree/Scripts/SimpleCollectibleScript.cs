@@ -27,7 +27,8 @@ public class SimpleCollectibleScript : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.CompareTag("Player")) Collect (other.gameObject.GetComponent<CharacterLives>());
+		if (other.CompareTag("Player") && !picked)
+			Collect (other.gameObject.GetComponent<CharacterLives>());
 	}
 
 	public void Collect(CharacterLives t)

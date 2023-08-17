@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 9152953078361206585}
   m_Layer: 7
   m_Name: MinionSlow
-  m_TagString: Untagged
+  m_TagString: Minions
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -408,6 +408,8 @@ MonoBehaviour:
   eggPopSFX: []
   shockwaveSFX: {fileID: 0}
   thrustSFX: {fileID: 0}
+  gravity: 0
+  startFadeOutDeath: 0
 --- !u!1 &615595565020147521
 GameObject:
   m_ObjectHideFlags: 0

@@ -335,7 +335,7 @@ public class BossSubBehaviour : MonoBehaviour
                     {
                         SwitchAnimation(CurrentAnimation.Readying);
                         motionVFX.SetActive(false);
-                        if (currentTimeStrike <= 2.0f)
+                        if (currentTimeStrike <= 1.33f)
                         {
                             currentTimeStrike += Time.deltaTime;
                             preemptiveShadow.SetActive(true);

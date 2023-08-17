@@ -22,9 +22,11 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Larch_branch
   m_Shader: {fileID: 4800000, guid: 99134b1f0c27d54469a840832a28fadf, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - EFFECT_HUE_VARIATION
-  - _WINDQUALITY_BETTER
+  - _WINDQUALITY_BEST
   m_InvalidKeywords:
   - _ALPHATEST_ON
   - _SURFACE_TYPE_TRANSPARENT
@@ -35,6 +37,7 @@ Material:
   stringTagMap: {}
   disabledShaderPasses:
   - DepthOnly
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -133,7 +136,7 @@ Material:
     - _BaseLight: 0
     - _BendSTR: 1
     - _BillboardKwToggle: 0
-    - _BillboardShadowFade: 0.5
+    - _BillboardShadowFade: 1
     - _Blend: 0.386
     - _BumpScale: 1
     - _CastShadows: 1
@@ -156,18 +159,18 @@ Material:
     - _Speed: 1
     - _SquashAmount: 1
     - _SrcBlend: 5
-    - _SubsurfaceIndirect: 0.25
+    - _SubsurfaceIndirect: 0
     - _SubsurfaceKwToggle: 0
     - _Surface: 1
     - _Threshold: 1
     - _TwoSided: 0
     - _UVSec: 0
-    - _WindQuality: 3
+    - _WindQuality: 4
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Color: {r: 0.6132076, g: 0.6132076, b: 0.6132076, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Direction: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}

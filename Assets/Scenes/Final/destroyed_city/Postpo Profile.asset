@@ -1,30 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5031642895685224675
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccf1aba9553839d41ae37dd52e9ebcce, type: 3}
-  m_Name: MotionBlur
-  m_EditorClassIdentifier: 
-  active: 1
-  mode:
-    m_OverrideState: 1
-    m_Value: 0
-  quality:
-    m_OverrideState: 1
-    m_Value: 1
-  intensity:
-    m_OverrideState: 1
-    m_Value: 0.104
-  clamp:
-    m_OverrideState: 1
-    m_Value: 0.05
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40,7 +15,6 @@ MonoBehaviour:
   components:
   - {fileID: 6480801081661853041}
   - {fileID: 6476760024688134138}
-  - {fileID: -5031642895685224675}
   - {fileID: 8114453833230865726}
   - {fileID: 6647780806777312489}
   - {fileID: 1561677447683591851}
@@ -78,19 +52,19 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: 0.14
+    m_Value: 0.25
   contrast:
     m_OverrideState: 1
-    m_Value: 5.7
+    m_Value: 2
   colorFilter:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 0.9353599, b: 0.8836478, a: 1}
+    m_Value: {r: 1, g: 0.94800836, b: 0.9025157, a: 1}
   hueShift:
     m_OverrideState: 1
     m_Value: 0
   saturation:
     m_OverrideState: 1
-    m_Value: 4.8
+    m_Value: 11
 --- !u!114 &6480801081661853041
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -109,19 +83,19 @@ MonoBehaviour:
     m_Value: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 0.75
+    m_Value: 0.63
   intensity:
     m_OverrideState: 1
-    m_Value: 2.71
+    m_Value: 1
   scatter:
     m_OverrideState: 1
-    m_Value: 0.61
+    m_Value: 0.814
   clamp:
     m_OverrideState: 1
     m_Value: 65472
   tint:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 0.945542, b: 0.85534585, a: 1}
+    m_Value: {r: 1, g: 0.84394944, b: 0.68553454, a: 1}
   highQualityFiltering:
     m_OverrideState: 1
     m_Value: 0
@@ -168,13 +142,13 @@ MonoBehaviour:
     m_Value: 0
   focusDistance:
     m_OverrideState: 1
-    m_Value: 5.09
+    m_Value: 13.5
   aperture:
     m_OverrideState: 1
-    m_Value: 1.3
+    m_Value: 1.6
   focalLength:
     m_OverrideState: 1
-    m_Value: 34
+    m_Value: 57
   bladeCount:
     m_OverrideState: 1
     m_Value: 6
@@ -202,10 +176,10 @@ MonoBehaviour:
     m_Value: 130
   redOutGreenIn:
     m_OverrideState: 1
-    m_Value: 24
+    m_Value: 53
   redOutBlueIn:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: -79
   greenOutRedIn:
     m_OverrideState: 1
     m_Value: 0
@@ -223,4 +197,4 @@ MonoBehaviour:
     m_Value: 0
   blueOutBlueIn:
     m_OverrideState: 1
-    m_Value: 100
+    m_Value: 127

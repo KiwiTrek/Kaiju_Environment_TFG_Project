@@ -163,7 +163,6 @@ public class GameplayDirector : MonoBehaviour
             }
         }
 
-
         if (prevText.text != missionText.text)
         {
             prevText.text = missionText.text;
@@ -383,7 +382,6 @@ public class GameplayDirector : MonoBehaviour
                 break;
         }
     }
-
     public void QuitApp()
     {
         Debug.Log("Quitting App!");

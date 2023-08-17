@@ -76,9 +76,9 @@ MonoBehaviour:
     AfterOpaque: 1
     Source: 1
     NormalSamples: 1
-    Intensity: 0.8
+    Intensity: 0.9
     DirectLightingStrength: 0.261
-    Radius: 0.035
+    Radius: 0.59
     Samples: 2
     BlurQuality: 0
     Falloff: 100
@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Active: 1
   m_Settings:
     technique: 0
-    maxDrawDistance: 1000
+    maxDrawDistance: 600
     decalLayers: 1
     dBufferSettings:
       surfaceData: 2
