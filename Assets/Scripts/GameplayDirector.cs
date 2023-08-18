@@ -100,6 +100,7 @@ public class GameplayDirector : MonoBehaviour
         music.clip = wind;
         previous = wind;
         music.Play();
+
         camDoorScript = camDoorPhase.GetComponent<CinemachineVirtualCamera>();
         camDoorDolly = camDoorScript.GetCinemachineComponent<CinemachineTrackedDolly>();
         camBirdScript = camBirdBoss.GetComponent<CinemachineVirtualCamera>();
@@ -107,11 +108,21 @@ public class GameplayDirector : MonoBehaviour
         camIntroScript2 = camIntro2.GetComponent<CinemachineVirtualCamera>();
         camIntroNoise2 = camIntroScript2.GetComponentInChildren<CinemachineBasicMultiChannelPerlin>();
         bossSubBehaviour = victoryChecker.GetComponent<BossSubBehaviour>();
+
         timerNoticeMe = -0.5f;
         timerBetween = 0.0f;
         timerFirstCutscene = 0.0f;
         timerDoorCutscene = 0.0f;
         timerBossIntro = 0.0f;
+        lives.spawnPoint = spawnPoint;
+
+        camIntro1.SetActive(false);
+        camIntro2.SetActive(false);
+        camFirstPhase1.SetActive(false);
+        camFirstPhase2.SetActive(false);
+        camDoorPhase.SetActive(false);
+        camBirdBoss.SetActive(false);
+        camBirdDeath.SetActive(false);
     }
 
     // Update is called once per frame
@@ -373,6 +384,7 @@ public class GameplayDirector : MonoBehaviour
                                 compilator.EndSession(DateTime.Now);
                             }
                             Debug.Log("You win!");
+                            AudioListener.pause = false;
                             SceneManager.LoadScene("CreditsScene", LoadSceneMode.Single);
                         }
                     }
@@ -381,14 +393,5 @@ public class GameplayDirector : MonoBehaviour
             default:
                 break;
         }
-    }
-    public void QuitApp()
-    {
-        Debug.Log("Quitting App!");
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
     }
 }

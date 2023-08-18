@@ -41,21 +41,31 @@ public class BossSubBehaviour : MonoBehaviour
     public BossStatus status = BossStatus.Idle;
 
     [Header("Components")]
-    public Animator animator;
-    public AnimationFunctions animationFunctions = null;
-    public BossMov mainBoss = null;
-    public GameObject motionVFX = null;
-    public GameObject shockwavePrefab = null;
-    public GameObject particlesPrefab = null;
-    public GameObject minionPrefab = null;
-    public GameObject minionVFX = null;
-    public BossSubHitbox subHitbox;
     public CinemachineVirtualCamera bossCamera;
+    public BossMov mainBoss = null;
+
+    public Transform startPositionFight = null;
+    public Transform cameraObjectPos = null;
+    public GameObject wallBoss = null;
+    float correctDistance = 0.0f;
+
+    public GameObject minionPrefab = null;
     public GameObject playerTarget;
     public GameObject preemptiveShadow;
     public GameObject healthBarUI;
+
+    [Space]
+    public BossSubHitbox subHitbox;
     public CapsuleCollider capsule;
     public BoxCollider box;
+
+    [Space]
+    public Animator animator;
+    public AnimationFunctions animationFunctions = null;
+    public GameObject motionVFX = null;
+    public GameObject shockwavePrefab = null;
+    public GameObject particlesPrefab = null;
+    public GameObject minionVFX = null;
 
     [Space(10)]
     public bool canReturn = false;
@@ -76,6 +86,7 @@ public class BossSubBehaviour : MonoBehaviour
         timeBeforeStrike = Random.Range(timeBeforeStrikeRange.x, timeBeforeStrikeRange.y);
         status = BossStatus.Idle;
         healthBarUI.SetActive(false);
+        correctDistance = Vector3.Distance(startPositionFight.position, cameraObjectPos.position);
     }
 
     // Update is called once per frame
@@ -110,12 +121,18 @@ public class BossSubBehaviour : MonoBehaviour
             animator.SetFloat("speedIdle", 1.0f);
             animator.SetFloat("speedReadying", 1.0f);
             motionVFX.SetActive(false);
+            wallBoss.SetActive(false);
             return;
         }
 
         if (GameplayDirector.cutsceneMode == CutsceneType.None)
         {
             healthBarUI.SetActive(true);
+            if (Vector3.Distance(playerTarget.transform.position, cameraObjectPos.position) <= correctDistance)
+            {
+                wallBoss.SetActive(true);
+            }
+
             switch (status)
             {
                 case BossStatus.Idle:

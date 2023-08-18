@@ -44,8 +44,10 @@ public class CharacterMov : MonoBehaviour {
     public Collider swordCollider;
     public CharacterLives health;
     public Animator animator;
+    public Transform initialPosition;
     public Transform groundChecker;
     public Transform jumpToTrunkFinalPos;
+    public Transform cam2dPos;
     public Transform bossIntroPos;
     public Transform birdBossPos;
     public LayerMask groundMask;
@@ -83,6 +85,7 @@ public class CharacterMov : MonoBehaviour {
     Vector3 lastP;
     Vector2 mouseSensibility;
     float timerToSpareJump = 0.0f;
+    [SerializeField] private bool setInitialPosition = false;
 
     int isHurtHardHash;
     int isMovingHash;
@@ -103,8 +106,16 @@ public class CharacterMov : MonoBehaviour {
         attackStartHash = Animator.StringToHash("attackStart");
         mouseSensibility = new Vector2(playerCam.m_XAxis.m_MaxSpeed, playerCam.m_YAxis.m_MaxSpeed);
 
+        currentCameraId = 0; 
         Cursor.lockState = CursorLockMode.Locked;
         timerToSpareJump = 0.0f;
+        
+        if (setInitialPosition)
+        {
+            controller.enabled = false;
+            transform.position = initialPosition.position;
+            controller.enabled = true;
+        }
     }
     
     // Update is called once per frame
@@ -116,12 +127,11 @@ public class CharacterMov : MonoBehaviour {
             canAttack = true;
         }
 
-        bool isHurtHard = animator.GetBool(isHurtHardHash);
         if (GameplayDirector.cutsceneMode == CutsceneType.None)
         {
             playerCam.m_XAxis.m_MaxSpeed = mouseSensibility.x;
             playerCam.m_YAxis.m_MaxSpeed = mouseSensibility.y;
-            if (!health.dead || !isHurtHard)
+            if (!health.dead)
             {
                 InputMagnitude();
 
@@ -159,7 +169,7 @@ public class CharacterMov : MonoBehaviour {
             controller.enabled = false;
             transform.position = Vector3.MoveTowards(transform.position, jumpToTrunkFinalPos.position, Time.deltaTime * 10.0f);
             controller.enabled = true;
-            if (Vector3.Distance(transform.position, jumpToTrunkFinalPos.position) <= 0.1f || timerToSpareJump >= 4.0f)
+            if (Vector3.Distance(transform.position, jumpToTrunkFinalPos.position) <= 0.1f || timerToSpareJump >= 3.5f)
             {
                 GameplayDirector.cutsceneMode = CutsceneType.None;
             }
@@ -191,13 +201,11 @@ public class CharacterMov : MonoBehaviour {
             animator.SetBool("forceIdle", false);
         }
 
-
         verticalMov.y += gravity * Time.deltaTime;
         controller.Move(verticalMov * Time.deltaTime);
         float verticalVelocity = (lastP.y - transform.position.y) / Time.deltaTime;
         animator.SetFloat("jumpVelocity", verticalVelocity);
     }
-
     void InputMagnitude()
     {
         //Calculate Input Vectors
@@ -281,26 +289,19 @@ public class CharacterMov : MonoBehaviour {
             animator.SetBool("attackStart", false);
         }
     }
-    public void InvertCamX()
+    public void InvertCamX(bool value)
     {
-        playerCam.m_XAxis.m_InvertInput = !playerCam.m_XAxis.m_InvertInput;
+        playerCam.m_XAxis.m_InvertInput = value;
     }
-    public void InvertCamY()
+    public void InvertCamY(bool value)
     {
-        playerCam.m_YAxis.m_InvertInput = !playerCam.m_YAxis.m_InvertInput;
+        playerCam.m_YAxis.m_InvertInput = !value;
     }
     public void SwitchSensitivity(float sensitivity)
     {
         playerCam.m_XAxis.m_MaxSpeed = 2.0f * sensitivity;
         playerCam.m_YAxis.m_MaxSpeed = sensitivity / 33;
         mouseSensibility = new Vector2(playerCam.m_XAxis.m_MaxSpeed, playerCam.m_YAxis.m_MaxSpeed);
-    }
-
-    public void RotateToCamera(Transform t)
-    {
-        var forward = cam.transform.forward;
-        desiredMoveDirection = forward;
-        t.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), desiredRotationSpeed);
     }
     void PlayerMoveAndRotation()
     {
@@ -339,6 +340,16 @@ public class CharacterMov : MonoBehaviour {
             if (isSprinting) animator.SetBool("isSprinting", false);
 
             if (playerCam.enabled) desiredMoveDirection = forward;
+        }
+
+        if (currentCameraId == 1 && GameplayDirector.cutsceneMode != CutsceneType.JumpToBoss)
+        {
+            float currentDistance = Mathf.Abs(Vector3.Distance(this.transform.position, cam2dPos.transform.position));
+            if (currentDistance >= 16.0f)
+            {
+                Vector3 dir = cam2dPos.transform.position - this.transform.position;
+                controller.Move(dir * Time.deltaTime);
+            }
         }
         
         transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation (desiredMoveDirection), desiredRotationSpeed);

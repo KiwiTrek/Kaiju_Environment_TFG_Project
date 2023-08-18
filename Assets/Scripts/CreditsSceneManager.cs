@@ -17,7 +17,6 @@ public class CreditsSceneManager : MonoBehaviour
 		skipButton.SetActive(false);
 		mousePosition = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 	}
-
 	private void Update()
 	{
 		if((mousePosition.x - Input.GetAxis("Mouse X")) != 0 || (mousePosition.y - Input.GetAxis("Mouse Y")) != 0)
@@ -40,12 +39,14 @@ public class CreditsSceneManager : MonoBehaviour
 
 		if (credits.position.y >= (540.0f + finalPositionY))
 		{
-			GoToHomeScene();
+            Cursor.lockState = CursorLockMode.None;
+            GoToHomeScene();
 		}
 	}
 
 	public void GoToHomeScene()
 	{
-		SceneManager.LoadScene(homeSceneName, LoadSceneMode.Single);
+		AudioListener.pause = false;
+        SceneManager.LoadScene(homeSceneName, LoadSceneMode.Single);
 	}
 }

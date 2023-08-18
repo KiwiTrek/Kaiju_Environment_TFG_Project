@@ -7,15 +7,17 @@ public class JumpCutscene : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            float distance = Mathf.Abs(Vector3.Distance(character.transform.position, character.jumpToTrunkFinalPos.transform.position));
+            Debug.Log("Distance: " + distance);
             if (Input.GetButtonDown("Jump"))
             {
+                float finalGravity = -(distance / 5.0f) - 1.0f;
                 character.verticalMov.y = 0.0f;
-                character.verticalMov.y += Mathf.Sqrt(character.jumpHeight * -4.5f * character.gravity);
+                character.verticalMov.y += Mathf.Sqrt(character.jumpHeight * finalGravity * character.gravity);
                 character.PlaySound(SoundType.Jump);
                 GameplayDirector.cutsceneMode = CutsceneType.JumpToBoss;
                 Debug.Log("Jump to trunk mode: On!");
             }
-            Debug.Log("It's a cutscene!");
         }
     }
 
@@ -23,15 +25,17 @@ public class JumpCutscene : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            float distance = Mathf.Abs(Vector3.Distance(character.transform.position, character.jumpToTrunkFinalPos.transform.position));
+            Debug.Log("Distance: " + distance);
             if (Input.GetButtonDown("Jump"))
             {
+                float finalGravity = -(distance / 5.0f) - 1.0f;
                 character.verticalMov.y = 0.0f;
-                character.verticalMov.y += Mathf.Sqrt(character.jumpHeight * -4.5f * character.gravity);
+                character.verticalMov.y += Mathf.Sqrt(character.jumpHeight * finalGravity * character.gravity);
                 character.PlaySound(SoundType.Jump);
                 GameplayDirector.cutsceneMode = CutsceneType.JumpToBoss;
                 Debug.Log("Jump to trunk mode: On!");
             }
-            Debug.Log("It's a cutscene!");
         }
     }
 }

@@ -413,6 +413,12 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: grounded
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: attackStart
+    m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: hitCount
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5516562686980611922}
   m_Solo: 0
@@ -594,6 +600,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 4
     m_ConditionEvent: jumpVelocity
     m_EventTreshold: 0.1
+  - m_ConditionMode: 4
+    m_ConditionEvent: deadCounter
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7249005210273008786}
   m_Solo: 0

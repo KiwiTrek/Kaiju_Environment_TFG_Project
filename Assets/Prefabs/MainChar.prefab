@@ -3194,8 +3194,12 @@ MonoBehaviour:
   swordCollider: {fileID: 3401152978200757638}
   health: {fileID: 7618824097106375683}
   animator: {fileID: 8819501666593248957}
+  initialPosition: {fileID: 0}
   groundChecker: {fileID: 320973876403583411}
   jumpToTrunkFinalPos: {fileID: 0}
+  cam2dPos: {fileID: 0}
+  bossIntroPos: {fileID: 0}
+  birdBossPos: {fileID: 0}
   groundMask:
     serializedVersion: 2
     m_Bits: 8
@@ -3235,10 +3239,10 @@ MonoBehaviour:
   isGrounded: 0
   canAttack: 1
   numberClicks: 0
-  cutsceneJumpMode: 0
   verticalMov: {x: 0, y: 0, z: 0}
   currentJumpCount: 0
   jumpPressed: 0
+  setInitialPosition: 1
 --- !u!114 &7618824097106375683
 MonoBehaviour:
   m_ObjectHideFlags: 0

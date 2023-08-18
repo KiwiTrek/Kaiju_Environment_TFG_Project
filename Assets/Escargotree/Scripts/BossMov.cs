@@ -177,7 +177,7 @@ public class BossMov : MonoBehaviour
             legsDestroyed = newValue;
             animator.SetInteger("legsDestroyed", legsDestroyed);
             float legSpeed = 0.48f + legsDestroyed * 0.18f;
-            finalHeightMultiplier = 0.185f + legsDestroyed * 0.075f;
+            finalHeightMultiplier = 0.08f + legsDestroyed * 0.03f;
             animator.SetFloat("legSpeed", legSpeed);
         }
         else
