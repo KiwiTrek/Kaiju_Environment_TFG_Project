@@ -34,9 +34,7 @@ public class CharacterMov : MonoBehaviour {
 
     [Space]
     [Header("Components")]
-    public AudioSource mov;
-    public AudioSource grunt;
-    public AudioSource swing;
+    public AudioSource sfx;
     public GameObject[] slashes;
     public Camera cam;
     public CinemachineFreeLook playerCam;
@@ -127,10 +125,22 @@ public class CharacterMov : MonoBehaviour {
             canAttack = true;
         }
 
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            controller.enabled = false;
+            transform.position = birdBossPos.position;
+            controller.enabled = true;
+        }
+#endif
+
         if (GameplayDirector.cutsceneMode == CutsceneType.None)
         {
             playerCam.m_XAxis.m_MaxSpeed = mouseSensibility.x;
             playerCam.m_YAxis.m_MaxSpeed = mouseSensibility.y;
+
+            InputX = 0.0f;
+            InputZ = 0.0f;
             if (!health.dead)
             {
                 InputMagnitude();
@@ -143,7 +153,6 @@ public class CharacterMov : MonoBehaviour {
         {
             playerCam.m_XAxis.m_MaxSpeed = 0.0f;
             playerCam.m_YAxis.m_MaxSpeed = 0.0f;
-            Debug.Log("Cutscene Mode On!");
         }
 
         isGrounded = (Physics.CheckSphere(groundChecker.position, groundDistance, groundMask) || Physics.CheckSphere(groundChecker.position, groundDistance, groundMask2));
@@ -162,6 +171,8 @@ public class CharacterMov : MonoBehaviour {
             verticalMov.y += Mathf.Sqrt(jumpHeight * -2.0f * gravity);
             canAttack = true;
             numberClicks = 0;
+            animator.SetBool("attackStart", false);
+            animator.SetInteger("hitCount", 0);
         }
 
         if (GameplayDirector.cutsceneMode == CutsceneType.JumpToBoss)
@@ -179,21 +190,29 @@ public class CharacterMov : MonoBehaviour {
         {
             timerToSpareJump = 0.0f;
         }
+        
+        if (GameplayDirector.cutsceneMode != CutsceneType.None)
+        {
+            controller.enabled = false;
+            if (GameplayDirector.cutsceneMode == CutsceneType.BossIntro)
+            {
+                transform.SetPositionAndRotation(bossIntroPos.position, bossIntroPos.rotation);
+            }
+            else if (GameplayDirector.cutsceneMode == CutsceneType.BirdIntro || GameplayDirector.cutsceneMode == CutsceneType.BirdEnd)
+            {
+                transform.position = birdBossPos.position;
+            }
+            else if (GameplayDirector.cutsceneMode != CutsceneType.JumpToBoss)
+            {
+                transform.position = transform.position;
+            }
+            controller.enabled = true;
 
-        if (GameplayDirector.cutsceneMode == CutsceneType.BossIntro)
-        {
-            controller.enabled = false;
-            transform.SetPositionAndRotation(bossIntroPos.position, bossIntroPos.rotation);
-            controller.enabled = true;
-            animator.SetBool("forceIdle", true);
-            animator.SetBool("isMoving", false);
-        }
-        else if (GameplayDirector.cutsceneMode == CutsceneType.BirdIntro || GameplayDirector.cutsceneMode == CutsceneType.BirdEnd)
-        {
-            controller.enabled = false;
-            transform.position = birdBossPos.position;
-            controller.enabled = true;
-            animator.SetBool("forceIdle", true);
+            if (GameplayDirector.cutsceneMode != CutsceneType.JumpToBoss)
+            {
+                animator.SetBool("forceIdle", true);
+                animator.SetBool("grounded", true);
+            }
             animator.SetBool("isMoving", false);
         }
         else
@@ -334,7 +353,7 @@ public class CharacterMov : MonoBehaviour {
             desiredMoveDirection = forward * InputZ + right * InputX;
             controller.Move(Time.deltaTime * velocity * desiredMoveDirection);
         }
-        else
+        else if (GameplayDirector.cutsceneMode == CutsceneType.None)
         {
             if (isMoving) animator.SetBool("isMoving", false);
             if (isSprinting) animator.SetBool("isSprinting", false);
@@ -342,6 +361,7 @@ public class CharacterMov : MonoBehaviour {
             if (playerCam.enabled) desiredMoveDirection = forward;
         }
 
+        //Position corrector 2D level
         if (currentCameraId == 1 && GameplayDirector.cutsceneMode != CutsceneType.JumpToBoss)
         {
             float currentDistance = Mathf.Abs(Vector3.Distance(this.transform.position, cam2dPos.transform.position));
@@ -376,65 +396,58 @@ public class CharacterMov : MonoBehaviour {
 
     public void PlaySound(SoundType type)
     {
-        mov.pitch = Random.Range(0.90f, 1.1f);
-        grunt.pitch = Random.Range(0.95f, 1.05f);
-        swing.pitch = Random.Range(0.9f, 1.1f);
+        sfx.pitch = Random.Range(0.90f, 1.1f);
         switch (type)
         {
             case SoundType.Jump:
                 {
-                    mov.clip = jumpsSFX[Random.Range(0, jumpsSFX.Length)];
-                    mov.Play();
+                    sfx.PlayOneShot(jumpsSFX[Random.Range(0, jumpsSFX.Length)]);
                     break;
                 }
             case SoundType.Land:
                 {
-                    grunt.clip = hurtSFX[Random.Range(1, hurtSFX.Length)];
-                    grunt.Play();
+                    sfx.pitch = Random.Range(0.95f, 1.05f);
+                    sfx.PlayOneShot(hurtSFX[Random.Range(1, hurtSFX.Length)]);
                     break;
                 }
             case SoundType.GruntSwing:
                 {
-                    grunt.clip = gruntSwingSFX[Random.Range(0, gruntSwingSFX.Length)];
-                    grunt.Play();
+                    sfx.pitch = Random.Range(0.95f, 1.05f);
+                    sfx.PlayOneShot(gruntSwingSFX[Random.Range(0, gruntSwingSFX.Length)]);
                     break;
                 }
             case SoundType.Sword:
                 {
-                    swing.clip = swordSFX[Random.Range(0, swordSFX.Length)];
-                    swing.Play();
+                    sfx.PlayOneShot(swordSFX[Random.Range(0, swordSFX.Length)]);
                     break;
                 }
             case SoundType.GruntSwingBig:
                 {
-                    swing.clip = gruntSwingBigSFX;
-                    swing.Play();
+                    sfx.PlayOneShot(gruntSwingBigSFX);
                     break;
                 }
             case SoundType.Hurt:
                 {
-                    grunt.clip = hurtSFX[Random.Range(0, hurtSFX.Length)];
-                    grunt.Play();
+                    sfx.pitch = Random.Range(0.95f, 1.05f);
+                    sfx.PlayOneShot(hurtSFX[Random.Range(0, hurtSFX.Length)]);
                     break;
                 }
             case SoundType.Thud:
                 {
-                    mov.clip = thudSFX;
-                    mov.pitch = Random.Range(0.85f, 1.00f);
-                    mov.Play();
+                    sfx.pitch = Random.Range(0.85f, 1.00f);
+                    sfx.PlayOneShot(thudSFX);
                     break;
                 }
             case SoundType.Death:
                 {
-                    grunt.clip = deathSFX;
-                    grunt.Play();
+                    sfx.pitch = Random.Range(0.95f, 1.05f);
+                    sfx.PlayOneShot(deathSFX);
                     break;
                 }
             case SoundType.GetUp:
                 {
-                    grunt.clip = getUpSFX[Random.Range(0, getUpSFX.Length)];
-                    grunt.pitch = Random.Range(0.8f, 1.0f);
-                    grunt.Play();
+                    sfx.pitch = Random.Range(0.95f, 1.05f);
+                    sfx.PlayOneShot(getUpSFX[Random.Range(0, getUpSFX.Length)]);
                     break;
                 }
             default:

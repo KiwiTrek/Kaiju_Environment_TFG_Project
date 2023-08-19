@@ -6,9 +6,8 @@ public class AnimationFunctions : MonoBehaviour
     
     [Space]
     [Header ("Components")]
-    public AudioSource normalSFX = null;
-    public AudioSource hitSFX = null;
-    public AudioSource voiceSFX = null;
+    public AudioSource sfx = null;
+    public AudioSource beepingSFX = null;
 
     [Space]
     [Header("Audio Clips Both")]
@@ -34,91 +33,44 @@ public class AnimationFunctions : MonoBehaviour
 
     public void PlaySound(SoundTypeBird type)
     {
-        normalSFX.pitch = Random.Range(0.9f, 1.1f);
-        voiceSFX.pitch = Random.Range(0.95f, 1.05f);
-        hitSFX.pitch = Random.Range(0.9f, 1.1f);
-
+        sfx.pitch = Random.Range(0.9f, 1.1f);
         switch (type)
         {
             case SoundTypeBird.Flapping:
-                normalSFX.clip = flapping[Random.Range(0, flapping.Length)];
-                normalSFX.Play();
+                sfx.PlayOneShot(flapping[Random.Range(0, flapping.Length)]);
                 break;
             case SoundTypeBird.HitBloody:
-                hitSFX.clip = hitBloody[Random.Range(0, flapping.Length)];
-                hitSFX.Play();
+                sfx.PlayOneShot(hitBloody[Random.Range(0, flapping.Length)]);
                 break;
             case SoundTypeBird.Hurt:
-                voiceSFX.clip = hurt[Random.Range(0, hurt.Length)];
-                voiceSFX.Play();
+                sfx.PlayOneShot(hurt[Random.Range(0, hurt.Length)]);
                 break;
             case SoundTypeBird.Thrust:
-                hitSFX.clip = thrustSFX;
-                hitSFX.Play();
+                sfx.PlayOneShot(thrustSFX);
                 break;
             case SoundTypeBird.Shockwave:
-                voiceSFX.clip = shockwaveSFX;
-                voiceSFX.Play();
+                sfx.pitch = Random.Range(0.95f, 1.05f);
+                sfx.PlayOneShot(shockwaveSFX);
                 break;
             case SoundTypeBird.EggPop:
-                voiceSFX.clip = eggPopSFX[Random.Range(0, eggPopSFX.Length)];
-                voiceSFX.Play();
+                sfx.pitch = Random.Range(0.95f, 1.05f);
+                sfx.PlayOneShot(eggPopSFX[Random.Range(0, eggPopSFX.Length)]);
                 break;
             default:
                 break;
         }
     }
-
-    public void PlaySoundDelayed(SoundTypeBird type, float delayTime = 0.0f)
-    {
-        normalSFX.pitch = Random.Range(0.9f, 1.1f);
-        voiceSFX.pitch = Random.Range(0.95f, 1.05f);
-        hitSFX.pitch = Random.Range(0.9f, 1.1f);
-
-        switch (type)
-        {
-            case SoundTypeBird.Flapping:
-                normalSFX.clip = flapping[Random.Range(0, flapping.Length)];
-                normalSFX.PlayDelayed(delayTime);
-                break;
-            case SoundTypeBird.HitBloody:
-                hitSFX.clip = hitBloody[Random.Range(0, flapping.Length)];
-                hitSFX.PlayDelayed(delayTime);
-                break;
-            case SoundTypeBird.Hurt:
-                voiceSFX.clip = hurt[Random.Range(0, hurt.Length)];
-                voiceSFX.PlayDelayed(delayTime);
-                break;
-            case SoundTypeBird.Thrust:
-                voiceSFX.clip = thrustSFX;
-                voiceSFX.PlayDelayed(delayTime);
-                break;
-            case SoundTypeBird.Shockwave:
-                voiceSFX.clip = shockwaveSFX;
-                voiceSFX.PlayDelayed(delayTime);
-                break;
-            case SoundTypeBird.EggPop:
-                hitSFX.clip = eggPopSFX[Random.Range(0, eggPopSFX.Length)];
-                hitSFX.PlayDelayed(delayTime);
-                break;
-            default:
-                break;
-        }
-    }
-
     public void PlaySoundMinion(SoundTypeMinion type)
     {
-        normalSFX.pitch = Random.Range(0.9f, 1.1f);
+        sfx.pitch = Random.Range(0.9f, 1.1f);
 
         switch (type)
         {
             case SoundTypeMinion.Flapping:
-                normalSFX.clip = flapping[Random.Range(0, flapping.Length)];
-                normalSFX.Play();
+                sfx.PlayOneShot(flapping[Random.Range(0, flapping.Length)]);
                 break;
             case SoundTypeMinion.Beeping:
-                voiceSFX.clip = beeping;
-                voiceSFX.Play();
+                beepingSFX.Play();
                 break;
             default:
                 break;

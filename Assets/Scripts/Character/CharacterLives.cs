@@ -87,7 +87,7 @@ public class CharacterLives : MonoBehaviour
 
                 movementScript.numberClicks = 0;
                 movementScript.animator.SetBool("attackStart", false);
-                movementScript.animator.SetInteger("hitCount", movementScript.numberClicks);
+                animator.SetInteger("hitCount", movementScript.numberClicks);
                 movementScript.canAttack = true;
             }
 
@@ -145,6 +145,8 @@ public class CharacterLives : MonoBehaviour
 
         movementScript.canAttack = false;
         movementScript.numberClicks = 0;
+        animator.SetBool("attackStart", false);
+        animator.SetInteger("hitCount", 0);
         movementScript.VerifyCombo();
 
         if (lives <= 0)
@@ -193,6 +195,8 @@ public class CharacterLives : MonoBehaviour
 
         movementScript.canAttack = false;
         movementScript.numberClicks = 0;
+        animator.SetBool("attackStart", false);
+        animator.SetInteger("hitCount", 0);
         movementScript.VerifyCombo();
 
         if (lives <= 0)

@@ -133,7 +133,8 @@ public class GameplayDirector : MonoBehaviour
         if (spawnPoint == null) return;
         if (bossMov == null) return;
 
-        if (Input.GetKey(KeyCode.F2))
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.F1))
         {
             if (debugColliderMaterial != null)
             {
@@ -149,29 +150,26 @@ public class GameplayDirector : MonoBehaviour
                 debugColliderMaterial.color = color;
             }
         }
-
-        if (cutsceneMode == CutsceneType.None)
+#endif
+        if (cameraSwitcher.id == 3)
         {
-            if (timerNoticeMe < maxTimeNoticeMe)
-            {
-                timerNoticeMe += Time.deltaTime;
-                timerBetween += Time.deltaTime;
-                if (timerBetween >= betweenTimeNoticeMe)
-                {
-                    timerBetween = 0.0f;
-                    if (!noticeMe.enabled)
-                    {
-                        noticeMeAudio.Play();
-                    }
-                    noticeMe.enabled = !noticeMe.enabled;
-                }
-            }
-            else
-            {
-                timerNoticeMe = maxTimeNoticeMe;
-                timerBetween = 0.0f;
-                noticeMe.enabled = false;
-            }
+            missionText.text = "Current objective: \nDefeat Carpintroyer!";
+            music.clip = third;
+        }
+        else if ((bossMov.legsDestroyed >= 3 || bossMov.isDown) && missionText.text != "Current objective: \nDefeat Carpintroyer")
+        {
+            missionText.text = "Current objective: \nClimb to the top!";
+            music.clip = second;
+        }
+        else if (Vector3.Distance(lives.gameObject.transform.position, spawnPoint.transform.position) <= 15.0f)
+        {
+            missionText.text = "Current objective: \nTumble it down!";
+            music.clip = first;
+        }
+
+        if (cameraSwitcher.id == 1 || cameraSwitcher.id == 2)
+        {
+            music.clip = second;
         }
 
         if (prevText.text != missionText.text)
@@ -180,58 +178,30 @@ public class GameplayDirector : MonoBehaviour
             if (prevText.text == "Current objective: \nTumble it down!")
             {
                 //Intro Cutscene
+                Debug.Log("Cutscene Mode: Intro");
                 cutsceneMode = CutsceneType.BossIntro;
                 Vector3 euler = bossMov.transform.eulerAngles;
                 euler.y -= 180.0f;
                 bossMov.transform.eulerAngles = euler;
-                music.Pause();
                 chanChan.Play();
             }
-            else if (prevText.text == "Current objective: \nClimb to the top!")
+
+            if (prevText.text == "Current objective: \nClimb to the top!")
             {
                 //Leg Cutscene
+                Debug.Log("Cutscene Mode: First Phase Down");
                 cutsceneMode = CutsceneType.BossFirstPhaseEnd;
             }
-            else if (prevText.text == "Current objective: \nDefeat Carpintroyer!")
+
+            if (prevText.text == "Current objective: \nDefeat Carpintroyer!")
             {
                 //Intro Subboss
+                Debug.Log("Cutscene Mode: Bird");
                 cutsceneMode = CutsceneType.BirdIntro;
                 music.Pause();
                 chanChan.Play();
             }
             timerNoticeMe = 0.0f;
-        }
-
-        if (cutsceneMode == CutsceneType.None)
-        {
-            if (previous != music.clip)
-            {
-                previous = music.clip;
-                music.Play();
-            }
-        }
-
-        if (Vector3.Distance(lives.gameObject.transform.position, spawnPoint.transform.position) <= 15.0f)
-        {
-            missionText.text = "Current objective: \nTumble it down!";
-            music.clip = first;
-        }
-
-        if (bossMov.legsDestroyed >= 3 || bossMov.isDown)
-        {
-            missionText.text = "Current objective: \nClimb to the top!";
-            music.clip = second;
-        }
-
-        if (cameraSwitcher.id == 1 || cameraSwitcher.id == 2)
-        {
-            music.clip = second;
-        }
-
-        if (cameraSwitcher.id == 3)
-        {
-            missionText.text = "Current objective: \nDefeat Carpintroyer!";
-            music.clip = third;
         }
 
         if (lives.dead && lives.deathCounter >= 3.0f)
@@ -269,9 +239,45 @@ public class GameplayDirector : MonoBehaviour
         switch (cutsceneMode)
         {
             case CutsceneType.None:
+                {
+                    if (!music.isPlaying && Time.timeScale != 0.0f)
+                    {
+                        music.Play();
+                        Debug.Log("Play music! isPlaying: " + music.isPlaying);
+                    }
+
+                    if (previous != music.clip)
+                    {
+                        previous = music.clip;
+                        Debug.Log("Current Music: " + music.clip.name);
+                    }
+
+                    if (timerNoticeMe < maxTimeNoticeMe)
+                    {
+                        timerNoticeMe += Time.deltaTime;
+                        timerBetween += Time.deltaTime;
+                        if (timerBetween >= betweenTimeNoticeMe)
+                        {
+                            timerBetween = 0.0f;
+                            if (!noticeMe.enabled)
+                            {
+                                noticeMeAudio.Play();
+                            }
+                            noticeMe.enabled = !noticeMe.enabled;
+                        }
+                    }
+                    else
+                    {
+                        timerNoticeMe = maxTimeNoticeMe;
+                        timerBetween = 0.0f;
+                        noticeMe.enabled = false;
+                    }
+                }
                 break;
             case CutsceneType.BossIntro:
                 {
+                    if (music.isPlaying)
+                        music.Pause();
                     if (bossMov.switchToSecondCam)
                     {
                         camIntro1.SetActive(false);
@@ -302,13 +308,10 @@ public class GameplayDirector : MonoBehaviour
                 }
             case CutsceneType.BossFirstPhaseEnd:
                 {
-                    music.Pause();
+                    if (music.isPlaying)
+                        music.Pause();
                     if (bossMov.switchToSecondCam)
                     {
-                        if (timerFirstCutscene <= 0)
-                        {
-                            music.Play();
-                        }
                         camFirstPhase1.SetActive(false);
                         camFirstPhase2.SetActive(true);
                         timerFirstCutscene += Time.deltaTime;
@@ -349,6 +352,8 @@ public class GameplayDirector : MonoBehaviour
                 }
             case CutsceneType.BirdIntro:
                 {
+                    if (music.isPlaying)
+                        music.Pause();
                     camBirdBoss.SetActive(true);
                     camBirdDolly.m_PathPosition += Time.deltaTime * 1.5f;
                     bossSubBehaviour.gameObject.transform.LookAt(lives.transform.position);
@@ -361,13 +366,13 @@ public class GameplayDirector : MonoBehaviour
                     {
                         camBirdBoss.SetActive(false);
                         cutsceneMode = CutsceneType.None;
-                        music.Play();
                     }
                     break;
                 }
             case CutsceneType.BirdEnd:
                 {
-                    music.Stop();
+                    if (music.isPlaying)
+                        music.Stop();
                     camBirdDeath.SetActive(true);
                     startFadeOut = victoryChecker.animationFunctions.startFadeOutDeath;
                     if (startFadeOut)

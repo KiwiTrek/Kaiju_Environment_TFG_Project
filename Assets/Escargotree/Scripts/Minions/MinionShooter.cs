@@ -82,27 +82,22 @@ public class MinionShooter : MonoBehaviour
         GameObject explosionVFX = Instantiate(explosionGO, spawnPosition.transform.position, Quaternion.identity);
         Destroy(explosionVFX, 0.75f);
 
-        audioSource.clip = eggPopSFX[Random.Range(0, eggPopSFX.Length)];
         audioSource.pitch = Random.Range(0.85f, 1.15f);
-        audioSource.Play();
+        audioSource.PlayOneShot(eggPopSFX[Random.Range(0, eggPopSFX.Length)]);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("On enemy radius");
         if (other.gameObject == target)
         {
-            Debug.Log("Target nearby");
             foundTarget = true;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Outside enemy radius");
         if (other.gameObject == target)
         {
-            Debug.Log("Target has left radious");
             foundTarget = false;
         }
     }

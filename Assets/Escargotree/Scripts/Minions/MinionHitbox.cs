@@ -51,7 +51,6 @@ public class MinionHitbox : MonoBehaviour
                 || other.gameObject.tag == "Sword"
                 || other.gameObject.tag == "Environment")
                 {
-                    Debug.Log("Enemy death! No damage.");
                     Die();
                 }
             }
@@ -61,7 +60,6 @@ public class MinionHitbox : MonoBehaviour
                 || other.gameObject.tag == "Sword"
                 || other.gameObject.tag == "EnvironmentIgnoreCam")
                 {
-                    Debug.Log("Enemy death! No damage.");
                     Die();
                 }
             }

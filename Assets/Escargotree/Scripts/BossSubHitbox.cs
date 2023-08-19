@@ -99,7 +99,6 @@ public class BossSubHitbox : MonoBehaviour
 
         GameObject vfx = Instantiate(featherVFX, transform);
         Destroy(vfx, 1.0f);
-        Debug.Log(player.numberClicks);
         currentHits += player.numberClicks;
     }
 }

@@ -7,7 +7,6 @@ public class CameraBoss : MonoBehaviour
     // Start is called before the first frame update
     public GameObject player;
     public float cameraSpeed = 1.0f;
-    float rotationStart = 0.0f;
     void Start()
     {
         

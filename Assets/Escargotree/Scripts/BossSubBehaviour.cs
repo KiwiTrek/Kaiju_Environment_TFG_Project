@@ -80,6 +80,7 @@ public class BossSubBehaviour : MonoBehaviour
     float currentTimeInvulnerable = 0.0f;
     readonly float timeBetweenBirds = 0.5f;
     int numberThrust = 0;
+    bool debugWallsOff = false;
     InvulnerablePhase invulnerablePhase = InvulnerablePhase.Thrusting;
     void Start()
     {
@@ -87,11 +88,20 @@ public class BossSubBehaviour : MonoBehaviour
         status = BossStatus.Idle;
         healthBarUI.SetActive(false);
         correctDistance = Vector3.Distance(startPositionFight.position, cameraObjectPos.position);
+        debugWallsOff = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            debugWallsOff = !debugWallsOff;
+            wallBoss.SetActive(!debugWallsOff);
+        }
+#endif
+
         if (!bossCamera.enabled)
         {
             status = BossStatus.Idle;
@@ -128,7 +138,7 @@ public class BossSubBehaviour : MonoBehaviour
         if (GameplayDirector.cutsceneMode == CutsceneType.None)
         {
             healthBarUI.SetActive(true);
-            if (Vector3.Distance(playerTarget.transform.position, cameraObjectPos.position) <= correctDistance)
+            if (!debugWallsOff && Vector3.Distance(playerTarget.transform.position, cameraObjectPos.position) <= correctDistance)
             {
                 wallBoss.SetActive(true);
             }
@@ -298,7 +308,6 @@ public class BossSubBehaviour : MonoBehaviour
         {
             Quaternion finalRotation = Quaternion.LookRotation(Vector3.down, Vector3.forward);
             SwitchAnimation(CurrentAnimation.Struggling);
-            Debug.Log(Mathf.Abs(Mathf.Cos(Quaternion.Angle(currentRotation, finalRotation) * Mathf.Deg2Rad)));
             transform.SetPositionAndRotation(
                 Vector3.Lerp(transform.position, new Vector3(thrustObjective.x, thrustObjective.y - (Mathf.Abs(Mathf.Cos(Quaternion.Angle(currentRotation, finalRotation) * Mathf.Deg2Rad)) * 1.3f) + 2.15f, thrustObjective.z), timeCountStruggle * 0.65f),
                 Quaternion.Lerp(currentRotation, finalRotation, timeCountStruggle * 0.65f));

@@ -44,6 +44,7 @@ public class BossMov : MonoBehaviour
     public AudioSource legBackRightAudio;
 
     [Space(10)]
+    public int hits = 0;
     public BossHitbox frontRightHitbox;
     public BossHitbox backLeftHitbox;
     public BossHitbox backRightHitbox;
@@ -85,6 +86,10 @@ public class BossMov : MonoBehaviour
             camIntroNoise2 = camIntroScript2.GetComponentInChildren<CinemachineBasicMultiChannelPerlin>();
         }
 
+        frontRightHitbox.currentHits = hits;
+        backLeftHitbox.currentHits = hits;
+        backRightHitbox.currentHits = hits;
+
         Vector3 euler = transform.eulerAngles;
         euler.y -= 180.0f;
         angleFinal = euler;
@@ -93,16 +98,17 @@ public class BossMov : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F1))
+#if UNITY_EDITOR
+        if (Input.GetKeyDown (KeyCode.F2))
         {
-            attacking = !attacking;
-            animator.SetBool(isAttackingHash, attacking);
-            if (legsDestroyed < 3 && attacking == true && canvas != null)
-            {
-                canvas.SetActive(true);
-            }
-            transform.eulerAngles = angleFinal;
+            backLeftHitbox.currentHits += 1;
         }
+
+        if (Input.GetKeyDown(KeyCode.F3))
+        {
+            backRightHitbox.currentHits += 1;
+        }
+#endif
 
         if (legsDestroyed < 3 && attacking)
         {
@@ -335,23 +341,22 @@ public class BossMov : MonoBehaviour
         {
             case SoundTypeEscargotree.LegRising:
                 mouthSound.pitch = Random.Range(0.90f, 1.1f);
-                mouthSound.clip = legRising[Random.Range(0, legRising.Length)];
+                mouthSound.PlayOneShot(legRising[Random.Range(0, legRising.Length)]);
                 break;
             case SoundTypeEscargotree.AboutToHit:
-                mouthSound.clip = aboutToHit[Random.Range(0, aboutToHit.Length)];
+                mouthSound.PlayOneShot(aboutToHit[Random.Range(0, aboutToHit.Length)]);
                 break;
             case SoundTypeEscargotree.Explosion:
                 mouthSound.pitch = Random.Range(0.90f, 1.1f);
-                mouthSound.clip = explosion[Random.Range(0, explosion.Length)];
+                mouthSound.PlayOneShot(explosion[Random.Range(0, explosion.Length)]);
                 break;
             case SoundTypeEscargotree.LegDeath:
-                mouthSound.clip = legDeath[Random.Range(0, legDeath.Length)];
+                mouthSound.PlayOneShot(legDeath[Random.Range(0, legDeath.Length)]);
                 if (camIntroNoise2 != null) camIntroNoise2.m_AmplitudeGain = 5.0f;
                 break;
             default:
                 break;
         }
-        mouthSound.Play();
     }
     public void PlaySoundLeg(AudioSource source, SoundTypeEscargotree type, float delayTime = 0.0f)
     {
@@ -385,26 +390,25 @@ public class BossMov : MonoBehaviour
         {
             case SoundTypeEscargotree.LegRising:
                 cutsceneAudio.pitch = Random.Range(0.90f, 1.1f);
-                cutsceneAudio.clip = legRising[Random.Range(0, legRising.Length)];
+                cutsceneAudio.PlayOneShot(legRising[Random.Range(0, legRising.Length)]);
                 break;
             case SoundTypeEscargotree.AboutToHit:
-                cutsceneAudio.clip = aboutToHit[Random.Range(0, aboutToHit.Length)];
+                cutsceneAudio.PlayOneShot(aboutToHit[Random.Range(0, aboutToHit.Length)]);
                 break;
             case SoundTypeEscargotree.Explosion:
                 cutsceneAudio.pitch = Random.Range(0.90f, 1.1f);
-                cutsceneAudio.clip = explosion[Random.Range(0, explosion.Length)];
+                cutsceneAudio.PlayOneShot(explosion[Random.Range(0, explosion.Length)]);
                 break;
             case SoundTypeEscargotree.LegDeath:
-                cutsceneAudio.clip = legDeath[Random.Range(0, legDeath.Length)];
+                cutsceneAudio.PlayOneShot(legDeath[Random.Range(0, legDeath.Length)]);
                 if (camIntroNoise2 != null) camIntroNoise2.m_AmplitudeGain = 5.0f;
                 break;
             case SoundTypeEscargotree.WoodCreak:
-                cutsceneAudio.clip = woodCreakSingle;
+                cutsceneAudio.PlayOneShot(woodCreakSingle);
                 break;
             default:
                 break;
         }
-        cutsceneAudio.Play();
     }
 
     public void SwitchToSecondCam()

@@ -8,7 +8,6 @@ public class JumpCutscene : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             float distance = Mathf.Abs(Vector3.Distance(character.transform.position, character.jumpToTrunkFinalPos.transform.position));
-            Debug.Log("Distance: " + distance);
             if (Input.GetButtonDown("Jump"))
             {
                 float finalGravity = -(distance / 5.0f) - 1.0f;
@@ -26,7 +25,6 @@ public class JumpCutscene : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             float distance = Mathf.Abs(Vector3.Distance(character.transform.position, character.jumpToTrunkFinalPos.transform.position));
-            Debug.Log("Distance: " + distance);
             if (Input.GetButtonDown("Jump"))
             {
                 float finalGravity = -(distance / 5.0f) - 1.0f;

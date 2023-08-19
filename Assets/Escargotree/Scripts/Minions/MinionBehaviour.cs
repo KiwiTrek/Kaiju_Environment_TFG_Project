@@ -98,30 +98,25 @@ public class MinionBehaviour : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("On enemy radius");
         if (other.gameObject == target)
         {
-            Debug.Log("Target nearby");
             foundTarget = true;
             if (canFollow)
             {
                 animationFunctions.PlaySoundMinion(SoundTypeMinion.Beeping);
-                animationFunctions.voiceSFX.loop = true;
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Outside enemy radius");
         if (other.gameObject == target)
         {
-            Debug.Log("Target has left radious");
             foundTarget = false;
             if (canFollow)
             {
-                animationFunctions.voiceSFX.Stop();
-                animationFunctions.voiceSFX.loop = false;
+                if (animationFunctions.beepingSFX != null)
+                    animationFunctions.beepingSFX.Stop();
             }
         }
     }
