@@ -3,6 +3,7 @@ public class BossHitbox : MonoBehaviour
 {
     // Start is called before the first frame update
     [Header("Components")]
+    public Animator dummyAnimator = null;
     public Renderer legRenderer = null;
     public GameObject legBrokenDecals = null;
     public AudioSource legAudioSource = null;
@@ -37,8 +38,7 @@ public class BossHitbox : MonoBehaviour
         {
             if (isDummy)
             {
-                Quaternion rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(-90.0f, -230.0f, 0.0f), Time.deltaTime * speedDummy);
-                this.transform.rotation = rotation;
+                dummyAnimator.SetBool("dummyStart", true);
             }
             this.hitbox.enabled = false;
 

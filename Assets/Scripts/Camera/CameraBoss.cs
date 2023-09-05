@@ -6,7 +6,6 @@ public class CameraBoss : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject player;
-    public float cameraSpeed = 1.0f;
     void Start()
     {
         
@@ -21,8 +20,8 @@ public class CameraBoss : MonoBehaviour
         }
         else
         {
-            Vector3 playerDirection = player.transform.position - transform.position;
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(playerDirection), Time.deltaTime * cameraSpeed);
+            Vector3 targetPosition = new Vector3(player.transform.position.x, transform.localPosition.y, transform.localPosition.z);
+            transform.LookAt(targetPosition);
         }
     }
 }

@@ -99,6 +99,7 @@ public class BossSubBehaviour : MonoBehaviour
         {
             debugWallsOff = !debugWallsOff;
             wallBoss.SetActive(!debugWallsOff);
+            Debug.Log("Debug Walls Off: " + debugWallsOff);
         }
 #endif
 

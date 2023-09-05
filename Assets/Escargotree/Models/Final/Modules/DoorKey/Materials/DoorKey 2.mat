@@ -69,6 +69,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _MaskTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -109,7 +113,9 @@ Material:
     m_Floats:
     - _ActivateMask: 0
     - _AlphaClip: 0
+    - _AlphaToMask: 0
     - _Blend: 0
+    - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
     - _CastShadows: 1
     - _ClearCoatMask: 0
@@ -126,11 +132,14 @@ Material:
     - _Height_Mask: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
+    - _OpacityMask: 1
     - _Parallax: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _Size: 0.5
     - _Smoothness: 0.299
+    - _SmoothnessMask: 0.5
     - _SmoothnessTextureChannel: 1
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -144,6 +153,9 @@ Material:
     m_Colors:
     - _BaseColor: {r: 0.6196208, g: 0, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 2.670157, g: 0.72211766, b: 2.6184387, a: 1}
+    - _EmissionColor: {r: 4.8671436, g: 1.3162711, b: 4.772872, a: 1}
+    - _In: {r: 0, g: 0, b: 0, a: 0}
+    - _Out: {r: 0, g: 0, b: 0, a: 0}
+    - _PlayerPosition: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []

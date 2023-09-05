@@ -126,10 +126,18 @@ public class CharacterMov : MonoBehaviour {
         }
 
 #if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.F4))
+        if (Input.GetKey(KeyCode.F4))
+        {
+            controller.enabled = false;
+            transform.position = bossIntroPos.position;
+            controller.enabled = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.F5))
         {
             controller.enabled = false;
             transform.position = birdBossPos.position;
+            currentCameraId = 0;
             controller.enabled = true;
         }
 #endif

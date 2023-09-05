@@ -9,8 +9,8 @@ public class CreditsSceneManager : MonoBehaviour
 	[SerializeField] private float idleTimer = 0.0f;
 	[SerializeField] private Vector2 mousePosition = Vector2.zero;
 	[SerializeField] private RectTransform credits;
-	[SerializeField] private float finalPositionY = 2900.0f;
-    private void OnEnable()
+	[SerializeField] private AudioSource creditsMusic = null;
+	private void OnEnable()
 	{
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = false;
@@ -37,8 +37,9 @@ public class CreditsSceneManager : MonoBehaviour
 			skipButton.SetActive(false);
 		}
 
-		if (credits.position.y >= (540.0f + finalPositionY))
-		{
+		if (!creditsMusic.isPlaying)
+        {
+            Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             GoToHomeScene();
 		}

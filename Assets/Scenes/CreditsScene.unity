@@ -159,7 +159,7 @@ MonoBehaviour:
   idleTimer: 0
   mousePosition: {x: 0, y: 0}
   credits: {fileID: 1529204113}
-  finalPositionY: 6420
+  creditsMusic: {fileID: 227189910}
 --- !u!4 &227189909
 Transform:
   m_ObjectHideFlags: 0
@@ -740,6 +740,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7344604440756327872, guid: 55e3047b554baf146a8b27de9e3cbd01, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -784,7 +788,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -8920}
+  m_AnchoredPosition: {x: 5, y: -6376}
   m_SizeDelta: {x: 898, y: 887}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1061803999
@@ -989,11 +993,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Credits\n\u2015\u2015\u2015\u2015\u2015\n\n\n\n\n\n\n\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\nKaijus
+  m_text: "Credits\n\u2015\u2015\u2015\u2015\u2015\n\n\n\n\n\n\n\n\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\nKaijus
     As Environments:\nDesign & Production of a Colossal Monster\nfunctioning as a
     Boss Level\n\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\nDeveloped
     by Guillem \xC1lava\n\nSupervised by Josep Serrano Recuero\n\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\nGame
-    created as the final product attached\nto the author's Final Degree Project a\n
+    created as the final product attached\nto the author's Final Degree Project at\n
     the Bachelor's Degree in Videogame Design\n& Development at CITM-UPC\n\n(2022
     - 2023)\n\n\n\n\n\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\nModels:\n\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\nA
     Piece of Nature - Evgenia Yaremko (www.artstation.com/evgeniyayaremko)\r\n\nCartoon
@@ -1016,11 +1020,11 @@ MonoBehaviour:
     from Pixabay\r\n\nNotification: Sound Effect by UNIVERSFIELD from Pixabay\r\n\nEagle
     Screech: Sound Effect by iedurodrigues from Pixabay\r\n\nRoar: Sound Effect by
     UNIVERSFIELD from Pixabay\r\n\n\rWind in Trees: Sound Effect by Micheal from
-    Pixabay\n\r\nOther sounds from Pixabay:\r\n- Explosion Pas\r\n- Female Grunts\r\n-
-    Flapping\r\n- Footsteps Boots\r\n- Whoosh\r\n- Howling Wind\r\n- Laser Charging\r\n-
-    Wood Impacts\r\n- Key Opening\r\n- Power Up\r\n- Bird Screeching\r\n- Othe Monster
-    Roars\r\n- Egg Cracking\r\n- Minion Beeping\n\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\n\n\n\n\n\n\n\n\n\n\n\n\n\nThanks
-    for playing!\n:)\n\n"
+    Pixabay\n\r\nOther sounds from Pixabay:\r\nExplosion Pas, Female Grunts, Flapping,
+    Footsteps,\nWhoosh, Howling Wind, Laser Charging, Wood\nImpacts, Key Opening,
+    Power Up, Bird Screeching,\nMonster Roars (Alt.), Egg Cracking & Minion Beeping\n\n\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\u2015\nThanks
+    for all playtesters who participated\nboth at the Design Class from J. Joan Pons\nand
+    the Beta Online Playtesting!\n\nAnd thank you for playing!\n:)\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2ce976e964c8d88418fd3e4cf96b5885, type: 2}
   m_sharedMaterial: {fileID: 5058085441464369664, guid: 2ce976e964c8d88418fd3e4cf96b5885, type: 2}
@@ -1047,8 +1051,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 57
-  m_fontSizeBase: 57
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1587,14 +1591,14 @@ RectTransform:
   m_GameObject: {fileID: 2083394001}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.92045, y: 0.92045, z: 0.92045}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1136140535}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -1721}
+  m_AnchoredPosition: {x: 0, y: -1573}
   m_SizeDelta: {x: 220, y: 220}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2083394003
