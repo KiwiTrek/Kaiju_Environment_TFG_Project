@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invertedCameraX: 0
   invertedCameraY: 0
-  mouseSensitivity: 150
-  masterVol: 0
-  musicVol: -10
+  mouseSensitivity: 110
+  masterVol: -6
+  musicVol: -12
   sfxVol: -10

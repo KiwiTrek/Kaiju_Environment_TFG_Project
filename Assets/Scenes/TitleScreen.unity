@@ -2524,7 +2524,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2104501161
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2542,7 +2542,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 703, y: -388.85004}
+  m_AnchoredPosition: {x: 703, y: -364}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2104501162
@@ -2588,7 +2588,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2104501163}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 890526999}
+        m_TargetAssemblyTypeName: HomeScreenManager, Assembly-CSharp
+        m_MethodName: GoToWebsite
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: https://kiwitrek.github.io/assets/docs/Alava_Guillem_Kaijus_As_Environments.pdf
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2104501163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2702,7 +2714,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1182028621184598984, guid: 064f0aa517517b749acb6e017f034032, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.8333333
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 1182028621184598984, guid: 064f0aa517517b749acb6e017f034032, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2802,7 +2814,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3302721581522206261, guid: 064f0aa517517b749acb6e017f034032, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: 3302721581522206261, guid: 064f0aa517517b749acb6e017f034032, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2826,7 +2838,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4411514444878654605, guid: 064f0aa517517b749acb6e017f034032, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 4411514444878654605, guid: 064f0aa517517b749acb6e017f034032, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2834,7 +2846,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4739177988105403833, guid: 064f0aa517517b749acb6e017f034032, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 4739177988105403833, guid: 064f0aa517517b749acb6e017f034032, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2842,11 +2854,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4739177988105403833, guid: 064f0aa517517b749acb6e017f034032, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 5202598054064823202, guid: 064f0aa517517b749acb6e017f034032, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: 5202598054064823202, guid: 064f0aa517517b749acb6e017f034032, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2854,7 +2866,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5202598054064823202, guid: 064f0aa517517b749acb6e017f034032, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: 6687716338751786848, guid: 064f0aa517517b749acb6e017f034032, type: 3}
       propertyPath: m_IsActive
@@ -2870,7 +2882,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8934636636383715400, guid: 064f0aa517517b749acb6e017f034032, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.8333333
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 8934636636383715400, guid: 064f0aa517517b749acb6e017f034032, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2878,7 +2890,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8934636636383715400, guid: 064f0aa517517b749acb6e017f034032, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.8333333
+      value: 0.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

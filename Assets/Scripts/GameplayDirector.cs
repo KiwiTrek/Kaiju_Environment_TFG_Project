@@ -99,6 +99,7 @@ public class GameplayDirector : MonoBehaviour
         debugColliderMaterial.color = color;
         music.clip = wind;
         previous = wind;
+        cutsceneMode = CutsceneType.None;
         music.Play();
 
         camDoorScript = camDoorPhase.GetComponent<CinemachineVirtualCamera>();

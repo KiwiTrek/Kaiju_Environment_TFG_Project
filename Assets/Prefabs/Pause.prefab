@@ -123,7 +123,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 200
   m_WholeNumbers: 0
-  m_Value: 150
+  m_Value: 110
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -2083,7 +2083,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Mouse Sensitivity
+  m_text: 'Camera Sensitivity
 
 '
   m_isRightToLeft: 0
@@ -2672,7 +2672,7 @@ MonoBehaviour:
   m_MinValue: -60
   m_MaxValue: 0
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: -6
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -3336,7 +3336,7 @@ MonoBehaviour:
   m_MinValue: -60
   m_MaxValue: 0
   m_WholeNumbers: 0
-  m_Value: -10
+  m_Value: -12
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
