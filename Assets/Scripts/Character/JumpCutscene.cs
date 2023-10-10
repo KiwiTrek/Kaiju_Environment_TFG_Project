@@ -43,6 +43,9 @@ public class JumpCutscene : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        pressSpaceUI.SetActive(false);
+        if (other.gameObject.CompareTag("Player"))
+        {
+            pressSpaceUI.SetActive(false);
+        }
     }
 }

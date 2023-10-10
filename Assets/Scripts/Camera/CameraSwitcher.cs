@@ -7,6 +7,7 @@ public class CameraSwitcher : MonoBehaviour
     public CharacterMov player;
     public Light light2D;
 
+    public GameObject pressSpaceUI;
     public static int SizeId = Shader.PropertyToID("_Size");
     [SerializeField] private Material[] materialsToCull = null;
     [SerializeField] private float size = 1.0f;
@@ -62,6 +63,7 @@ public class CameraSwitcher : MonoBehaviour
                     if (legCam != null) { legCam.enabled = false; }
                     if (bossCam != null) { bossCam.enabled = false; }
                     if (light2D != null) { light2D.enabled = true; }
+                    if (pressSpaceUI != null) { pressSpaceUI.SetActive(false); }
                     break;
                 }
             case 2: //Leg
@@ -70,6 +72,7 @@ public class CameraSwitcher : MonoBehaviour
                     if (levelCam != null) { levelCam.enabled = false; }
                     if (legCam != null) { legCam.enabled = true; }
                     if (bossCam != null) { bossCam.enabled = false; }
+                    if (pressSpaceUI != null) { pressSpaceUI.SetActive(false); }
                     break;
                 }
             case 3: //Boss

@@ -7244,6 +7244,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19e3bec5d2084834e86823c680ab9eb1, type: 3}
+--- !u!1 &780652253 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8342511209789739682, guid: ba1078ef5a13ce045812fdec7dc47db4, type: 3}
+  m_PrefabInstance: {fileID: 3263637643941442555}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &798863031
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8117,11 +8122,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8878295394825752063, guid: 84716dc5f680d234a99fe96cdf088e69, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.10377781
+      value: -0.10377785
       objectReference: {fileID: 0}
     - target: {fileID: 8878295394825752063, guid: 84716dc5f680d234a99fe96cdf088e69, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0034614534
+      value: 0.0034614545
       objectReference: {fileID: 0}
     - target: {fileID: 8878295395169493404, guid: 84716dc5f680d234a99fe96cdf088e69, type: 3}
       propertyPath: m_FollowOffset.y
@@ -13824,6 +13829,10 @@ PrefabInstance:
       propertyPath: playerCam
       value: 
       objectReference: {fileID: 264491177}
+    - target: {fileID: 3478307877695400388, guid: 30ecfd9c53c40f548b31c56408e0f523, type: 3}
+      propertyPath: pressSpaceUI
+      value: 
+      objectReference: {fileID: 780652253}
     - target: {fileID: 3889887526743528085, guid: 30ecfd9c53c40f548b31c56408e0f523, type: 3}
       propertyPath: m_SizeDelta.x
       value: 177.0946
@@ -15896,7 +15905,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1471535356}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.033155724, y: -0.10377779, z: 0.003461453, w: 0.9940417}
+  m_LocalRotation: {x: 0.033155724, y: -0.103777856, z: 0.0034614552, w: 0.9940417}
   m_LocalPosition: {x: 360.3468, y: 2.705, z: 262.7044}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
